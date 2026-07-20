@@ -1,0 +1,116 @@
+episode,train_return,eval_return,epsilon,loss,llm_full_response
+1,-1190,-229.7,0.9934,385.8118015198658,N/A
+2,-1487,-200.0,0.9868,425.7283852648735,N/A
+3,-3269,-1105.85,0.9802,584.5931833648682,N/A
+4,-2081,-253.8,0.9736,678.9437352371216,N/A
+5,-2081,-200.0,0.967,631.5172127532959,N/A
+6,-2477,-200.0,0.9604,603.1723313903808,N/A
+7,-1883,-200.0,0.9538,575.0242430877686,N/A
+8,-2180,-214.85,0.9472,586.7237801742554,N/A
+9,-2378,-200.0,0.9406,632.1097843170166,N/A
+10,-1784,-328.7,0.9339999999999999,604.4607339096069,"{
+    ""partial_policy"": {
+        ""36"": 1,
+        ""35"": 2,
+        ""34"": 2,
+        ""33"": 2,
+        ""32"": 2
+    },
+    ""reasoning"": ""The agent is currently failing by moving into states that lead to the cliff, particularly in the vicinity of states 35-46. By assigning action 1 (up) to state 36, the agent can avoid immediate danger and start moving towards safer states. For states 35-32, action 2 (right) is assigned to encourage movement towards the goal while avoiding cliffs. This strategy aims to reduce the likelihood of falling into the cliff states and improve overall returns.""
+}"
+11,-2675,-200.0,0.9274,615.5406056213379,N/A
+12,-2774,-391.55,0.9208,636.3050029754638,N/A
+13,-3071,-200.0,0.9142,664.2325763702393,N/A
+14,-2675,-200.0,0.9076,678.0899703598022,N/A
+15,-1289,-390.55,0.901,657.8350173187256,N/A
+16,-1883,-200.0,0.8944,631.0683885574341,N/A
+17,-1388,-200.0,0.8878,653.747770729065,N/A
+18,-2081,-289.1,0.8812,640.2609719085693,N/A
+19,-2378,-303.95,0.8746,645.9139645957947,N/A
+20,-893,-200.0,0.868,652.4538856506348,"{
+    ""partial_policy"": {
+        ""36"": 2,
+        ""35"": 2,
+        ""34"": 2,
+        ""33"": 1,
+        ""32"": 1
+    },
+    ""reasoning"": ""The proposed actions focus on moving the agent towards the right while avoiding the cliff states. State 36 (start) is assigned action 2 (right) to encourage movement towards the goal. States 35 and 34 are also assigned action 2 to continue progressing right. State 33 is assigned action 1 (up) to avoid the cliff while still making progress, and state 32 is assigned action 1 to further ensure safety and movement towards the goal. This policy aims to prevent the agent from falling into the cliff states and encourages a safer path towards the goal.""
+}"
+21,-2774,-200.0,0.8613999999999999,645.266480102539,N/A
+22,-2675,-214.85,0.8548,614.9396088790894,N/A
+23,-1091,-294.05,0.8482000000000001,657.6502519226074,N/A
+24,-3368,-234.65,0.8416,611.6382304382324,N/A
+25,-1190,-279.2,0.835,610.4170124053956,N/A
+26,-868,-234.65,0.8284,619.4961971483732,N/A
+27,-497,-200.0,0.8218,626.364633102417,N/A
+28,-2081,-323.45,0.8151999999999999,585.2005129623413,N/A
+29,-1685,-269.3,0.8086,601.4493676757812,N/A
+30,-1091,-224.75,0.802,583.5963816833496,"{
+    ""partial_policy"": {
+        ""36"": 2,
+        ""35"": 2,
+        ""34"": 2,
+        ""33"": 1,
+        ""32"": 1
+    },
+    ""reasoning"": ""The proposed actions aim to guide the agent away from the cliff states (37-46) while still progressing towards the goal. State 36 (start) is directed to move right (action 2) to avoid the cliff and head towards the goal. States 35 and 34 also move right to ensure the agent does not approach the cliff. State 33 is assigned action 1 (up) to provide a safe upward movement, while state 32 is also directed to move up to avoid potential cliff encounters. This policy focuses on critical states near the cliff and avoids repeating previous ineffective actions.""
+}"
+31,-596,-200.0,0.7954,630.8680796051026,N/A
+32,-2873,-177.6,0.7888,625.8431280517578,N/A
+33,-3269,-239.6,0.7822,583.6188453292847,N/A
+34,-2774,-308.9,0.7756000000000001,601.2805389785767,N/A
+35,-1685,-254.45,0.769,619.4617658996582,N/A
+36,-1190,-333.65,0.7624,601.1215974426269,N/A
+37,-497,-308.9,0.7558,589.9275395202636,N/A
+38,-1982,-368.3,0.7492,564.9170183944702,N/A
+39,-2774,-190.95,0.7425999999999999,586.2258758163453,N/A
+40,-1982,-200.0,0.736,601.293942489624,"{
+    ""partial_policy"": {
+        ""36"": 0,
+        ""35"": 0,
+        ""34"": 0,
+        ""33"": 0,
+        ""32"": 1
+    },
+    ""reasoning"": ""The proposed actions focus on the critical states near the cliff (36-35-34-33) to prevent the agent from falling into the cliff states (37-46). State 36 is the start state, and moving left (0) keeps the agent safe while progressing towards the goal. State 32 is assigned action 1 (up) to encourage upward movement away from the cliff while still aiming towards the right side of the grid. This policy aims to reduce the risk of falling into the cliff and improve overall returns.""
+}"
+41,-1190,-269.3,0.7294,591.0972623825073,N/A
+42,-1586,-259.4,0.7228,584.7952845764161,N/A
+43,-1190,-234.65,0.7162,586.1062465286254,N/A
+44,-1883,-373.25,0.7096,579.5340828323365,N/A
+45,-2675,-254.45,0.7030000000000001,563.8692524719238,N/A
+46,-893,-217.45,0.6964,551.529986038208,N/A
+47,-992,-219.8,0.6898,559.6978406524659,N/A
+48,-1289,-246.65,0.6832,569.5021490478516,N/A
+49,-2081,-200.0,0.6766000000000001,568.0847038459777,N/A
+50,-992,-222.95,0.67,561.2259745407105,"{
+    ""partial_policy"": {
+        ""36"": 1,
+        ""35"": 0,
+        ""34"": 0,
+        ""33"": 1,
+        ""32"": 1
+    },
+    ""reasoning"": ""The proposed actions aim to guide the agent away from the cliff states (37-46) and towards safer paths. State 36 (start) is assigned action 1 (up) to encourage upward movement away from the cliff. States 35 and 34 are assigned action 0 (left) to prevent downward movement towards the cliff. States 33 and 32 are assigned action 1 (up) to further promote upward movement and avoid the cliff. This policy aims to reduce the likelihood of falling into the cliff while also moving towards the goal.""
+}"
+51,-1586,-200.0,0.6634,569.3357074737548,N/A
+52,-1190,-221.85,0.6568,540.7532858657837,N/A
+53,-1289,-200.0,0.6502,553.4884347915649,N/A
+54,-695,-204.95,0.6436,531.5301466560363,N/A
+55,-794,-215.55,0.637,544.6390721130371,N/A
+56,-46,-159.85,0.6304,463.0415163454802,N/A
+57,-1190,-200.0,0.6238,497.65385898590085,N/A
+58,-893,-130.4,0.6172,484.416401874423,N/A
+59,-398,-171.1,0.6106,499.20587659835815,N/A
+60,-695,-143.85,0.604,512.2081314760446,"{
+    ""partial_policy"": {
+        ""36"": 0,
+        ""35"": 1,
+        ""34"": 1,
+        ""33"": 1,
+        ""32"": 0
+    },
+    ""reasoning"": ""The proposed actions focus on critical states near the cliff (35-46) and the start state (36). State 36 is assigned to move right to avoid falling into the cliff. State 35 is assigned to move up to ensure the agent stays safe and avoids the cliff. States 34 and 33 are also assigned to move up to continue progressing toward the goal while staying safe. State 32 is assigned to move left, allowing for a safer path without risking a fall into the cliff. This policy aims to minimize the risk of falling into the cliff while promoting movement toward the goal.""
+}"
+61,-336,-68.55,0.5973999999999999,463.89522256712985,N/A
