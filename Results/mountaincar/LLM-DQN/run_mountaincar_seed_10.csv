@@ -1,0 +1,25 @@
+episode,train_return,eval_return,epsilon,loss,llm_full_response
+1,148.02852823510767,0.9108140599727641,0.99525,1.176512962797793,N/A
+2,-98.05219336748121,-45.47703772813081,0.9905,3.8646711748838425,N/A
+3,146.59323748867027,-76.10346407264468,0.98575,5.023342704361883,N/A
+4,197.8411949742586,-23.415791294137,0.981,10.924073977804765,N/A
+5,150.90608688294887,98.80050491705884,0.97625,25.64335074260317,"{
+    ""vel_split"": 0.55,
+    ""pos_split"": 0.45,
+    ""action_low_energy"": 0,
+    ""action_high_energy"": 2,
+    ""reasoning"": ""The current policy has a high evaluation score and a conflict rate of 0.0%, indicating that the existing strategy is effective. However, there is room for improvement in the average reward and coverage of the low energy region. By slightly increasing the velocity and position splits, we can potentially enhance the car's momentum-building capability and allow for more aggressive energy acquisition when the car is in the low energy state. This adjustment aims to increase the low energy coverage, potentially leading to higher rewards and shorter episode lengths while maintaining the effectiveness of the high energy strategy.""
+}"
+6,243.60534214135265,59.88616399416581,0.9715,46.396681750586275,N/A
+7,151.70644448362293,50.73151444558229,0.96675,60.04778922608024,N/A
+8,163.10633796094916,79.57423319184917,0.962,98.47828358027243,N/A
+9,115.53426489531994,100.07198511196984,0.95725,145.3152722560841,N/A
+10,162.13257094104776,109.39979867605958,0.9525,142.07065587191238,"{
+    ""vel_split"": 0.52,
+    ""pos_split"": 0.43,
+    ""action_low_energy"": 0,
+    ""action_high_energy"": 2,
+    ""reasoning"": ""The current policy has improved the coverage of the low energy region and maintained a conflict rate of 0.0%. However, the evaluation score has decreased compared to the initial policy. To enhance performance, we can slightly adjust the velocity and position splits to balance the low energy and high energy coverage better. By slightly decreasing the position split and increasing the velocity split, we aim to improve the car's ability to build momentum while still allowing it to transition effectively to the high energy state. This adjustment seeks to optimize the average reward and episode length by ensuring the car can efficiently gain momentum and reach the goal more consistently.""
+}"
+11,177.21069744566918,86.24679046441217,0.94775,154.1367824828427,N/A
+12,467.410695756937,178.16942081811726,0.9430000000000001,162.79675900755507,N/A

@@ -1,0 +1,1904 @@
+episode,train_return,eval_return,epsilon,loss,llm1_full_response,llm2_full_response
+1,-119.56527349176554,-112.76960645170296,0.9835,nan,N/A,N/A
+2,-133.60442423906557,-112.76960645170296,0.967,nan,N/A,N/A
+3,-131.4576577641591,-114.73367535264317,0.9505,0.002176593989133835,N/A,N/A
+4,-132.04492150464293,-122.33100241456798,0.9339999999999999,0.0007974263280630112,N/A,N/A
+5,-135.3388059916378,-124.47643426048441,0.9175,0.0004286330076865852,"To help the DQN agent learn faster in the MountainCar-v0 environment, we need to optimize the exploration strategy by adjusting the action distribution during exploration. Let's analyze the sampled actions and the total reward from the last episode to provide recommendations.
+
+### Analysis of Sampled Actions:
+The sampled actions from the last episode are distributed as follows:
+- **Action 0 (Push Left):** Appears 31 times
+- **Action 1 (No Push):** Appears 39 times
+- **Action 2 (Push Right):** Appears 30 times
+
+This distribution is relatively balanced, but with a slight preference for ""No Push"" actions.
+
+### Total Reward:
+The total reward from the last episode is -135.34, which suggests that the agent is still struggling to reach the goal efficiently. In MountainCar-v0, the reward is -1 for each time step, so a higher (less negative) reward indicates reaching the goal faster.
+
+### Recommendations for Exploration Strategy:
+
+1. **Increase Exploration of Push Actions:**
+   - Since the goal is to build momentum to reach the flag, it is crucial to explore the ""Push Left"" and ""Push Right"" actions more frequently. This will help the agent learn the dynamics of gaining momentum by moving back and forth between the hills.
+
+2. **Action Distribution Adjustment:**
+   - Consider adjusting the exploration action distribution to favor more ""Push"" actions initially. For example, you could try:
+     - **Action 0 (Push Left):** 40%
+     - **Action 1 (No Push):** 20%
+     - **Action 2 (Push Right):** 40%
+   - This distribution encourages the agent to actively explore the effects of pushing left and right, which is essential for building the necessary momentum.
+
+3. **Monitor and Adjust:**
+   - After implementing the adjusted distribution for 20 episodes, monitor the agent's performance and adjust the distribution as needed. If the agent shows improvement, you can gradually reduce exploration and allow the DQN to exploit more.
+
+4. **Adaptive Exploration:**
+   - Consider using an adaptive exploration strategy such as epsilon-greedy with a decaying epsilon. Start with a higher epsilon value to encourage exploration and gradually decrease it as the agent learns more about the environment.
+
+5. **Reward Shaping:**
+   - Although not directly related to action distribution, consider reward shaping to provide additional incentives for reaching higher positions or gaining velocity. This can guide the agent more effectively towards the goal.
+
+By implementing these strategies, you should be able to improve the learning efficiency of the DQN agent in the MountainCar-v0 environment.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+6,-110.31204822837948,-133.58659828535738,0.901,0.0006406622123904526,N/A,N/A
+7,-136.24127418203952,-133.07138184081145,0.8845,0.0003190157003700733,N/A,N/A
+8,-125.36827283059309,-112.34261829021591,0.868,0.0002215831191278994,N/A,N/A
+9,-128.58990101301325,-117.9345550036298,0.8515,0.00033996504498645663,N/A,N/A
+10,-135.42829471553938,-126.8322133329352,0.835,0.00027962157037109137,"To help the DQN agent learn faster in the MountainCar-v0 environment, we need to focus on an exploration strategy that effectively balances the need to explore the state space and exploit known good actions. Given the task description and the sampled actions, let's analyze the data and provide recommendations:
+
+### Analysis of Current Action Distribution
+
+1. **Sampled Actions**:
+   - 0 (Push Left): 32 times
+   - 1 (No Push): 22 times
+   - 2 (Push Right): 46 times
+
+2. **Observation**:
+   - The distribution of actions shows a preference for ""Push Right"" (action 2), followed by ""Push Left"" (action 0), and then ""No Push"" (action 1).
+   - The total reward in the last episode is -135.43, indicating that the agent is not yet performing optimally. The reward is negative, which is typical for MountainCar, but the goal is to reduce this negative reward as much as possible.
+
+### Recommendations for Exploration Strategy
+
+1. **Balanced Exploration**:
+   - The current action distribution is skewed towards pushing right, which might not be optimal for building the necessary momentum to reach the goal. A more balanced exploration strategy could help the agent learn more effectively.
+   - **Suggested Action Probabilities**:
+     - Push Left (0): 35%
+     - No Push (1): 25%
+     - Push Right (2): 40%
+
+2. **Encourage Momentum Building**:
+   - To effectively build momentum, the agent should explore sequences of actions that include both pushing left and right. This can be achieved by slightly increasing the probability of ""Push Left"" to encourage exploration in that direction more frequently.
+
+3. **Adaptive Exploration**:
+   - Consider implementing an adaptive exploration strategy where the action probabilities are adjusted based on the agent's performance over time. For instance, if the agent starts achieving better rewards, gradually shift the probabilities to favor exploitation (e.g., using an epsilon-greedy strategy with decaying epsilon).
+
+4. **Diverse State Exploration**:
+   - Ensure that the agent explores a diverse range of states by occasionally favoring the ""No Push"" action. This will help the agent learn the dynamics of the environment better, especially in situations where maintaining or reducing speed is beneficial.
+
+5. **Monitor and Adjust**:
+   - Continuously monitor the agent's performance and adjust the exploration strategy as needed. If the agent shows improvement, consider reducing exploration in favor of exploitation to consolidate learning.
+
+By adopting a more balanced and adaptive exploration strategy, the agent should be able to learn the necessary dynamics to build momentum and reach the goal more efficiently in the MountainCar-v0 environment.","```json
+{
+  ""action_probs"": [0.35, 0.25, 0.4]
+}
+```"
+11,-137.09635330698717,-116.0012582261564,0.8185,0.0003127205709461123,N/A,N/A
+12,-133.8838970033148,-119.20402875247821,0.802,0.0005253827548585832,N/A,N/A
+13,-129.5020710065818,-115.35511449933267,0.7855,0.0005606455961242318,N/A,N/A
+14,-124.48767606791586,-115.35511449933267,0.769,0.0005285944789648056,N/A,N/A
+15,-134.48982841136223,-116.13734828939876,0.7525,0.0004672811774071306,"To help the DQN agent learn more effectively in the MountainCar-v0 environment, we need to consider an exploration strategy that encourages the agent to explore actions that build momentum, which is crucial for solving this task. Let's analyze the current data and suggest a more effective exploration action distribution.
+
+### Analysis of Current Data:
+
+1. **Action Distribution**:
+   - Action 0 (Push Left): 32 times
+   - Action 1 (No Push): 28 times
+   - Action 2 (Push Right): 40 times
+
+   The current distribution shows a slight preference towards ""Push Right"" actions, which is reasonable given the goal is to reach the flag on the right hill. However, the overall distribution is relatively balanced, which might not be ideal for building momentum effectively.
+
+2. **Total Reward**:
+   - The total reward of -134.49 indicates that the agent is not yet efficiently reaching the goal. In MountainCar-v0, rewards are negative, and the goal is to minimize the absolute reward value (i.e., get closer to zero).
+
+### Recommendations for Exploration Strategy:
+
+1. **Bias Towards Momentum-Building Actions**:
+   - Encourage actions that help build momentum. The car needs to oscillate between the left and right hills to gather enough speed to reach the flag. Therefore, actions that alternate between pushing left and right should be emphasized more than ""No Push.""
+
+2. **Suggested Action Distribution**:
+   - **Action 0 (Push Left)**: 35%
+   - **Action 1 (No Push)**: 15%
+   - **Action 2 (Push Right)**: 50%
+
+   This distribution encourages the agent to push right more frequently, which aligns with the goal of reaching the right hill. However, it still maintains a significant proportion of ""Push Left"" actions to ensure momentum is built by moving back and forth. The ""No Push"" action is minimized to prevent the agent from getting stuck or losing momentum.
+
+3. **Adaptive Exploration**:
+   - Implement an adaptive exploration strategy where the action distribution is adjusted based on the agent's performance over episodes. If the agent starts reaching the goal more consistently, gradually shift towards a more balanced distribution to refine the policy.
+
+4. **Incorporate Exploration Noise**:
+   - Introduce some exploration noise, such as Gaussian noise, to the actions during training. This can help the agent explore a wider range of states and avoid local optima.
+
+By adopting this exploration strategy, the agent should be better positioned to learn the necessary dynamics for building momentum and reaching the goal more efficiently in the MountainCar-v0 environment.","```json
+{
+  ""action_probs"": [0.35, 0.15, 0.5]
+}
+```"
+16,-136.22836662493197,-115.35511449933267,0.736,0.0007601949037052691,N/A,N/A
+17,-133.04194314949626,-126.41244443963986,0.7195,0.0009683125535957515,N/A,N/A
+18,-121.99931253843828,-115.35511449933267,0.7030000000000001,0.0008885539718903601,N/A,N/A
+19,-130.7568143010046,-124.11739582692728,0.6865,0.0007943724049255252,N/A,N/A
+20,-119.477393515312,-121.8325066104762,0.67,0.0010403185151517391,"To help the DQN agent learn faster in the MountainCar-v0 environment, we need to analyze the current exploration strategy and adjust it to encourage more effective exploration. The MountainCar-v0 task requires the agent to build momentum by oscillating between the hills, which means the agent needs to strategically use actions to gain enough velocity to reach the goal.
+
+### Analysis of Current Exploration Strategy:
+1. **Action Distribution**: 
+   - From the sampled actions, we observe the following distribution:
+     - Action 0 (Push Left): 34 times
+     - Action 1 (No Push): 11 times
+     - Action 2 (Push Right): 55 times
+
+2. **Current Behavior**:
+   - The agent is predominantly using Action 2 (Push Right), which might indicate a bias towards pushing right. This is not necessarily beneficial if the car is not gaining enough momentum to reach the flag.
+   - The use of Action 1 (No Push) is relatively low, which might limit the agent's ability to stabilize or adjust its position effectively.
+
+3. **Total Reward**:
+   - The total reward of -119.477 suggests that the agent is not yet efficiently reaching the goal, as a higher negative reward indicates more time steps are being used per episode.
+
+### Recommendations for Exploration Strategy:
+To improve the learning speed of the DQN agent, consider adjusting the action distribution during exploration as follows:
+
+1. **Balanced Action Exploration**:
+   - Aim for a more balanced exploration of actions to ensure the agent experiences a variety of states and transitions.
+   - Suggested action distribution:
+     - Action 0 (Push Left): 35%
+     - Action 1 (No Push): 30%
+     - Action 2 (Push Right): 35%
+
+2. **Encourage Oscillation**:
+   - The agent should be encouraged to oscillate between pushing left and right to build momentum. A balanced distribution between Actions 0 and 2 will help in achieving this.
+
+3. **Incorporate No Push Strategically**:
+   - Increase the usage of Action 1 (No Push) slightly to allow the agent to stabilize its position and potentially gather more information about the environment state.
+
+4. **Adaptive Exploration**:
+   - Consider using an adaptive exploration strategy where the distribution can shift based on the agent's current position and velocity. For instance, if the agent is moving up a hill, increasing the probability of Action 2 (Push Right) might be beneficial, whereas pushing left might be favored when descending.
+
+5. **Monitor and Adjust**:
+   - Continuously monitor the agent's performance and adjust the exploration strategy based on observed improvements or setbacks in total rewards.
+
+By implementing these recommendations, the agent should be able to explore more effectively, build the necessary momentum, and ultimately learn to solve the MountainCar-v0 task more efficiently.","```json
+{
+  ""action_probs"": [0.35, 0.3, 0.35]
+}
+```"
+21,-132.7831213779656,-115.35511449933267,0.6535,0.0008786310208961368,N/A,N/A
+22,-133.38938558734006,-115.35511449933267,0.637,0.0019006265792995691,N/A,N/A
+23,-110.93842802632052,-115.35511449933267,0.6205,0.0013586556306108832,N/A,N/A
+24,-115.96263001156338,-115.35511449933267,0.604,0.001933857100084424,N/A,N/A
+25,-131.87037262612105,-115.35511449933267,0.5874999999999999,0.0027084213215857744,"To help the DQN agent learn faster in the MountainCar-v0 environment, we need to consider the sampled actions and the total reward from the last episode. The goal is to improve exploration by providing a more balanced action distribution that encourages the agent to effectively build momentum and reach the goal.
+
+### Analysis of Current Action Distribution:
+
+1. **Sampled Actions Count:**
+   - `Push Left (0)`: 57 times
+   - `No Push (1)`: 17 times
+   - `Push Right (2)`: 26 times
+
+2. **Observations:**
+   - The agent heavily favors the `Push Left (0)` action, which might indicate an imbalance in exploration.
+   - The `No Push (1)` action is underrepresented, which might limit the agent's ability to stabilize or maintain momentum.
+   - The `Push Right (2)` action is moderately used, but might still need adjustments to better build momentum.
+
+### Recommendations for Exploration Strategy:
+
+1. **Balanced Exploration:**
+   - Encourage a more balanced distribution of actions to allow the agent to explore different strategies effectively. This can be achieved by adjusting the probabilities for each action during exploration.
+
+2. **Recommended Action Distribution:**
+   - `Push Left (0)`: 40%
+   - `No Push (1)`: 30%
+   - `Push Right (2)`: 30%
+
+3. **Rationale:**
+   - **Increase `No Push (1)`**: Increasing the frequency of the `No Push` action can help the agent stabilize its position or maintain momentum without unnecessary reversals.
+   - **Maintain `Push Right (2)`**: Keeping a reasonable probability for `Push Right` ensures the agent attempts to climb the right hill more frequently.
+   - **Reduce `Push Left (0)`**: Reducing the frequency of `Push Left` prevents the agent from getting stuck in a loop of moving left too often, which can hinder progress towards the goal.
+
+4. **Monitor and Adjust:**
+   - Continuously monitor the performance and adjust the distribution based on the agent's learning progress. If the agent starts to consistently reach the goal, consider shifting towards a more greedy strategy with less exploration.
+
+By implementing this adjusted exploration strategy, the agent should be able to explore the state space more effectively, potentially leading to faster learning and improved performance in reaching the goal in MountainCar-v0.","```json
+{
+  ""action_probs"": [0.4, 0.3, 0.3]
+}
+```"
+26,-128.21955519383945,-115.35511449933267,0.571,0.0011706480290740728,N/A,N/A
+27,-101.30746189453764,-115.35511449933267,0.5545,0.0021324832923710346,N/A,N/A
+28,-130.19922145616607,-115.35511449933267,0.538,0.0015163312200456858,N/A,N/A
+29,-129.52246260260134,-113.53927920063941,0.5215000000000001,0.0025663638953119516,N/A,N/A
+30,-130.40780247157613,-115.35511449933267,0.505,0.0022133002057671547,"To help the DQN agent learn faster in the MountainCar-v0 environment, let's analyze the provided data and suggest an exploration action distribution strategy.
+
+### Analysis of Sampled Actions
+
+From the sampled actions in the last episode:
+- **Action 0 (Push Left)**: 60 occurrences
+- **Action 1 (No Push)**: 17 occurrences
+- **Action 2 (Push Right)**: 23 occurrences
+
+The current action distribution is approximately:
+- **Action 0 (Push Left)**: 60%
+- **Action 1 (No Push)**: 17%
+- **Action 2 (Push Right)**: 23%
+
+### Observations
+
+1. **Dominance of Action 0**: The agent predominantly selects Action 0 (Push Left). This may suggest that the agent is spending more time building momentum to the left, but it might be overemphasized, potentially slowing down progress towards the goal.
+
+2. **Balanced Exploration**: For effective learning, it’s important that the agent explores all actions adequately to understand their effects on the environment. Current distribution might not be balanced enough for optimal exploration.
+
+3. **Momentum Building**: Given the nature of the task, the agent needs to build momentum by oscillating between actions 0 and 2. Action 1 (No Push) should be used sparingly as it doesn’t contribute to momentum buildup.
+
+### Recommendations for Exploration Action Distribution
+
+To improve the learning efficiency of the DQN agent, consider adjusting the exploration action distribution as follows:
+
+- **Action 0 (Push Left)**: 40%
+- **Action 1 (No Push)**: 10%
+- **Action 2 (Push Right)**: 50%
+
+#### Rationale
+
+- **Increase Action 2 (Push Right)**: By increasing the frequency of Action 2, the agent will have more opportunities to push towards the goal, which is crucial for reaching the flag on the right hill.
+
+- **Maintain Action 0 (Push Left)**: A significant portion of actions should still be dedicated to building momentum to the left, but slightly reduced to allow more pushes to the right.
+
+- **Reduce Action 1 (No Push)**: This action should be minimized because it doesn’t contribute to momentum, which is essential in this environment.
+
+### Implementation Strategy
+
+1. **Epsilon-Greedy Exploration**: Use an epsilon-greedy strategy where the probability of selecting a random action follows the recommended distribution during exploration.
+
+2. **Adaptive Exploration**: Consider dynamically adjusting the distribution based on the agent's performance and progress towards the goal over time.
+
+3. **Monitor and Adjust**: Continuously monitor the agent's performance, and adjust the action distribution if necessary to ensure balanced exploration and efficient learning.
+
+By implementing these recommendations, the agent should be able to explore more effectively and, consequently, learn to solve the MountainCar-v0 task more efficiently.","```json
+{
+  ""action_probs"": [0.4, 0.1, 0.5]
+}
+```"
+31,-128.63603120780823,-115.35511449933267,0.48849999999999993,0.002119633136317134,N/A,N/A
+32,-117.2745537560481,-115.35511449933267,0.472,0.003205214161425829,N/A,N/A
+33,-95.8663142080885,-115.35511449933267,0.4555,0.004249430261552334,N/A,N/A
+34,-104.02983154596836,-115.35511449933267,0.43900000000000006,0.004598941188305616,N/A,N/A
+35,-125.00678563562856,-112.48733260306048,0.4225,0.0035409987904131413,"To help the DQN agent learn faster in the MountainCar-v0 environment, we need to focus on an exploration strategy that efficiently builds momentum to reach the goal. The sampled actions and the total reward from the last episode provide insights into the agent's behavior and areas for improvement.
+
+### Analysis of Current Behavior:
+1. **Action Distribution**: 
+   - The sampled actions show a heavy bias towards action `0` (Push Left), with occasional actions `2` (Push Right) and very few `1` (No Push).
+   - This indicates the agent is primarily attempting to move left, which is necessary to gain momentum but might be overemphasized.
+
+2. **Reward**:
+   - The total reward of `-125.01` suggests that the car is not reaching the goal efficiently. The agent may be spending too much time or getting stuck in suboptimal states.
+
+3. **Momentum Building**:
+   - The key to solving this environment is to build sufficient momentum. The current action pattern might not be generating enough rightward momentum.
+
+### Recommendations for Exploration Strategy:
+To improve the agent's learning process, consider the following action distribution for exploration during the next 20 training episodes:
+
+1. **Balanced Action Distribution**:
+   - **Push Left (0)**: 40%
+   - **No Push (1)**: 20%
+   - **Push Right (2)**: 40%
+
+2. **Rationale**:
+   - **Push Left (0) and Push Right (2)**: Equal emphasis on left and right actions will help the agent learn the importance of oscillating to build momentum.
+   - **No Push (1)**: Including a moderate amount of 'No Push' actions allows the agent to stabilize or maintain its current velocity, which can be useful when the car is near the peak of a hill.
+
+3. **Exploration Strategy**:
+   - Implement an epsilon-greedy strategy where exploration is encouraged initially but gradually decreases as the agent learns. Start with a higher epsilon (e.g., 0.3) and decay it over episodes.
+
+4. **Monitor and Adjust**:
+   - Continuously monitor the rewards and adjust the distribution if the agent shows signs of improvement or stagnation.
+   - Pay attention to whether the agent successfully reaches the goal more frequently or if there are specific states where it struggles.
+
+By adopting this balanced exploration strategy, the agent should be better equipped to learn the dynamics of the environment and improve its performance over subsequent episodes.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+36,-125.69775375641096,-111.04778374421414,0.406,0.003910672850906849,N/A,N/A
+37,-108.99251351177399,-112.20655837649913,0.38949999999999996,0.004499499220401049,N/A,N/A
+38,-92.78591797575355,-111.99610974066104,0.373,0.004817603621631861,N/A,N/A
+39,-97.85347153141302,-110.8124159059735,0.35650000000000004,0.004971693269908428,N/A,N/A
+40,-125.92491268625938,-110.62774795899206,0.3400000000000001,0.008015627041459084,"To help the DQN agent learn faster in the MountainCar-v0 environment, we need to focus on optimizing the exploration strategy. Given the data from the last episode, we can make several observations and recommendations:
+
+### Observations:
+1. **Action Distribution**: The sampled actions are heavily skewed towards action 0 (Push Left), with a few instances of actions 1 (No Push) and 2 (Push Right). This indicates a strong bias towards pushing left, which may not be optimal for building momentum.
+
+2. **Total Reward**: The total reward of -125.92 suggests that the agent is not performing well, as it is far from the optimal reward of around -110 to -90, which indicates reaching the flag efficiently.
+
+3. **Momentum Building**: The MountainCar-v0 environment requires the agent to build momentum by oscillating between the left and right sides. A balanced exploration of actions is crucial for learning this dynamic.
+
+### Recommendations:
+1. **Balanced Action Exploration**:
+   - **Increase Action 2 (Push Right)**: The agent needs to explore pushing right more frequently to effectively build momentum. The current distribution underutilizes this action.
+   - **Reduce Action 0 (Push Left)**: While pushing left is important, the current overuse may hinder learning. Balancing it with action 2 is crucial.
+   - **Moderate Action 1 (No Push)**: This action can be used strategically when the car is at the peak of a hill, but it should not dominate the action space.
+
+2. **Exploration Strategy**:
+   - **Epsilon-Greedy with Adjusted Probabilities**: Use an epsilon-greedy strategy where, during exploration, actions are chosen based on adjusted probabilities:
+     - Assign a higher probability to action 2 (e.g., 40%).
+     - Assign a moderate probability to action 0 (e.g., 30%).
+     - Assign a lower probability to action 1 (e.g., 30%).
+   - This adjustment encourages the agent to explore pushing right more often while maintaining a balance with other actions.
+
+3. **Dynamic Exploration**:
+   - **Adaptive Exploration Rate**: Consider dynamically adjusting the exploration rate based on performance improvements. If the agent's performance plateaus, increase exploration to encourage trying new strategies.
+
+4. **Reward Shaping**:
+   - If possible, modify the reward function to provide intermediate rewards for achieving higher velocities or reaching higher positions on the hills. This can guide the agent towards the goal more effectively.
+
+By implementing these strategies, the agent should be able to learn the necessary momentum-building behavior more efficiently, potentially leading to improved performance in the MountainCar-v0 environment.","```json
+{
+  ""action_probs"": [0.3, 0.2, 0.5]
+}
+```"
+41,-90.50130730498591,-110.40891743672702,0.3235,0.007642722222954035,N/A,N/A
+42,-90.48694708395847,-110.28024542179647,0.30700000000000005,0.004229171201586723,N/A,N/A
+43,-77.65238187261522,-107.95968137171408,0.2923975,0.013164855539798737,N/A,N/A
+44,-123.03223194518988,-107.49054021076154,0.2758974999999999,0.00896858237683773,N/A,N/A
+45,-96.85763620356198,-107.0358699545,0.26055249999999996,0.00797964632511139,"To help the DQN agent learn faster in the MountainCar-v0 environment, we need to analyze the current exploration strategy and suggest improvements. The goal is to encourage effective exploration that allows the agent to build momentum and reach the flag on the right hill.
+
+### Analysis of Current Action Distribution:
+The sampled actions in the last episode are as follows:
+- Action 0 (Push Left): 40 times
+- Action 1 (No Push): 5 times
+- Action 2 (Push Right): 55 times
+
+The current distribution shows a higher frequency of ""Push Right"" actions, which indicates that the agent might be trying to reach the goal directly without building enough momentum. The ""No Push"" action is underrepresented, which might limit the agent's ability to effectively explore the state space.
+
+### Recommendations for Exploration Strategy:
+1. **Balance Left and Right Pushes:**
+   - Encourage a more balanced distribution between ""Push Left"" and ""Push Right"" actions. This will help the agent build momentum by swinging back and forth more effectively.
+   - Suggested distribution: 40% Left, 10% No Push, 50% Right.
+
+2. **Increase ""No Push"" Actions:**
+   - Increase the frequency of ""No Push"" actions slightly. This can help the agent explore the effects of inertia and gravity in the environment, leading to better understanding and strategy formulation.
+   - Suggested distribution: 30% Left, 20% No Push, 50% Right.
+
+3. **Adaptive Exploration:**
+   - Implement an adaptive exploration strategy where the action distribution can change based on the agent's performance. For example, if the agent is not making progress towards the goal, increase the exploration rate to encourage more diverse actions.
+
+4. **Encourage Exploration in Early Episodes:**
+   - In the initial episodes, prioritize exploration over exploitation to allow the agent to gather diverse experiences. Gradually shift towards exploitation as the agent learns effective strategies.
+
+5. **Monitor and Adjust:**
+   - Continuously monitor the agent's performance and adjust the exploration strategy accordingly. If the total reward improves, it may indicate that the current exploration strategy is effective.
+
+By implementing these recommendations, the agent should be able to learn more effectively and improve its performance in the MountainCar-v0 environment. The key is to ensure that the agent explores the state space thoroughly to understand the dynamics of the environment and develop a successful strategy to reach the goal.","```json
+{
+  ""action_probs"": [0.3, 0.2, 0.5]
+}
+```"
+46,-71.58764296431204,-104.16555031988692,0.24661,0.0060271406546235085,N/A,N/A
+47,-70.23254413212248,-97.36972084871611,0.2321725,0.014631586149334908,N/A,N/A
+48,-82.023437468889,-95.91130715435631,0.21740500000000007,0.013498630374670029,N/A,N/A
+49,-123.58074205690266,-92.40975953537136,0.200905,0.0053680227138102055,N/A,N/A
+50,-79.52056426710915,-87.18556609951894,0.18655,0.007437471300363541,"To help the DQN agent learn more effectively in the MountainCar-v0 environment, we need to analyze the current exploration strategy and adjust the action distribution to encourage more efficient exploration. Here’s a breakdown of the current situation and recommendations for improvement:
+
+### Current Analysis
+1. **Action Distribution:**
+   - Action 0 (Push Left): 31 times
+   - Action 1 (No Push): 2 times
+   - Action 2 (Push Right): 67 times
+
+2. **Current Strategy:**
+   - The agent is heavily favoring Action 2 (Push Right) with 67 out of 100 actions.
+   - Action 0 (Push Left) is used 31 times, which is less frequent.
+   - Action 1 (No Push) is rarely used, only 2 times.
+
+3. **Performance:**
+   - The total reward in the last episode is -79.52, indicating that the agent is not reaching the goal efficiently.
+
+### Recommendations for Exploration Strategy
+To improve the agent's learning and exploration efficiency, consider the following adjustments to the action distribution:
+
+1. **Balanced Exploration:**
+   - Encourage a more balanced exploration strategy by increasing the frequency of Action 0 (Push Left) and Action 1 (No Push). This can help the agent explore the state space more thoroughly and build the necessary momentum to reach the goal.
+
+2. **Suggested Action Distribution:**
+   - Action 0 (Push Left): 40%
+   - Action 1 (No Push): 20%
+   - Action 2 (Push Right): 40%
+
+3. **Rationale:**
+   - **Action 0 (Push Left):** Increasing the frequency of pushing left will help the agent gain momentum by moving back and forth more effectively. This is crucial for building the speed needed to climb the hill.
+   - **Action 1 (No Push):** Although used sparingly, incorporating moments of no push can allow the agent to decelerate or maintain momentum strategically, which might help in learning subtle control adjustments.
+   - **Action 2 (Push Right):** Maintaining a significant portion of right pushes ensures that the agent continues to aim for the goal while exploring other strategies.
+
+4. **Implementation:**
+   - Adjust the exploration policy to reflect the new action distribution for the next 20 episodes.
+   - Monitor the agent's performance and adjust the distribution if necessary, based on reward improvements and observed behavior.
+
+By adopting this more balanced exploration strategy, the agent should be able to explore the environment more effectively, potentially leading to faster learning and improved performance in reaching the goal.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+51,-70.57843220762442,-86.19888689748863,0.17203000000000002,0.009507060050964355,N/A,N/A
+52,-69.8687864428237,-76.35573117883268,0.158335,0.009215570986270905,N/A,N/A
+53,-63.38418942805732,-71.10530778068741,0.14513500000000001,0.024966740980744362,N/A,N/A
+54,-69.89151001843494,-66.06017782668158,0.13168750000000007,0.011393161490559578,N/A,N/A
+55,-65.73653741497884,-63.458426809710055,0.11824000000000001,0.008189231157302856,"Based on the provided data, let's analyze the current action distribution and suggest a strategy to improve exploration in the MountainCar-v0 environment.
+
+### Current Situation:
+- **Total Reward**: -65.74 (indicating the car is far from reaching the goal efficiently)
+- **Sampled Actions**:
+  - Action 0 (Push Left): 33 times
+  - Action 1 (No Push): 2 times
+  - Action 2 (Push Right): 49 times
+
+### Observations:
+1. **Imbalance in Action Distribution**: There is a heavy bias towards Action 2 (Push Right), which was chosen 49 times. Action 0 (Push Left) was chosen 33 times, while Action 1 (No Push) was chosen only 2 times.
+2. **Exploration Strategy**: The current exploration strategy seems to favor pushing right more frequently, potentially due to the agent's current policy or exploration method.
+3. **Potential Overfitting**: The agent might be overfitting to certain states or not exploring enough diverse strategies to gain momentum effectively.
+
+### Recommendations:
+To improve the exploration and help the DQN agent learn faster, consider the following strategy:
+
+1. **Balanced Action Exploration**:
+   - Adjust the exploration strategy to ensure a more balanced distribution of actions. This can help the agent explore a wider range of state-action pairs.
+   - Suggested Action Distribution:
+     - Action 0 (Push Left): 40%
+     - Action 1 (No Push): 20%
+     - Action 2 (Push Right): 40%
+
+2. **Incorporate Exploration Noise**:
+   - Introduce a small amount of noise or randomness to the selected actions to encourage exploration of less frequently visited states.
+   - This can be achieved by using techniques like epsilon-greedy with a gradually decreasing epsilon value or using a softmax action selection mechanism.
+
+3. **Monitor and Adjust**:
+   - Continuously monitor the performance and adjust the action distribution based on the observed improvements.
+   - If the total reward improves, fine-tune the distribution to maintain a balance between exploration and exploitation.
+
+4. **Momentum Building**:
+   - Encourage the agent to explore sequences of actions that help build momentum, such as alternating between pushing left and right, rather than frequently choosing ""No Push.""
+
+5. **Reward Shaping**:
+   - Consider implementing reward shaping to provide intermediate rewards for reaching certain positions or velocities, which can guide the agent towards more effective exploration strategies.
+
+By implementing these strategies, the agent should be able to explore the environment more effectively, build the necessary momentum to reach the goal, and improve its learning rate over the next 20 training episodes.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+56,-67.04247450316159,-62.58990511545481,0.10528749999999998,0.010322533547878265,N/A,N/A
+57,-67.76649463160929,-61.70786594769994,0.092005,0.015690717846155167,N/A,N/A
+58,-62.82475499388821,-61.09460550505668,0.07913499999999996,0.014442441053688526,N/A,N/A
+59,-63.45348600181748,-59.82198562075583,0.06651250000000009,0.008907957933843136,N/A,N/A
+60,-52.83601745685031,-59.32824230177327,0.0576025,0.01425652951002121,"Based on the provided data, let's analyze the current exploration strategy and suggest improvements to help the DQN agent learn more effectively in the MountainCar-v0 environment.
+
+### Analysis:
+1. **Action Distribution:** 
+   - The sampled actions show a significant bias towards action `2` (Push Right), especially in the latter part of the episode. 
+   - Action `0` (Push Left) is underrepresented, particularly when compared to action `2`.
+   - Action `1` (No Push) is rarely used, with only a single occurrence.
+
+2. **Reward Analysis:**
+   - The total reward of approximately -52.84 indicates that the agent is not yet efficiently reaching the goal. In MountainCar-v0, the reward is -1 for each time step until the car reaches the goal, so a less negative reward would indicate quicker success.
+
+### Recommendations:
+To improve exploration and potentially accelerate learning, consider adjusting the action distribution during exploration:
+
+1. **Balanced Exploration:**
+   - Use a more balanced action distribution to ensure the agent explores all possible actions. This can prevent overfitting to suboptimal strategies and encourage the discovery of more effective policies.
+   - Suggested initial distribution: 
+     - Action `0` (Push Left): 40%
+     - Action `1` (No Push): 20%
+     - Action `2` (Push Right): 40%
+
+2. **Adaptive Exploration:**
+   - Gradually adjust the exploration strategy based on the agent’s performance. If the agent starts achieving better rewards, you can reduce exploration in favor of exploitation.
+   - Implement an epsilon-greedy strategy where epsilon decreases over time, allowing the agent to exploit learned strategies while still exploring occasionally.
+
+3. **Momentum Building:**
+   - Encourage actions that help build momentum. The car needs to move back and forth to gather enough speed to reach the top of the hill. Ensuring a balanced use of actions `0` and `2` can help achieve this.
+
+4. **Reward Shaping (Optional):**
+   - If feasible, consider reward shaping by providing additional feedback to the agent when it moves towards the goal or gains speed. This can guide the learning process more effectively.
+
+By adopting a more balanced and adaptive exploration strategy, the agent should be better equipped to learn the necessary momentum-building behavior needed to solve the MountainCar-v0 task efficiently.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+61,-65.08537601908662,-58.17169957793243,0.045227499999999976,0.012754150666296482,N/A,N/A
+62,-61.2092728848049,-59.27281143224061,0.03235749999999993,0.010204024612903595,N/A,N/A
+63,-58.536153202809956,-59.31307047684909,0.020147499999999985,0.0211805272847414,N/A,N/A
+64,-57.356211269141326,-59.99935692718376,0.01,0.015221104957163334,N/A,N/A
+65,-57.58859074374531,-58.162524896703644,0.01,0.009708032011985779,"Based on the data provided, we can observe the following:
+
+1. **Action Distribution**: The sampled actions indicate a heavy bias towards actions ""0"" (Push Left) and ""2"" (Push Right), with fewer instances of action ""1"" (No Push). This is somewhat expected, as the MountainCar task typically requires the car to build momentum by oscillating between pushing left and right.
+
+2. **Performance**: The total reward in the last episode is -57.59, which suggests that the agent is not yet consistently reaching the goal. The MountainCar-v0 environment rewards the agent with -1 for each time step until the goal is reached, so a higher negative reward indicates that the agent is taking more time to reach the goal or not reaching it at all.
+
+3. **Momentum Building**: The key to solving MountainCar is to build enough momentum to reach the flag on the right hill. The current action distribution might not be effectively balancing the momentum-building process, as indicated by the performance.
+
+### Recommendations for Exploration Action Distribution:
+
+1. **Balanced Exploration**: Ensure a more balanced exploration strategy that allows the agent to explore all possible actions more evenly. This can help the agent learn the dynamics of the environment better. Consider an initial action distribution like:
+   - Action 0 (Push Left): 40%
+   - Action 1 (No Push): 20%
+   - Action 2 (Push Right): 40%
+
+   This distribution encourages the agent to explore both left and right pushes equally, with a moderate exploration of the ""No Push"" action.
+
+2. **Adaptive Exploration**: As the agent learns, adapt the exploration strategy based on its performance. Gradually decrease the exploration rate for actions that are well-learned and increase it for those that need more exploration.
+
+3. **Reward Shaping**: Consider implementing reward shaping strategies that can provide intermediate rewards for reaching certain velocity or position thresholds. This can guide the agent towards building momentum more effectively.
+
+4. **Monitor and Adjust**: Continuously monitor the performance of the agent across episodes. If there is no improvement, consider adjusting the exploration strategy further, potentially using techniques like epsilon-greedy with annealing, where the exploration rate decreases over time as the agent becomes more confident in its learned policy.
+
+By implementing these strategies, the agent should be able to learn more efficiently and improve its performance in the MountainCar-v0 environment.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+66,-62.24624305061062,-57.25663112446974,0.01,0.06320483237504959,N/A,N/A
+67,-57.24004533963911,-58.45645880606219,0.01,0.01666361652314663,N/A,N/A
+68,-58.17903284042673,-56.695761521421865,0.01,0.015569886192679405,N/A,N/A
+69,-55.70880024235479,-57.43299519047357,0.01,0.017310384660959244,N/A,N/A
+70,-55.766309609570136,-57.31194946538991,0.01,0.01269003376364708,"Based on the provided data, the agent's recent exploration strategy seems to be heavily biased towards certain actions, particularly actions 0 (Push Left) and 2 (Push Right), with occasional action 1 (No Push). Here's a breakdown of the current situation and recommendations for improving the exploration strategy:
+
+### Current Action Distribution Analysis:
+- **Action 0 (Push Left):** The agent has sampled this action frequently, particularly at the beginning of the episode.
+- **Action 1 (No Push):** This action is rarely chosen, appearing sporadically throughout the episode.
+- **Action 2 (Push Right):** After the initial series of left pushes, the agent heavily favors pushing right.
+
+### Observations:
+1. **Bias Towards Pushing:** The agent seems to prefer pushing actions (0 and 2) over no action (1). This is expected to some extent since building momentum is crucial, but the distribution is quite skewed.
+2. **Initial Left Pushes:** The agent tends to start with a series of left pushes, which might be an attempt to build initial momentum but could limit exploration of other strategies.
+3. **Limited Exploration of No Push (1):** The action 1 is underexplored. This action can be vital in certain states to maintain momentum without overshooting or losing built-up velocity.
+
+### Recommendations for Exploration Strategy:
+To improve learning efficiency, the exploration strategy should be adjusted to encourage a more balanced action distribution, allowing the agent to explore a wider variety of state-action pairs:
+
+1. **Increase Exploration of Action 1 (No Push):**
+   - Encourage more frequent sampling of action 1. This can help the agent learn when maintaining its current state is beneficial, rather than constantly pushing left or right.
+
+2. **Balanced Action Sampling:**
+   - Aim for a more uniform distribution of actions initially. This will allow the agent to experience a wider range of scenarios and learn more effective policies. Consider using a softmax distribution with a temperature parameter to control exploration.
+
+3. **Adaptive Exploration:**
+   - Implement an adaptive exploration strategy where the action probabilities are adjusted based on the agent's performance or the state of the environment. For example, if the agent's velocity is high, reduce the probability of further pushing actions to avoid overshooting.
+
+4. **State-Dependent Exploration:**
+   - Tailor the exploration strategy based on the state. For instance, in states where the car is close to the goal with high velocity, increase the probability of action 1 to stabilize the car's position.
+
+5. **Periodic Review and Adjustment:**
+   - Continuously monitor the agent's performance and adjust the exploration strategy based on the observed data. If certain actions are underexplored or overexplored, adjust their probabilities accordingly.
+
+By implementing these recommendations, the agent should be able to explore more effectively, leading to faster convergence to an optimal policy.","```json
+{
+  ""action_probs"": [0.3, 0.4, 0.3]
+}
+```"
+71,-59.795314770161994,-54.14163263453172,0.01,0.04825517535209656,N/A,N/A
+72,-57.99654267633865,-55.73387449476142,0.01,0.014855066314339638,N/A,N/A
+73,-57.12021764515499,-56.138432334273,0.01,0.02053994871675968,N/A,N/A
+74,-59.21056081900772,-69.34000490293454,0.01,0.015656696632504463,N/A,N/A
+75,-57.90147762676436,-60.67960407298905,0.01,0.017180893570184708,"Based on the data provided, here are some observations and recommendations for the exploration strategy in the MountainCar-v0 environment:
+
+### Observations:
+1. **Action Distribution**:
+   - The sampled actions show a heavy bias towards actions `0` (Push Left) and `2` (Push Right), with relatively few `1` (No Push) actions.
+   - This behavior is expected as the car needs to oscillate between the valleys to gain enough momentum to reach the flag.
+
+2. **Performance**:
+   - The total reward in the last episode is -57.9, which suggests that the agent is still struggling to consistently reach the goal. The reward indicates that the agent is making progress but not efficiently enough.
+
+3. **Momentum Building**:
+   - Successfully solving MountainCar-v0 requires the agent to build momentum by moving back and forth between the hills. The sampled actions suggest some attempts at this, but the distribution may not be optimized for learning this behavior effectively.
+
+### Recommendations:
+1. **Action Distribution Adjustment**:
+   - **Increase Exploration of `2` (Push Right)**: Since the goal is on the right hill, slightly biasing the exploration towards `2` can help the agent learn to reach the goal more effectively.
+   - **Balanced Oscillation**: Ensure that the agent spends sufficient time exploring `0` and `2` to learn the oscillation behavior necessary to build momentum. Consider a distribution like 40% `0`, 10% `1`, and 50% `2`.
+
+2. **Incorporate State Awareness**:
+   - Encourage exploration strategies that consider the car's position and velocity. For instance, if the car is moving left with high velocity, prioritize action `2` to capitalize on the momentum.
+
+3. **Variable Exploration Rate**:
+   - Implement a dynamic exploration strategy where the action distribution can vary based on the episode number or the agent's performance. Start with a higher exploration rate and gradually reduce it as the agent becomes more proficient.
+
+4. **Reward Shaping**:
+   - Consider reward shaping to provide intermediate rewards for reaching certain positions or achieving specific velocities. This can guide the agent's exploration towards more promising strategies.
+
+5. **Monitor and Adjust**:
+   - Continuously monitor the agent's performance and adjust the exploration strategy as needed. If the agent's performance plateaus, consider introducing exploration noise or revisiting the action distribution.
+
+By implementing these recommendations, the agent should be able to learn the optimal policy more efficiently, improving its ability to solve the MountainCar-v0 task.","```json
+{
+  ""action_probs"": [0.35, 0.15, 0.5]
+}
+```"
+76,-58.60182371482121,-63.9286350477038,0.01,0.044696494936943054,N/A,N/A
+77,-62.65482542630886,-73.16292646745094,0.01,0.03201407566666603,N/A,N/A
+78,-56.714509468492366,-56.56870315599862,0.01,0.03248026967048645,N/A,N/A
+79,-60.51218212376282,-57.10219663162934,0.01,0.039804164320230484,N/A,N/A
+80,-54.828229404807985,-72.40633044256046,0.01,0.042301490902900696,"To help the DQN agent learn more effectively in the MountainCar-v0 environment, it's important to consider the current action distribution and its impact on the agent's learning process. Let's analyze the provided data and recommend a strategy for exploration.
+
+### Analysis of Current Action Distribution:
+
+1. **Current Action Bias**:
+   - The sampled actions show a strong bias towards action `2` (Push Right) towards the end of the episode. 
+   - The beginning of the episode is dominated by action `0` (Push Left), with very few instances of action `1` (No Push).
+
+2. **Reward Context**:
+   - The total reward of `-54.83` indicates that the agent is not yet reaching the goal efficiently. A reward closer to `0` would indicate success in reaching the flag.
+
+3. **Exploration Pattern**:
+   - The agent seems to initially try to build momentum by pushing left but shifts heavily towards pushing right, possibly too early or excessively, which might not be optimal for building momentum effectively.
+
+### Recommendations for Exploration Strategy:
+
+To improve the learning efficiency of the DQN agent, consider the following exploration strategy:
+
+1. **Balanced Exploration**:
+   - Encourage a more balanced exploration of actions `0` and `2` throughout the episode. This can help the agent learn to build momentum more effectively by alternating pushes left and right.
+   - Suggested distribution for exploration (probability per action):
+     - Action `0` (Push Left): 40%
+     - Action `1` (No Push): 10%
+     - Action `2` (Push Right): 50%
+
+2. **Incorporate Action `1` (No Push)**:
+   - Increase the probability of action `1` to allow the agent to explore states where it maintains its velocity. This can help the agent learn when it's beneficial to conserve momentum without pushing.
+
+3. **Adaptive Exploration**:
+   - Consider implementing an adaptive exploration strategy that adjusts the action distribution based on the agent's progress. For instance, initially favor more exploration with actions `0` and `2`, and gradually shift towards the optimal action as performance improves.
+
+4. **Monitor and Adjust**:
+   - Continuously monitor the agent's performance and adjust the exploration strategy as needed. If the agent starts performing better, gradually reduce exploration to allow for more exploitation of learned policies.
+
+By implementing these recommendations, the agent should be able to explore the state space more effectively, leading to faster learning and improved performance in reaching the goal in the MountainCar-v0 environment.","```json
+{
+  ""action_probs"": [0.4, 0.1, 0.5]
+}
+```"
+81,-83.0037914465281,-56.532413600181734,0.01,0.05008615180850029,N/A,N/A
+82,-59.09143506970388,-59.46951684575045,0.01,0.024222180247306824,N/A,N/A
+83,-56.82085237072648,-82.47021077128795,0.01,0.060228295624256134,N/A,N/A
+84,-79.96614108923822,-66.26936752540067,0.01,0.04786697402596474,N/A,N/A
+85,-77.65570794543227,-61.24585046697441,0.01,0.02150863967835903,"To help the DQN agent learn more effectively in the MountainCar-v0 environment, we need to analyze the sampled actions and consider how they might be improved to facilitate better exploration and learning. The goal is to ensure the agent explores the state space efficiently to build momentum and reach the goal.
+
+### Analysis of Sampled Actions:
+- **Action Distribution**: 
+  - Action 0 (Push Left): 24 times
+  - Action 1 (No Push): 22 times
+  - Action 2 (Push Right): 54 times
+
+- **Observations**:
+  - The agent predominantly chooses Action 2 (Push Right), which might indicate a bias towards this action. 
+  - Action 1 (No Push) is used less frequently, which might be insufficient for the car to build momentum effectively.
+  - Action 0 (Push Left) is also underrepresented, which is crucial for building momentum by moving back and forth.
+
+### Recommendations for Exploration Strategy:
+1. **Balanced Exploration**:
+   - Encourage a more balanced exploration strategy by adjusting the action distribution to ensure the agent explores all actions more evenly. This can help the agent better understand the dynamics of the environment and how to build momentum effectively.
+
+2. **Action Distribution Proposal**:
+   - **Action 0 (Push Left)**: 35%
+   - **Action 1 (No Push)**: 30%
+   - **Action 2 (Push Right)**: 35%
+
+   This proposed distribution aims to balance the actions, allowing the agent to explore the state space more thoroughly by ensuring it doesn't overly favor one direction. 
+
+3. **Adaptive Exploration**:
+   - Implement an adaptive exploration strategy where the action probabilities are adjusted based on the agent's performance. If the agent is not improving, increase exploration by favoring underexplored actions.
+
+4. **Incorporate State-Dependent Exploration**:
+   - Consider incorporating state-dependent exploration strategies where the choice of action is influenced by the current state of the car (position and velocity). For instance, if the car is moving uphill and losing speed, encourage pushing in the opposite direction to build momentum.
+
+5. **Monitor and Adjust**:
+   - Continuously monitor the agent's performance and adjust the exploration strategy as needed. If the agent's total reward improves, continue with the current strategy; if not, consider further adjustments to the action distribution.
+
+By implementing these recommendations, the agent should be able to explore the environment more effectively, leading to faster learning and better performance in the MountainCar-v0 task.","```json
+{
+  ""action_probs"": [0.35, 0.3, 0.35]
+}
+```"
+86,-86.08430634277336,-105.51092523607261,0.01,0.044091351330280304,N/A,N/A
+87,-58.01120223470998,-102.39634539723913,0.01,0.02572426199913025,N/A,N/A
+88,-108.31946286611645,-102.4333408108059,0.01,0.021165620535612106,N/A,N/A
+89,-125.79872739676517,-97.53314221939887,0.01,0.04028158634901047,N/A,N/A
+90,-86.5189933848451,-94.66432881216468,0.01,0.043047308921813965,"To help the DQN agent learn faster in the MountainCar-v0 environment, we need to consider the current exploration strategy and adjust it to encourage more effective learning. Here's an analysis of the current situation and a recommended strategy:
+
+### Analysis of Current Exploration
+
+1. **Current Action Distribution**:
+   - **Push Right (Action 2)**: This action is heavily favored, as indicated by the high frequency of '2' in the sampled actions. This suggests that the agent is predominantly trying to push the car to the right.
+   - **Push Left (Action 0)**: This action is underrepresented, appearing in clusters but far less frequently than '2'.
+   - **No Push (Action 1)**: This action is used very sparingly, which might be leading to missed opportunities to stabilize the car's momentum when needed.
+
+2. **Performance**:
+   - The total reward of -86.52 indicates that the agent is struggling to reach the goal efficiently. In MountainCar, a less negative reward indicates better performance (since the reward is typically negative until the goal is reached).
+
+3. **Momentum Building**:
+   - The car must build momentum by moving left and right to reach the flag. The current strategy seems to focus too much on pushing right, potentially causing the car to stall or not gain enough momentum to reach the goal.
+
+### Recommended Strategy for Exploration
+
+To improve the agent's learning efficiency, consider adjusting the exploration action distribution as follows:
+
+1. **Balanced Action Distribution**:
+   - **Push Left (Action 0)**: Increase the frequency to encourage the agent to explore moving left more often. This will help in building the necessary momentum to climb the right hill.
+   - **No Push (Action 1)**: Slightly increase the frequency to allow the agent to stabilize its velocity when needed, preventing unnecessary energy expenditure and maintaining momentum.
+   - **Push Right (Action 2)**: Decrease the frequency slightly to balance the exploration, as it is currently overrepresented.
+
+2. **Suggested Exploration Probability**:
+   - **Push Left (Action 0)**: 40%
+   - **No Push (Action 1)**: 20%
+   - **Push Right (Action 2)**: 40%
+
+3. **Adaptive Exploration**:
+   - Consider using an adaptive exploration strategy where the action probabilities are adjusted based on the agent's recent performance. If the agent fails to improve, increase exploration of less frequently used actions.
+
+4. **Use of Epsilon-Greedy**:
+   - Implement an epsilon-greedy strategy where epsilon starts relatively high to promote exploration and gradually decays as the agent's performance improves. This ensures the agent explores sufficiently early on and exploits learned strategies as it becomes more proficient.
+
+By adopting a more balanced and adaptive exploration strategy, the agent is more likely to discover effective strategies for building momentum and reaching the goal more efficiently. This should help improve the total reward over the next 20 training episodes.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+91,-94.67948728382889,-90.67317072775363,0.01,0.03145235404372215,N/A,N/A
+92,-125.94303107577161,-93.28854348020283,0.01,0.02758115343749523,N/A,N/A
+93,-101.35649879541394,-93.24772587497446,0.01,0.028728388249874115,N/A,N/A
+94,-129.73557768815198,-89.83262708266663,0.01,0.055923689156770706,N/A,N/A
+95,-123.19442337872293,-89.31386408816358,0.01,0.036677148193120956,"Based on the data provided, it seems that the agent is predominantly choosing the action ""Push Right"" (action 2) during exploration. This indicates a potential lack of exploration diversity, which might be hindering the agent's ability to learn an effective policy for the MountainCar-v0 environment. The goal in this environment is to build momentum by oscillating between the two hills, which requires a balanced exploration of actions.
+
+### Analysis:
+1. **Action Distribution**: The sampled actions show a strong bias towards action 2 (""Push Right""). There are very few instances of action 0 (""Push Left"") and almost no instances of action 1 (""No Push"").
+2. **Reward**: The total reward of -123.19 suggests that the agent is not efficiently reaching the goal. In MountainCar-v0, the closer the total reward is to 0, the better, as the episode ends when the car reaches the flag.
+
+### Recommendations for Exploration Strategy:
+To help the DQN agent learn faster, it is crucial to encourage a more balanced exploration strategy. Here’s a recommended action distribution for the next 20 training episodes:
+
+1. **Action Distribution**:
+   - **Push Left (Action 0)**: 40%
+   - **No Push (Action 1)**: 20%
+   - **Push Right (Action 2)**: 40%
+
+2. **Rationale**:
+   - **Push Left (Action 0)**: Increasing the frequency of this action will help the car build momentum by moving back and forth between the hills. This is essential for overcoming the right hill.
+   - **No Push (Action 1)**: While this action is less critical, it can still provide valuable state transitions and should be explored moderately to avoid deterministic behavior.
+   - **Push Right (Action 2)**: This action remains important as it helps the car move towards the goal. However, its frequency should be balanced with ""Push Left"" to ensure effective momentum building.
+
+3. **Implementation**:
+   - Use an epsilon-greedy strategy where the exploration probability is adjusted to follow the recommended distribution.
+   - Consider using a decaying epsilon to gradually reduce exploration as the agent becomes more proficient in the task.
+
+By implementing this exploration strategy, the agent should gain a better understanding of the environment dynamics and improve its ability to reach the goal more efficiently.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+96,-127.64244460750159,-90.04158022999334,0.01,0.06594014912843704,N/A,N/A
+97,-129.05097005108124,-89.25448403441285,0.01,0.03496776521205902,N/A,N/A
+98,-83.1346810660358,-89.56330967386933,0.01,0.028477709740400314,N/A,N/A
+99,-70.32818936374967,-97.3871380996609,0.01,0.04059118404984474,N/A,N/A
+100,-128.15820611098883,-75.23692965439776,0.01,0.05110170692205429,"Based on the provided data, it seems that the agent is predominantly selecting the action ""2"" (Push Right). This skewed action distribution is likely hindering the agent's ability to explore the state space effectively, which is critical for tasks like MountainCar-v0 where building momentum is key to solving the environment.
+
+Here are my recommendations for an exploration strategy to help the DQN agent learn more effectively:
+
+1. **Balanced Action Distribution**:
+   - Encourage a more balanced distribution of actions during exploration. Given that the agent heavily favors ""Push Right,"" it's essential to make ""Push Left"" and ""No Push"" more likely to be selected.
+   - A simple strategy could be to use an epsilon-greedy policy with a higher epsilon value during these 20 episodes to encourage more exploration. For example, set epsilon to 0.3, meaning that 30% of the time, actions are chosen randomly.
+
+2. **Exploration Strategy**:
+   - Implement a stochastic action selection where each action has an equal probability of being chosen during exploration. For instance, set the probabilities as follows:
+     - P(Push Left) = 0.33
+     - P(No Push) = 0.33
+     - P(Push Right) = 0.34
+   - This ensures that the agent explores all possible actions more uniformly, which can help it learn the dynamics of the environment better.
+
+3. **Adaptive Exploration**:
+   - Consider an adaptive exploration strategy where the action probabilities are adjusted based on the agent's performance. For example, if the agent is consistently failing to reach the goal, increase the probability of less chosen actions (e.g., ""Push Left"" and ""No Push"").
+
+4. **Reward Shaping**:
+   - While not directly related to action distribution, consider implementing reward shaping to encourage exploration. For instance, provide a small positive reward for reaching higher positions on the left hill, which incentivizes the agent to explore more effectively.
+
+5. **Action Noise**:
+   - Introduce a small amount of noise to the action selection process, which can help the agent escape local optima and explore more effectively.
+
+By implementing these strategies, the agent should be able to explore the environment more thoroughly, building the necessary momentum to reach the goal more effectively. This balanced exploration will likely lead to improved learning and faster convergence to an optimal policy.","```json
+{
+  ""action_probs"": [0.33, 0.33, 0.34]
+}
+```"
+101,-70.11208328207599,-73.95203560100022,0.01,0.02581588551402092,N/A,N/A
+102,-129.56228845886633,-67.12677637778305,0.01,0.028038162738084793,N/A,N/A
+103,-55.94491381226108,-67.5606352607855,0.01,0.06191428750753403,N/A,N/A
+104,-70.45950641411724,-62.72352255439942,0.01,0.03905945271253586,N/A,N/A
+105,-72.41671270123753,-64.01912086346844,0.01,0.03697187453508377,"Based on the provided data, we can observe the following:
+
+1. **Action Distribution**: The sampled actions show a significant imbalance, with a majority of actions being either 0 (Push Left) or 2 (Push Right). There are very few instances of action 1 (No Push). Specifically, the distribution seems to favor actions 0 and 2, with 1 being underrepresented.
+
+2. **Performance**: The total reward in the last episode was -72.4167, which indicates that the agent is not yet performing well, as it is far from the optimal reward of reaching the goal.
+
+3. **Momentum Building**: In MountainCar-v0, the key to success is building enough momentum to reach the top of the hill. This typically involves alternating between actions 0 and 2 to effectively swing back and forth, gaining enough speed to reach the goal.
+
+### Recommendations for Exploration Strategy
+
+To facilitate better learning and exploration for the DQN agent, consider the following recommendations:
+
+1. **Balanced Exploration**: Ensure a more balanced exploration strategy by increasing the frequency of action 1 (No Push). This action might help the agent learn when to maintain current momentum without unnecessary energy expenditure, which can be crucial for optimizing the trajectory.
+
+2. **Encourage Alternation**: Given the nature of the task, encourage a pattern of alternating between actions 0 and 2. This can be achieved by slightly biasing the exploration strategy towards alternating actions, which may help the agent better learn the dynamics of building momentum.
+
+3. **Exploration Strategy**: Implement a softmax or epsilon-greedy strategy with a bias towards actions 0 and 2, but not completely neglecting action 1. For instance:
+   - Epsilon-greedy: Start with a higher epsilon (e.g., 0.3) to encourage exploration, and gradually decrease it over episodes.
+   - Softmax: Adjust the temperature parameter to ensure that actions 0 and 2 are more likely than action 1, but action 1 still has a reasonable probability.
+
+4. **Adaptive Exploration**: Consider an adaptive exploration strategy that adjusts based on the agent's performance. For example, if the agent is not improving, increase exploration; if the agent shows signs of improvement, focus more on exploitation.
+
+5. **Reward Shaping**: Although not directly related to action distribution, consider implementing reward shaping to provide intermediate rewards for reaching certain positions or velocities, encouraging the agent to explore more effectively.
+
+By adopting these strategies, the DQN agent may learn faster and more effectively, ultimately improving its performance in the MountainCar-v0 environment.","```json
+{
+  ""action_probs"": [0.35, 0.15, 0.5]
+}
+```"
+106,-42.73703032025534,-61.76597961113602,0.01,0.023829763755202293,N/A,N/A
+107,-65.50905627418712,-62.937022199368855,0.01,0.025495495647192,N/A,N/A
+108,-63.653953987240286,-58.855582206799205,0.01,0.030609771609306335,N/A,N/A
+109,-61.907232300075705,-61.16641010728266,0.01,0.04464814066886902,N/A,N/A
+110,-43.58868805951037,-58.899020699448464,0.01,0.0224290881305933,"Based on the data provided, it seems that the agent is currently favoring actions 0 (Push Left) and 2 (Push Right) heavily, with no actions 1 (No Push) being sampled at all. This indicates that the agent is attempting to build momentum by oscillating between pushing left and right, which is a reasonable strategy for the MountainCar-v0 environment. However, the lack of action 1 suggests that the agent might not be exploring the state space effectively, potentially missing opportunities to maintain momentum or fine-tune its position.
+
+### Analysis:
+1. **Current Action Distribution**: The agent predominantly uses actions 0 and 2, with no sampling of action 1. This could lead to a suboptimal exploration strategy as action 1 might sometimes be beneficial to maintain a certain velocity or position without overcorrecting.
+2. **Total Reward**: The total reward of -43.59 indicates that the agent is still quite far from solving the task optimally. This is typical for early training stages, but it also suggests room for improvement in exploration.
+
+### Recommendations for Exploration Strategy:
+1. **Introduce Action 1**: Encourage the exploration of action 1 (No Push) to allow the agent to experience scenarios where maintaining the current velocity and position might be beneficial. This can help in fine-tuning the agent's understanding of the environment dynamics.
+
+2. **Balanced Exploration**: Adjust the exploration strategy to ensure a more balanced sampling of actions. A possible distribution could be:
+   - Action 0 (Push Left): 40%
+   - Action 1 (No Push): 20%
+   - Action 2 (Push Right): 40%
+
+   This distribution still emphasizes the importance of building momentum by pushing left and right but introduces a reasonable probability for action 1 to be explored.
+
+3. **Adaptive Exploration**: Consider using an adaptive exploration strategy where the action probabilities are adjusted based on the agent's recent performance. For example, if the agent is consistently failing to reach the goal, increase the probability of less-explored actions to encourage diverse experiences.
+
+4. **Monitor and Adjust**: Continuously monitor the agent's performance and adjust the exploration strategy as needed. If the agent starts to show signs of improvement, gradually shift towards a more exploitation-focused strategy.
+
+By implementing these recommendations, the agent should be able to explore the state space more effectively, potentially leading to faster learning and better performance in the MountainCar-v0 environment.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+111,-44.95131883239375,-60.52033627109082,0.01,0.029473062604665756,N/A,N/A
+112,-63.38570187084634,-58.82889691770773,0.01,0.020566582679748535,N/A,N/A
+113,-39.861506444611585,-59.73390572125137,0.01,0.019635580480098724,N/A,N/A
+114,-38.45854824096958,-59.74299754537733,0.01,0.015118561685085297,N/A,N/A
+115,-37.859377607784715,-59.390178321601425,0.01,0.016048016026616096,"Based on the provided data, it seems that the agent predominantly sampled actions 0 (Push Left) and 2 (Push Right), with no occurrences of action 1 (No Push). This suggests that the agent is attempting to build momentum by oscillating between the left and right actions, which is a common strategy in the MountainCar-v0 environment to gain enough speed to reach the goal.
+
+The total reward of -37.86 indicates that the agent is still struggling to reach the goal efficiently. In MountainCar-v0, the reward is typically -1 for each time step until the goal is reached, so a higher negative reward implies longer episodes without reaching the goal.
+
+### Recommendations for Exploration Action Distribution
+
+To help the DQN agent learn faster, consider the following strategy recommendations:
+
+1. **Balanced Exploration**: Introduce a more balanced exploration strategy that includes all three actions. This can help the agent to better understand the effects of the ""No Push"" action, which might be beneficial in certain states to maintain or adjust velocity without losing momentum. A possible distribution could be:
+   - Action 0 (Push Left): 40%
+   - Action 1 (No Push): 20%
+   - Action 2 (Push Right): 40%
+
+2. **State-Dependent Exploration**: Modify the exploration strategy based on the current state of the car. For example:
+   - If the car's position is near the left boundary, increase the probability of action 2 (Push Right).
+   - If the car's position is near the right boundary, increase the probability of action 0 (Push Left).
+   - If the car's velocity is close to zero, slightly increase the probability of action 1 (No Push) to allow for potential stabilization.
+
+3. **Epsilon-Greedy with Decay**: Implement an epsilon-greedy strategy with a decaying epsilon value. Start with a higher epsilon (e.g., 0.8) and gradually decrease it to encourage more exploration initially and more exploitation as the agent learns.
+
+4. **Reward Shaping**: Although not directly related to action distribution, consider implementing reward shaping to provide intermediate rewards for reaching certain positions or velocities. This can guide the agent toward more effective exploration patterns.
+
+5. **Monitor and Adjust**: Continuously monitor the performance over the next 20 episodes and adjust the action distribution based on observed improvements or challenges. If the agent starts performing better, gradually shift towards more exploitation.
+
+By incorporating these strategies, the agent should be able to explore the environment more effectively, leading to faster learning and improved performance in the MountainCar-v0 task.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+116,-39.72072672177373,-59.090149969159235,0.01,0.032381586730480194,N/A,N/A
+117,-49.570396417994715,-59.18330847633433,0.01,0.017885565757751465,N/A,N/A
+118,-42.23794848431966,-59.31133851417087,0.01,0.027419142425060272,N/A,N/A
+119,-45.76697011770446,-59.23275847441666,0.01,0.05365769565105438,N/A,N/A
+120,-42.76962340293188,-58.667050029192126,0.01,0.020075328648090363,"Based on the data provided, the agent's recent exploration strategy seems to heavily favor the ""Push Right"" action (action 2) after initially choosing ""Push Left"" (action 0) for a brief period. The ""No Push"" action (action 1) is not utilized at all in the sampled actions. This unbalanced exploration strategy might not be optimal for learning in the MountainCar-v0 environment, where building momentum is crucial.
+
+### Analysis:
+
+1. **Action Distribution:**
+   - The sampled actions show a strong bias towards ""Push Right"" (action 2), especially after the initial sequence of ""Push Left"" (action 0). This can lead to suboptimal exploration as the agent might not adequately explore the state space around ""No Push"" (action 1).
+
+2. **Reward:**
+   - The total reward in the last episode is -42.77, which indicates that the agent is not yet reaching the goal efficiently. The reward is negative because the episode ends after 200 time steps without reaching the flag, which is typical for MountainCar-v0 when the goal is not reached.
+
+3. **Momentum Building:**
+   - The key to solving MountainCar-v0 is to build momentum by oscillating between pushing left and right. The current strategy might not be effectively building the necessary momentum, especially since the ""No Push"" action is not being used to allow the car to coast and gain speed.
+
+### Recommendations:
+
+To improve the exploration strategy and help the DQN agent learn faster, consider the following action distribution for the next 20 training episodes:
+
+1. **Balanced Exploration:**
+   - Encourage a more balanced exploration of actions by adjusting the probabilities for each action. A suggested distribution could be:
+     - **Push Left (action 0):** 0.4
+     - **No Push (action 1):** 0.2
+     - **Push Right (action 2):** 0.4
+
+2. **Incorporate ""No Push"":**
+   - By incorporating the ""No Push"" action, the agent can potentially exploit the car's momentum more effectively. This action can help the car to coast and gain speed without additional force, which is crucial for reaching the top of the hill.
+
+3. **Adaptive Exploration:**
+   - Consider using an adaptive exploration strategy, such as epsilon-greedy with a decaying epsilon, to gradually shift from exploration to exploitation as the agent learns more about the environment.
+
+4. **Monitor and Adjust:**
+   - Continuously monitor the agent's performance and adjust the action distribution as necessary based on observed improvements or stagnation in learning. Keep track of the total reward and adjust exploration tactics if the agent's performance plateaus.
+
+By implementing these recommendations, the agent should be able to explore the environment more effectively and build the necessary momentum to reach the goal more consistently.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+121,-42.392681826424926,-59.73683296781748,0.01,0.02156680077314377,N/A,N/A
+122,-61.770906204371016,-58.84121476466961,0.01,0.017408952116966248,N/A,N/A
+123,-60.51222716490739,-59.661600909108685,0.01,0.01598457060754299,N/A,N/A
+124,-65.50036343650099,-59.71521589537317,0.01,0.060913898050785065,N/A,N/A
+125,-61.053118853177025,-59.4820331141889,0.01,0.04104628413915634,"In the MountainCar-v0 environment, the goal is to drive the car to the flag on the right hill. Due to the weak engine, the car must build momentum by oscillating between the hills. The key to improving learning during exploration is to ensure the agent experiences a diverse range of states and actions that help it understand the dynamics of the environment.
+
+### Analysis of the Current Action Distribution:
+
+1. **Action Frequency:**
+   - Action 0 (Push Left): 33 times
+   - Action 1 (No Push): 3 times
+   - Action 2 (Push Right): 64 times
+
+2. **Observations:**
+   - The agent predominantly uses Action 2 (Push Right), which indicates a bias towards pushing right.
+   - Action 1 (No Push) is underrepresented, suggesting that the agent rarely chooses to coast without applying force.
+   - There is some use of Action 0 (Push Left), but it is less frequent than Action 2.
+
+### Recommendations for Exploration Action Distribution:
+
+To help the DQN agent learn faster, it is crucial to ensure a balanced exploration strategy that allows the agent to experience the consequences of different actions. Here are some recommendations:
+
+1. **Balanced Action Distribution:**
+   - Encourage a more balanced distribution of actions to ensure the agent explores the state space effectively. A suggested distribution could be:
+     - Action 0 (Push Left): 40%
+     - Action 1 (No Push): 20%
+     - Action 2 (Push Right): 40%
+
+2. **Increased Exploration of ""No Push"":**
+   - Increase the frequency of Action 1 (No Push) to allow the agent to learn the effects of inertia and coasting, which can be crucial for building momentum.
+
+3. **Adaptive Exploration Strategy:**
+   - Consider using an adaptive exploration strategy such as epsilon-greedy with a decaying epsilon. This allows the agent to explore more in the initial episodes and gradually exploit the learned policy as training progresses.
+
+4. **Encourage Oscillation:**
+   - Ensure that the exploration strategy encourages the agent to oscillate between the left and right hills. This can be achieved by promoting sequences of alternating actions, such as alternating between Push Left and Push Right, with occasional No Push actions to maintain inertia.
+
+5. **Monitor and Adjust:**
+   - Continuously monitor the agent's performance and adjust the action distribution if certain actions are still underrepresented or if the learning progress stalls.
+
+By implementing these recommendations, the agent should be able to explore the environment more effectively, leading to faster learning and improved performance in achieving the goal.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+126,-62.193508719450826,-59.180775520486996,0.01,0.07382339239120483,N/A,N/A
+127,-78.02217310447676,-59.31643260475285,0.01,0.05369715020060539,N/A,N/A
+128,-60.92342812825558,-58.698113255219155,0.01,0.012129475362598896,N/A,N/A
+129,-37.30671496018102,-72.41995973981294,0.01,0.04345620796084404,N/A,N/A
+130,-37.79858485012914,-58.64202095383979,0.01,0.018019480630755424,"The data you've provided indicates that during the last episode, the agent predominantly used actions 0 (Push Left) and 2 (Push Right), with a heavy bias towards action 2 towards the end. This suggests that the agent is trying to build momentum to reach the goal but might not be effectively exploring the state space to learn an optimal policy.
+
+### Analysis:
+1. **Action Distribution**: The current action distribution is heavily skewed towards actions 0 and 2, with no instances of action 1 (No Push). This might be limiting the agent's ability to explore the effects of maintaining its current state, which could be crucial in certain positions to build momentum effectively.
+
+2. **Momentum Building**: The MountainCar-v0 environment requires the agent to build momentum by oscillating between the left and right hills. A balanced exploration of all actions can help the agent learn the optimal sequence of actions needed to achieve this.
+
+3. **Current Performance**: The total reward of -37.8 suggests that the agent is not yet efficiently reaching the goal, as more negative rewards indicate more time spent without reaching the goal.
+
+### Recommendations for Exploration Strategy:
+To enhance the learning process of the DQN agent, consider the following action distribution for exploration during the next 20 training episodes:
+
+1. **Balanced Exploration**: Introduce a more balanced action distribution to ensure the agent explores all possible actions:
+   - Action 0 (Push Left): 40%
+   - Action 1 (No Push): 20%
+   - Action 2 (Push Right): 40%
+
+2. **Incorporate Action 1 (No Push)**: By including action 1 in the exploration strategy, the agent can learn the potential benefits of maintaining its velocity in certain states, which could help in achieving a more efficient build-up of momentum.
+
+3. **Adaptive Exploration**: As the agent learns, gradually reduce exploration to allow the agent to exploit more of its learned policy. This can be achieved by decreasing the exploration rate (epsilon) in an epsilon-greedy strategy over time.
+
+4. **Monitor Performance**: Continuously monitor the total reward and adjust the action distribution if necessary. If significant improvement is observed, consider reducing exploration of random actions.
+
+By following these recommendations, the agent should be better equipped to explore the environment and learn an optimal policy more effectively.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+131,-60.94698864201284,-58.18973911960768,0.01,0.037244103848934174,N/A,N/A
+132,-61.79401694722805,-58.129717378021795,0.01,0.034856684505939484,N/A,N/A
+133,-39.8791445483254,-57.982689468300485,0.01,0.05171804875135422,N/A,N/A
+134,-62.72167548224815,-57.493521908538966,0.01,0.018000146374106407,N/A,N/A
+135,-58.21894764543975,-57.848761111366244,0.01,0.07094677537679672,"Based on the information provided, it appears that the sampled actions from the last episode show a heavy bias towards the action ""Push Right"" (action 2) and ""Push Left"" (action 0), with very few ""No Push"" (action 1) actions. This indicates that the agent is primarily trying to build momentum by moving left and right, which is typical for the MountainCar-v0 environment. However, the distribution might not be optimal for exploration and learning.
+
+Here are some strategy recommendations to help the DQN agent learn faster:
+
+1. **Balanced Exploration**:
+   - Encourage a more balanced exploration strategy. The current distribution seems to overly favor pushing right, which might limit the agent's ability to explore the state space effectively. Consider adjusting the exploration policy to have a more uniform distribution across actions, or at least ensure that each action has a reasonable probability of being selected.
+   - Suggested Action Distribution: 
+     - Push Left (action 0): 40%
+     - No Push (action 1): 20%
+     - Push Right (action 2): 40%
+
+2. **Epsilon-Greedy Strategy**:
+   - Use an epsilon-greedy strategy with a decaying epsilon value. Start with a higher epsilon (e.g., 0.5) to encourage exploration, and gradually decrease it over time to allow the agent to exploit its learned policy.
+
+3. **Prioritize Critical States**:
+   - Pay attention to states where the velocity is near zero or when the car is at the peak of a hill. In these situations, the choice of action is crucial for building momentum. Consider implementing a heuristic that biases action selection based on the car's position and velocity.
+
+4. **Monitor Learning Progress**:
+   - Continuously monitor the agent's performance and adjust the exploration strategy as needed. If the total reward does not improve over several episodes, consider revisiting the exploration parameters.
+
+5. **Reward Shaping**:
+   - Although the goal is not to solve the task directly, ensure that the reward function is providing sufficient feedback for the agent to learn effectively. If the agent struggles to learn, consider incorporating additional rewards for reaching certain positions or velocities.
+
+By implementing these strategies, the agent should be able to explore the environment more effectively and potentially learn a better policy for solving the MountainCar-v0 task.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+136,-61.61433266219018,-57.90349207527619,0.01,0.017634082585573196,N/A,N/A
+137,-65.75781617677501,-57.99436672689624,0.01,0.01748686283826828,N/A,N/A
+138,-60.61753023249497,-57.698573565749335,0.01,0.016928574070334435,N/A,N/A
+139,-57.336618458280064,-57.75744346998772,0.01,0.01611192524433136,N/A,N/A
+140,-41.039033452634314,-57.525222107206105,0.01,0.04590163379907608,"Based on the data provided, we can observe the following:
+
+1. **Action Distribution**: In the last episode, the actions sampled were heavily skewed towards actions 0 (""Push Left"") and 2 (""Push Right""), with no instances of action 1 (""No Push""). This suggests that the agent is primarily trying to build momentum by moving back and forth, which is a reasonable strategy for the MountainCar problem. However, the complete absence of action 1 might indicate that the agent is not exploring all possible actions, potentially missing out on beneficial states where no push might be advantageous.
+
+2. **Total Reward**: The total reward of -41.039 indicates that the agent is performing relatively well, as the reward is based on the number of time steps taken to reach the goal. However, there is still room for improvement.
+
+3. **Momentum Building**: The MountainCar problem requires the agent to build momentum by oscillating between the left and right sides of the valley. The current action distribution seems to support this strategy, but it might be too deterministic, potentially leading to suboptimal exploration.
+
+### Recommendations for Exploration Strategy:
+
+1. **Incorporate Action 1 (""No Push"")**: Introduce a small probability for action 1 to allow the agent to explore states where no push might be beneficial. This could help the agent discover situations where maintaining momentum without an additional push is advantageous.
+
+2. **Balanced Exploration**: Aim for a more balanced exploration strategy. Consider an action distribution like:
+   - Action 0 (""Push Left""): 40%
+   - Action 1 (""No Push""): 20%
+   - Action 2 (""Push Right""): 40%
+
+   This distribution maintains a focus on building momentum (actions 0 and 2) while introducing some exploration of action 1.
+
+3. **Adaptive Exploration**: As the agent learns, consider using an adaptive exploration strategy where the probabilities of actions are adjusted based on performance. For example, if the agent consistently performs well with a certain distribution, it can gradually decrease exploration and rely more on learned policies.
+
+4. **Monitor and Adjust**: Continuously monitor the performance and adjust the exploration strategy as needed. If the agent's performance plateaus or worsens, revisit the action distribution to ensure it remains effective.
+
+Implementing these recommendations should help the DQN agent explore the state space more effectively, potentially leading to faster learning and improved performance in the MountainCar-v0 environment.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+141,-57.25510864568473,-58.25671768251969,0.01,0.01333561073988676,N/A,N/A
+142,-42.64384966154716,-57.431262393608414,0.01,0.022805742919445038,N/A,N/A
+143,-38.26092484111764,-57.4130572560363,0.01,0.01959824748337269,N/A,N/A
+144,-59.88957159982525,-57.21772949742213,0.01,0.02041061967611313,N/A,N/A
+145,-60.33725683655855,-57.40220729461796,0.01,0.05184060335159302,"To help the DQN agent learn faster in the MountainCar-v0 environment, we need to focus on improving the exploration strategy based on the analysis of the sampled actions and the total reward from the last episode. Here's a breakdown of the current situation and recommendations:
+
+### Analysis of Current Exploration Strategy
+
+1. **Action Distribution**:
+   - The sampled actions show a heavy bias towards actions `0` (Push Left) and `2` (Push Right), with very few instances of action `1` (No Push).
+   - The sequence of actions suggests that the agent is oscillating between pushing left and right to build momentum, which is a necessary strategy in MountainCar-v0.
+
+2. **Total Reward**:
+   - The total reward of approximately -60 indicates that the agent is not reaching the goal consistently. In MountainCar-v0, a reward closer to zero would indicate better performance as the episode ends once the car reaches the flag.
+
+### Recommendations for Exploration Strategy
+
+To improve the learning efficiency of the DQN agent, consider the following adjustments to the exploration strategy:
+
+1. **Balanced Action Distribution**:
+   - Increase the exploration of action `1` (No Push) to better understand its impact on the car's momentum. This can help the agent learn when it's beneficial to maintain the current velocity rather than always accelerating.
+   - Suggested action distribution for the next 20 episodes:
+     - Action `0` (Push Left): 40%
+     - Action `1` (No Push): 20%
+     - Action `2` (Push Right): 40%
+
+2. **Adaptive Exploration**:
+   - Implement an epsilon-greedy strategy where the exploration rate (epsilon) starts high and gradually decreases as the agent learns. This allows the agent to explore more in the initial episodes and exploit learned strategies in later episodes.
+
+3. **State-Dependent Exploration**:
+   - Encourage exploration based on the car's position and velocity. For example, if the car is moving uphill, pushing in the opposite direction might be more beneficial to gain momentum.
+
+4. **Reward Shaping**:
+   - Introduce a small positive reward for increased velocity or reaching higher positions on the hills. This can guide the agent towards more effective exploration patterns.
+
+5. **Monitor and Adjust**:
+   - Continuously monitor the agent's performance and adjust the action distribution as needed. If certain actions consistently lead to better outcomes, gradually shift the distribution to favor those actions.
+
+By implementing these strategies, the DQN agent should be able to learn the dynamics of the MountainCar-v0 environment more effectively, ultimately improving its performance and ability to reach the goal.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+146,-61.733074399637886,-57.28451761278632,0.01,0.01997675932943821,N/A,N/A
+147,-56.66269464393014,-57.106324723256435,0.01,0.01860000379383564,N/A,N/A
+148,-59.02853588456202,-58.05856067625599,0.01,0.015991538763046265,N/A,N/A
+149,-39.34563635969534,-57.175793878867275,0.01,0.014479110948741436,N/A,N/A
+150,-58.16581327903217,-57.64624240197022,0.01,0.040249165147542953,"Based on the provided data, we can see that the agent is currently favoring actions 0 (Push Left) and 2 (Push Right) significantly more than action 1 (No Push). The sampled actions indicate a pattern where the agent tends to use one action repeatedly for a period before switching to another action. This might suggest that the agent is attempting to build momentum by pushing in one direction before switching to the other.
+
+### Analysis:
+
+1. **Action Distribution**: 
+   - The sampled actions show a significant bias towards actions 0 and 2, with very few instances of action 1. This suggests that the agent is not exploring the ""No Push"" action adequately. 
+   - The current strategy seems to focus on building momentum through continuous pushing, which is necessary, but the lack of ""No Push"" actions may limit the exploration of potentially beneficial states.
+
+2. **Performance**:
+   - The total reward of -58.1658 indicates that the agent is not yet performing optimally. In MountainCar, the goal is to minimize the number of steps (and thus increase the reward) by reaching the flag efficiently.
+
+### Recommendations for Exploration Strategy:
+
+1. **Balanced Exploration**:
+   - Introduce a more balanced action distribution to ensure that the agent explores all possible actions, including ""No Push"". This can help the agent learn the dynamics of the environment more comprehensively.
+   - Suggested action distribution: 
+     - Action 0 (Push Left): 40%
+     - Action 1 (No Push): 20%
+     - Action 2 (Push Right): 40%
+
+2. **Momentum Building**:
+   - While balancing exploration, ensure that the agent continues to build momentum by alternating between actions 0 and 2. This is crucial for overcoming the hill.
+   - Encourage sequences where the agent switches between pushing left and right, but also includes ""No Push"" to explore its impact on velocity and position.
+
+3. **Adaptive Exploration**:
+   - Consider using an adaptive exploration strategy where the action distribution is adjusted based on the agent's current position and velocity. For instance, if the agent is moving towards the left hill, slightly favor pushing left, and vice versa.
+   - Use state-dependent exploration to encourage the agent to make more informed exploration decisions based on its current state.
+
+4. **Reward Shaping**:
+   - If possible, introduce a small positive reward for reaching higher velocity or position milestones. This can guide the agent towards more effective momentum-building strategies.
+
+By implementing a more balanced and adaptive exploration strategy, the agent can gain a better understanding of the environment, potentially leading to faster learning and improved performance in reaching the goal.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+151,-58.51238969352228,-58.19057698064803,0.01,0.00973026268184185,N/A,N/A
+152,-59.4561298839016,-57.7793740398039,0.01,0.039813555777072906,N/A,N/A
+153,-58.398261864162414,-57.779111307135494,0.01,0.016305765137076378,N/A,N/A
+154,-39.15250304779705,-57.96016663594351,0.01,0.020121445879340172,N/A,N/A
+155,-42.68705875578785,-63.98375978112132,0.01,0.01058897003531456,"Based on the information provided, the MountainCar-v0 environment requires the agent to build momentum by oscillating between moving left and right to eventually reach the goal. The sampled actions indicate a heavy bias towards action 2 (""Push Right"") after an initial series of action 0 (""Push Left""). This pattern suggests that the current exploration strategy might be overly deterministic or biased, which can lead to suboptimal learning and policy development.
+
+### Analysis:
+1. **Action Bias**: The sampled actions show a strong bias towards action 2 (""Push Right""), especially after the initial segment of action 0 (""Push Left""). This indicates that the agent might not be exploring the state space effectively, potentially missing out on learning the dynamics of momentum building.
+
+2. **Lack of Exploration**: The absence of action 1 (""No Push"") in the sampled actions suggests that the agent might not be exploring all possible actions, which is crucial for learning an effective policy in MountainCar-v0.
+
+3. **Reward Signal**: The total reward of -42.687 is relatively high (in terms of absolute value), indicating that the agent is not successfully reaching the goal. This further supports the need for a more balanced exploration strategy.
+
+### Recommendations for Exploration Strategy:
+To improve the exploration and help the DQN agent learn faster, consider the following action distribution for the next 20 training episodes:
+
+1. **Balanced Exploration**: Implement an exploration strategy that ensures a more balanced distribution of actions. For example, consider using an epsilon-greedy strategy with a higher epsilon value (e.g., 0.3 to 0.5) to encourage more exploration.
+
+2. **Action Distribution**:
+   - **Action 0 (Push Left)**: 40%
+   - **Action 1 (No Push)**: 20%
+   - **Action 2 (Push Right)**: 40%
+
+3. **Decaying Exploration Rate**: Gradually decrease the exploration rate (epsilon) over time to allow the agent to exploit learned policies as it becomes more confident in its actions. Start with a higher exploration rate and decay it linearly or exponentially.
+
+4. **Random Action Sampling**: Introduce some randomness in action selection to prevent the agent from getting stuck in local optima. This can be achieved by occasionally selecting actions uniformly at random.
+
+5. **Monitor Learning Progress**: Continuously monitor the agent's performance and adjust the exploration strategy as needed. If the agent's performance plateaus, consider increasing exploration temporarily to escape potential local optima.
+
+By implementing these strategies, the agent should explore the state-action space more effectively, leading to improved learning and performance in reaching the goal in MountainCar-v0.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+156,-60.44805290595896,-58.4286264116901,0.01,0.015610676258802414,N/A,N/A
+157,-58.44000862182748,-61.535373460528284,0.01,0.013892682269215584,N/A,N/A
+158,-62.67209899990954,-58.53264489547672,0.01,0.007983226329088211,N/A,N/A
+159,-40.718841887611354,-58.78802337049207,0.01,0.011666079983115196,N/A,N/A
+160,-63.53653670282507,-59.12306430110434,0.01,0.05712486803531647,"Based on the provided data, it seems that the current strategy heavily favors the ""Push Right"" action, with a significant portion of the actions being ""2"" (Push Right), followed by a cluster of ""0"" (Push Left) actions and a few ""1"" (No Push) actions. This distribution suggests that the agent is attempting to build momentum by pushing right more frequently. However, the total reward indicates that the current exploration strategy may not be optimal for learning how to solve the MountainCar-v0 task efficiently.
+
+### Analysis:
+1. **Action Distribution**: The sampled actions show a strong bias towards ""Push Right"" (action 2), with some ""Push Left"" (action 0) actions and very few ""No Push"" (action 1) actions. This indicates an imbalance that might not be conducive to effective exploration.
+
+2. **Momentum Building**: In MountainCar-v0, building momentum is crucial. The car needs to move back and forth to gain enough speed to reach the flag. A more balanced exploration strategy might help the agent learn this dynamic better.
+
+3. **Reward**: The total reward of -63.54 suggests that the agent is not consistently reaching the goal. The reward structure in MountainCar-v0 penalizes every time step, so a less negative reward would indicate more efficient behavior.
+
+### Recommendations for Exploration Strategy:
+To help the DQN agent learn faster, consider employing a more balanced action exploration strategy. Here are some specific recommendations:
+
+1. **Balanced Action Distribution**:
+   - **Increase the frequency of ""Push Left"" (action 0)**: Ensure that the agent has enough opportunities to explore moving left, which is essential for building momentum.
+   - **Include more ""No Push"" (action 1)**: This action can help stabilize the agent's movement and prevent it from overshooting or oscillating excessively.
+
+2. **Suggested Action Probabilities**:
+   - **Push Left (action 0)**: 40%
+   - **No Push (action 1)**: 20%
+   - **Push Right (action 2)**: 40%
+
+   This distribution encourages the agent to explore both directions equally while also allowing it to occasionally maintain its current state without acceleration.
+
+3. **Adaptive Exploration**:
+   - Consider using an epsilon-greedy strategy with a decaying epsilon over episodes. Start with a higher epsilon to encourage exploration and gradually decrease it to exploit learned strategies as training progresses.
+
+4. **Reward Shaping**:
+   - Although not directly related to action distribution, implementing a small positive reward for reaching higher positions might encourage more effective exploration and momentum building.
+
+By implementing a more balanced exploration strategy and adjusting the action probabilities, the agent should have a better chance of learning the dynamics of the environment more effectively, potentially leading to improved performance and faster convergence.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+161,-58.031005727972044,-59.316757032784835,0.01,0.009319975972175598,N/A,N/A
+162,-64.31007046168001,-60.10438568106038,0.01,0.03076893836259842,N/A,N/A
+163,-62.67024447436312,-60.19546612014254,0.01,0.00869783479720354,N/A,N/A
+164,-63.44003149696755,-60.776654532561075,0.01,0.013950763270258904,N/A,N/A
+165,-61.08634102592312,-62.00873094314734,0.01,0.02375773899257183,"To help the DQN agent learn more effectively in the MountainCar-v0 environment, we need to consider the sampled actions and the total reward from the last episode. Here's an analysis of the current situation and some strategy recommendations:
+
+### Analysis:
+1. **Current Action Distribution**: 
+   - The sampled actions from the last episode show a heavy bias towards actions 0 (Push Left) and 2 (Push Right), with very few instances of action 1 (No Push). This suggests that the agent is predominantly oscillating between pushing left and right, which is typical in the MountainCar-v0 environment to build momentum.
+
+2. **Total Reward**: 
+   - The total reward of -61.086 indicates that the agent is not yet reaching the goal efficiently. In MountainCar-v0, a higher (less negative) reward means the agent is reaching the goal faster.
+
+3. **Momentum Building**: 
+   - In MountainCar-v0, building momentum by alternating between pushing left and right is crucial for climbing the hill. However, the current distribution might not be optimal for exploring all possible state-action spaces effectively.
+
+### Recommendations:
+1. **Balanced Exploration**:
+   - To improve exploration, consider using a more balanced action distribution. This can help the agent explore different strategies and potentially discover more effective ways to build momentum. A suggested distribution could be:
+     - Action 0 (Push Left): 40%
+     - Action 1 (No Push): 20%
+     - Action 2 (Push Right): 40%
+
+2. **Increased Use of 'No Push'**:
+   - Incorporating more 'No Push' actions can help the agent learn when to conserve momentum. Increasing the frequency of action 1 can provide the agent with more diverse experiences and potentially lead to discovering more efficient state transitions.
+
+3. **Adaptive Exploration Strategy**:
+   - Implement an adaptive exploration strategy where the action distribution gradually shifts based on the agent's performance. For example, if the agent starts to achieve better rewards, the distribution can be adjusted to favor actions that contributed to success.
+
+4. **Monitor and Adjust**:
+   - Continuously monitor the agent's performance over the next 20 episodes. If the total reward improves, continue with the current strategy. If not, consider further adjustments to the exploration strategy, such as increasing the exploration rate or modifying the action distribution further.
+
+By applying these recommendations, the agent should have a better chance of exploring the environment effectively, leading to improved learning and performance in future episodes.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+166,-62.03117035339321,-62.40773755768422,0.01,0.011563800275325775,N/A,N/A
+167,-63.24945638901057,-62.52986415879716,0.01,0.029363088309764862,N/A,N/A
+168,-62.9548208836703,-65.51695112971859,0.01,0.05136321112513542,N/A,N/A
+169,-62.49794845986843,-61.29994229244744,0.01,0.010649786330759525,N/A,N/A
+170,-38.029887466964176,-60.59065456698032,0.01,0.026537692174315453,"Based on the provided data, it appears that the sampled actions during the last episode were heavily skewed towards actions 0 (Push Left) and 2 (Push Right), with a significant portion of the episode dominated by action 2 (Push Right). The total reward of -38.03 suggests that the agent is not yet effectively reaching the goal, which indicates that the current exploration strategy might not be optimal for learning the task efficiently.
+
+### Analysis:
+
+1. **Action Distribution Imbalance**: 
+   - The sequence of actions is heavily biased towards pushing left initially, followed by a long sequence of pushing right. This suggests a lack of balanced exploration between the actions, which is crucial for the agent to learn the dynamics of the environment effectively.
+
+2. **Momentum Building**:
+   - The MountainCar-v0 environment requires the agent to build momentum by oscillating between pushing left and right. An effective exploration strategy should encourage this oscillation to help the agent understand how to gain enough speed to reach the flag.
+
+### Recommendations:
+
+To improve the exploration strategy and help the DQN agent learn more effectively, consider the following action distribution:
+
+1. **Balanced Exploration**:
+   - Encourage a more balanced exploration that allows the agent to experience all actions more evenly. A suggested distribution could be:
+     - Action 0 (Push Left): 40%
+     - Action 1 (No Push): 20%
+     - Action 2 (Push Right): 40%
+
+2. **Encourage Oscillation**:
+   - To promote momentum building, consider implementing an exploration strategy that alternates between actions 0 and 2 more frequently. This can be done by introducing a small probability of switching actions after a few consecutive steps of the same action.
+
+3. **Dynamic Exploration**:
+   - Implement a dynamically adjusting exploration strategy where the probability of selecting each action changes based on the agent's current velocity. For example, if the velocity is positive, slightly favor action 0 (Push Left) to encourage oscillation and vice versa.
+
+4. **Epsilon-Greedy with Annealing**:
+   - Use an epsilon-greedy strategy with annealing, where the exploration rate (epsilon) starts high and gradually decreases over time. This ensures more exploration in the early stages and more exploitation as the agent becomes more knowledgeable about the environment.
+
+5. **Monitor and Adjust**:
+   - Continuously monitor the agent's performance and adjust the exploration strategy as needed based on the observed rewards and action distributions.
+
+By implementing these recommendations, the agent should be better equipped to learn the necessary momentum-building strategy to achieve the goal in the MountainCar-v0 environment more efficiently.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+171,-63.83972380428623,-60.94472711312502,0.01,0.02467724122107029,N/A,N/A
+172,-38.09844117680165,-61.00035197156467,0.01,0.03743217885494232,N/A,N/A
+173,-61.69175552289898,-60.70592794436643,0.01,0.020282700657844543,N/A,N/A
+174,-44.96797196910649,-60.353714304149676,0.01,0.02425023540854454,N/A,N/A
+175,-38.642465856563646,-62.06687265197328,0.01,0.010905762203037739,"To help the DQN agent learn more effectively in the MountainCar-v0 environment, we need to analyze the current exploration strategy and adjust the action distribution to better facilitate learning. Let's break down the information provided:
+
+1. **Current Performance**: 
+   - The total reward in the last episode is -38.64. In MountainCar-v0, a higher (less negative) reward indicates better performance. A reward of -38.64 suggests the agent is not yet successfully reaching the goal, but it might be making some progress.
+
+2. **Sampled Actions**:
+   - The actions sampled in the last episode are heavily skewed towards action 2 (Push Right), especially in the latter part of the episode.
+   - Initially, there is a sequence of action 0 (Push Left), followed by a transition to action 2 (Push Right) with very few action 1 (No Push) moves.
+
+3. **Analysis**:
+   - The car needs to build momentum by oscillating back and forth between the two hills. This requires a balanced exploration of actions 0 and 2 to effectively gain momentum.
+   - The current distribution shows an imbalance with a predominant use of action 2, which might cause the agent to get stuck or not build enough momentum to reach the goal.
+
+4. **Recommendations**:
+   - **Balanced Exploration**: Encourage a more balanced exploration of actions 0 and 2. This can be achieved by adjusting the exploration policy to increase the probability of choosing action 0 at the start of the episode and alternating more frequently between actions 0 and 2.
+   - **Reduced Action 1 Usage**: Action 1 (No Push) seems less useful for momentum building in the early learning stages and can be minimized for now.
+   - **Exploration Strategy**:
+     - For the next 20 training episodes, consider using an exploration policy with a probability distribution such as:
+       - Action 0 (Push Left): 45%
+       - Action 1 (No Push): 10%
+       - Action 2 (Push Right): 45%
+   - **Adaptive Exploration**: Monitor the agent's performance and adjust the distribution dynamically. If the agent starts to reach the goal more consistently, gradually reduce exploration in favor of exploitation of the learned policy.
+
+By implementing these recommendations, the agent should be able to explore the state space more effectively, build the necessary momentum, and improve its learning rate over the next set of episodes.","```json
+{
+  ""action_probs"": [0.45, 0.1, 0.45]
+}
+```"
+176,-62.473139729507146,-60.779682486729406,0.01,0.01949123665690422,N/A,N/A
+177,-41.70583690412875,-60.45978779869036,0.01,0.02476739138364792,N/A,N/A
+178,-62.81266529155463,-61.93014504658921,0.01,0.012826727703213692,N/A,N/A
+179,-37.64829945713283,-60.63596583016074,0.01,0.017458684742450714,N/A,N/A
+180,-63.19954597740581,-60.346955978925436,0.01,0.014386264607310295,"Based on the provided data, the sampled actions from the last episode are predominantly skewed towards actions 0 (Push Left) and 2 (Push Right), with very few instances of action 1 (No Push). This distribution indicates that the agent is primarily focusing on accelerating either to the left or right, with minimal neutral actions.
+
+Given the nature of the MountainCar-v0 environment, where the agent needs to build momentum by oscillating between the left and right hills, this action distribution makes sense. However, the current exploration strategy seems to be heavily biased towards pushing right (action 2) towards the end of the episode, which suggests that the agent might be overcommitting to one direction without adequately building momentum from the left side.
+
+### Recommendations:
+
+1. **Balanced Oscillation**: Encourage a more balanced oscillation between pushing left and right. This can be achieved by adjusting the exploration strategy to ensure a more even distribution between actions 0 and 2. This will help the agent to effectively build the necessary momentum to reach the goal.
+
+2. **Increased Exploration of No Push (Action 1)**: Introduce a slightly higher probability for action 1 (No Push) to allow the agent to occasionally maintain its current velocity. This could help in fine-tuning the momentum and prevent overshooting or unnecessary energy expenditure.
+
+3. **Exploration Strategy**: For the next 20 training episodes, consider using a probabilistic exploration strategy with the following distribution:
+   - Action 0 (Push Left): 40%
+   - Action 1 (No Push): 20%
+   - Action 2 (Push Right): 40%
+
+   This distribution ensures that the agent spends an equal amount of time pushing left and right, while also occasionally exploring the neutral action.
+
+4. **Adaptive Exploration**: Monitor the agent's performance and adjust the exploration probabilities based on the observed improvement. If the agent starts achieving higher rewards, further reduce the probability of action 1 and increase the focus on actions 0 and 2.
+
+5. **Reward Analysis**: Continuously evaluate the total reward per episode to assess the effectiveness of the exploration strategy. If the reward improves, it indicates that the agent is learning to build momentum more effectively.
+
+By adopting these recommendations, the exploration phase should help the agent learn the dynamics of the environment more efficiently, potentially leading to faster convergence to an optimal policy.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+181,-61.82447249901681,-60.088270162915975,0.01,0.013422762043774128,N/A,N/A
+182,-62.26660055448299,-60.15052347148155,0.01,0.01216937880963087,N/A,N/A
+183,-61.255535652972384,-59.72100416404555,0.01,0.026272719725966454,N/A,N/A
+184,-63.51080948244367,-59.473647977247346,0.01,0.011106022633612156,N/A,N/A
+185,-61.52657730393111,-59.43654707376336,0.01,0.03718758374452591,"To help the DQN agent learn faster in the MountainCar-v0 environment, we need to adjust the exploration strategy based on the observed action distribution and the total reward from the last episode. Let's analyze the data and provide recommendations:
+
+### Analysis:
+
+1. **Action Distribution:**
+   - The sampled actions show a heavy bias towards actions 0 (Push Left) and 2 (Push Right), with very few instances of action 1 (No Push).
+   - Specifically, there are 43 instances of action 0, 52 instances of action 2, and only 5 instances of action 1.
+
+2. **Total Reward:**
+   - The total reward from the last episode is -61.53, which indicates that the agent is not yet efficiently reaching the goal. The reward is negative because the car is likely oscillating back and forth without reaching the flag.
+
+3. **Current Strategy:**
+   - The current exploration strategy seems to be over-relying on pushing actions (0 and 2) and under-utilizing the ""No Push"" action (1). This might lead to suboptimal learning as the agent might not be effectively exploring the state space where maintaining velocity (using action 1) could be beneficial.
+
+### Recommendations:
+
+1. **Balanced Exploration:**
+   - Introduce a more balanced exploration strategy by increasing the probability of selecting action 1 (No Push) during exploration. This will encourage the agent to explore states where maintaining velocity is beneficial, helping it to build momentum more effectively.
+
+2. **Suggested Action Distribution:**
+   - Adjust the exploration action distribution to be more balanced. For the next 20 training episodes, consider using the following distribution:
+     - Action 0 (Push Left): 35%
+     - Action 1 (No Push): 30%
+     - Action 2 (Push Right): 35%
+
+3. **Adaptive Exploration:**
+   - Monitor the agent's performance and adjust the exploration strategy adaptively. If the agent starts improving (higher total rewards), gradually decrease exploration (e.g., through epsilon decay) to let the agent exploit learned policies.
+
+4. **Reward Shaping:**
+   - Consider implementing reward shaping to provide additional incentives for actions that lead to increased momentum or reaching higher positions on the hill.
+
+5. **Training Episodes:**
+   - Continue to evaluate the agent's performance after each set of episodes and refine the exploration strategy based on observed improvements or stagnations in performance.
+
+By implementing these recommendations, the agent should be able to explore the environment more effectively and learn a policy that allows it to reach the goal more consistently.","```json
+{
+  ""action_probs"": [0.35, 0.3, 0.35]
+}
+```"
+186,-61.85617730843703,-59.39853453955171,0.01,0.015745121985673904,N/A,N/A
+187,-46.365229645677445,-59.46505118053902,0.01,0.02181941084563732,N/A,N/A
+188,-51.43497648533833,-59.10824589754545,0.01,0.03780059888958931,N/A,N/A
+189,-60.46522215657998,-58.52358056102812,0.01,0.012271727435290813,N/A,N/A
+190,-39.81144405196289,-58.449554777181035,0.01,0.025113869458436966,"Based on the provided data, it seems that the agent predominantly sampled action `2` (Push Right) during the last episode, after initially sampling action `0` (Push Left). This pattern suggests that the agent is trying to build momentum by moving left and then consistently pushing right. However, the total reward of approximately `-39.81` indicates that the agent is not yet efficiently reaching the goal.
+
+### Analysis:
+1. **Imbalance in Action Sampling**: The actions sampled show a strong bias towards `Push Right` after an initial sequence of `Push Left`. There is very little exploration of the `No Push` action, which might help in fine-tuning the car's position and velocity.
+
+2. **Momentum Building**: The MountainCar task requires careful momentum building by moving back and forth. The current strategy might be overemphasizing pushing right without sufficient leftward movement to build the necessary momentum.
+
+3. **Exploration Strategy**: A more balanced exploration strategy might help the agent discover more effective sequences of actions to achieve the goal.
+
+### Recommendations:
+To help the DQN agent learn faster, consider the following exploration action distribution for the next 20 training episodes:
+
+1. **Balanced Exploration**:
+   - Increase the probability of sampling the `Push Left` action to ensure the agent explores building momentum more effectively.
+   - Introduce more `No Push` actions to allow the car to coast and potentially reach higher positions on the hill.
+
+2. **Suggested Action Distribution**:
+   - `Push Left (0)`: 40%
+   - `No Push (1)`: 20%
+   - `Push Right (2)`: 40%
+
+This distribution encourages the agent to explore a wider range of strategies, potentially leading to more effective momentum building and efficient reaching of the goal.
+
+### Implementation:
+- Adjust the exploration policy to follow the suggested distribution for the next 20 episodes.
+- Monitor the agent's performance and adjust further if necessary based on new observations.
+
+By diversifying the exploration strategy, the agent may discover more effective sequences of actions to reach the flag, ultimately improving its learning rate and performance in the MountainCar-v0 environment.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+191,-63.662880575510556,-60.18863632149129,0.01,0.01394177507609129,N/A,N/A
+192,-42.15566945189079,-58.7864030958097,0.01,0.011482872068881989,N/A,N/A
+193,-37.741277206906986,-59.03185595541735,0.01,0.02508920058608055,N/A,N/A
+194,-41.391502493287305,-60.346424950482344,0.01,0.01276366412639618,N/A,N/A
+195,-48.72764404796596,-60.38020909228656,0.01,0.030028849840164185,"Based on the information provided, the agent's actions during the last episode were heavily biased towards two actions: ""Push Left"" (action 0) at the start and ""Push Right"" (action 2) for the majority of the episode, with very few ""No Push"" (action 1) actions. This pattern indicates that the agent is not exploring the action space effectively, which could hinder its learning process.
+
+### Analysis:
+1. **Action Distribution**: The current distribution is skewed, with a significant number of ""Push Right"" actions following an initial cluster of ""Push Left"" actions. This suggests that the agent may be stuck in a repetitive cycle, not fully exploring the state space and resulting in suboptimal learning.
+
+2. **Reward**: The total reward of -48.73 indicates that the agent is not performing well, as it is far from reaching the goal efficiently. This could be due to the lack of exploration or an ineffective policy that doesn't maximize momentum effectively.
+
+3. **Exploration**: The lack of ""No Push"" actions suggests that the agent may not be adequately exploring the effects of maintaining its current velocity, which is crucial for building momentum in the MountainCar environment.
+
+### Recommendations:
+To improve exploration and help the DQN agent learn faster, consider adopting the following strategy for the next 20 training episodes:
+
+1. **Balanced Exploration**: Implement a more balanced action distribution during exploration. For example, aim for an equal distribution of actions or a slight preference towards actions that have been underexplored:
+   - 35% ""Push Left"" (action 0)
+   - 30% ""No Push"" (action 1)
+   - 35% ""Push Right"" (action 2)
+
+2. **Exploration Strategy**: Use an epsilon-greedy strategy with a higher epsilon value to encourage more exploration. Start with a higher epsilon (e.g., 0.3 or 0.4) and decay it over time to allow the agent to exploit learned policies as it becomes more confident.
+
+3. **Momentum Building**: Encourage the agent to experiment with sequences of actions that build momentum. For example, alternating between ""Push Left"" and ""Push Right"" could help the agent discover effective momentum-building strategies.
+
+4. **Reward Shaping**: Consider providing additional rewards for reaching higher positions on the hills. This can guide the agent towards understanding the importance of momentum.
+
+5. **Monitor Learning**: Continuously monitor the agent's performance and adjust the exploration strategy based on observed improvements or persistent issues.
+
+By implementing these recommendations, the agent should be able to explore the state-action space more effectively, leading to improved learning and performance over time.","```json
+{
+  ""action_probs"": [0.35, 0.3, 0.35]
+}
+```"
+196,-57.25007146953305,-60.12990675595023,0.01,0.014638838358223438,N/A,N/A
+197,-37.893227728216786,-58.3952340222953,0.01,0.009956481866538525,N/A,N/A
+198,-60.08058388477324,-60.29629514547106,0.01,0.018881240859627724,N/A,N/A
+199,-44.91446324020096,-60.28659585211477,0.01,0.014024188742041588,N/A,N/A
+200,-63.32853944348837,-58.90362711512745,0.01,0.010883215814828873,"To help the DQN agent learn faster in the MountainCar-v0 environment, it's important to ensure that the exploration strategy encourages the agent to experience a diverse range of states and actions. This will allow the agent to better understand the dynamics of the environment and develop a robust policy.
+
+### Analysis of Current Exploration Strategy
+
+1. **Action Distribution**: 
+   - The sampled actions indicate a strong bias towards actions 0 (Push Left) and 2 (Push Right), with very few actions 1 (No Push).
+   - The sequence of actions shows long streaks of either pushing left or right, which might not be optimal for building momentum.
+
+2. **Total Reward**:
+   - The total reward of -63.33 in the last episode suggests that the agent is not yet consistently reaching the goal, as the maximum possible reward is -200 (for not reaching the goal).
+
+### Recommendations for Exploration Strategy
+
+1. **Balanced Action Distribution**:
+   - **Increase Exploration of Action 1 (No Push)**: Currently, action 1 is under-sampled. Increasing the frequency of this action could help the agent learn about its effects, especially when at the peak of the hills.
+   - **Balanced Distribution**: Aim for a more balanced distribution across actions to prevent overfitting to specific action sequences. A starting point could be a distribution like [0.4, 0.2, 0.4] for actions [0, 1, 2] respectively.
+
+2. **Encourage Momentum Building**:
+   - To reach the goal, the car needs to build momentum by moving back and forth. Encourage sequences that alternate between pushing left and right, rather than long streaks of the same action.
+   - Consider a policy that alternates actions more frequently or uses a stochastic approach to switch between pushing left and right.
+
+3. **Exploration Strategy**:
+   - **Epsilon-Greedy with Decay**: Implement an epsilon-greedy strategy with a decay over episodes to ensure sufficient exploration initially, gradually shifting towards exploitation as the agent learns.
+   - **Noise Injection**: Introduce some randomness or noise in the action selection to prevent the agent from getting stuck in local optima.
+
+4. **Monitoring and Adjustment**:
+   - Continuously monitor the total reward and action distributions in subsequent episodes. Adjust the exploration strategy if the learning curve shows stagnation or suboptimal performance.
+
+By implementing these recommendations, the agent should be able to explore the state-action space more effectively, leading to faster learning and improved performance in reaching the goal.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+201,-48.65059110414669,-59.52801599029084,0.01,0.012132564559578896,N/A,N/A
+202,-40.12263810081474,-60.12549364392121,0.01,0.03102429211139679,N/A,N/A
+203,-60.835490240928316,-57.5778572942206,0.01,0.01206142921000719,N/A,N/A
+204,-37.795464492462855,-59.28756081138164,0.01,0.00802772305905819,N/A,N/A
+205,-60.72547398760387,-71.69597169170684,0.01,0.05634954199194908,"Based on the provided data and the nature of the MountainCar-v0 environment, it's clear that the current exploration strategy predominantly involves pushing left (action 0) and right (action 2), with very few instances of no push (action 1). The total reward of -60.72547398760387 suggests that the agent is not yet efficiently achieving the goal of reaching the flag, which typically requires balancing momentum to climb the hill.
+
+### Analysis:
+1. **Action Distribution**: The sampled actions show a strong bias towards pushing left or right, with almost no instances of the ""No Push"" action. This may indicate that the agent is not adequately exploring the impact of maintaining its current velocity, which can be crucial for building momentum in the MountainCar task.
+
+2. **Momentum Building**: The MountainCar problem requires the agent to build momentum by oscillating back and forth between the hills. A balanced exploration strategy that includes all action types may help the agent learn to effectively build this momentum.
+
+3. **Reward Signal**: The negative reward suggests that the agent is not reaching the goal, likely due to insufficient exploration of various strategies to build momentum effectively.
+
+### Recommendations:
+To improve the learning process of the DQN agent, consider the following exploration strategy for the next 20 training episodes:
+
+1. **Balanced Action Distribution**:
+   - Increase the probability of selecting the ""No Push"" action (action 1) to explore its effects on maintaining and building momentum.
+   - Suggested action distribution: 
+     - Push Left (action 0): 40%
+     - No Push (action 1): 20%
+     - Push Right (action 2): 40%
+
+2. **Adaptive Exploration**:
+   - Consider using an epsilon-greedy strategy where the epsilon value starts high (e.g., 0.3) and decays over time. This allows for more exploration initially and more exploitation as the agent learns.
+
+3. **Reward Shaping**:
+   - If possible, incorporate reward shaping to provide additional feedback when the agent increases its velocity or reaches higher positions on the hills. This can guide the agent to understand the importance of momentum.
+
+4. **Monitor Learning Progress**:
+   - Continuously monitor the agent's performance and adjust the exploration strategy based on observed improvements or stagnations in the total reward.
+
+By implementing these strategies, the agent should have a more balanced exploration process, enabling it to learn more effective policies for solving the MountainCar-v0 task.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+206,-45.722328680261455,-57.88030306074713,0.01,0.011191258206963539,N/A,N/A
+207,-58.481465371172625,-72.32787221940791,0.01,0.021959973499178886,N/A,N/A
+208,-61.09675128350334,-98.37053138809476,0.01,0.008960042148828506,N/A,N/A
+209,-61.3079544860637,-59.93361478904965,0.01,0.011634163558483124,N/A,N/A
+210,-70.13621168082462,-56.11679222770763,0.01,0.074198417365551,"To help the DQN agent learn more effectively in the MountainCar-v0 environment, it's important to design an exploration strategy that encourages the agent to explore different actions and states. Let's analyze the current situation and provide recommendations:
+
+### Analysis:
+
+1. **Current Action Distribution:**
+   - The sampled actions show a heavy bias towards action `1` (No Push), followed by more instances of action `2` (Push Right), and a few instances of action `0` (Push Left).
+   - This distribution suggests that the agent is not exploring the action space evenly, potentially leading to suboptimal learning.
+
+2. **Challenge of the Environment:**
+   - The MountainCar-v0 environment requires the car to build momentum by oscillating back and forth. This means the agent needs to learn to use both action `0` (Push Left) and action `2` (Push Right) effectively.
+
+3. **Performance:**
+   - The total reward of -70.13 indicates that the agent is not yet reaching the goal efficiently, as the maximum possible reward is -200 (if the agent never reaches the goal).
+
+### Recommendations:
+
+1. **Balanced Exploration:**
+   - Encourage a more balanced exploration strategy to ensure the agent experiences all actions more uniformly. This can help the agent learn the dynamics of the environment more effectively.
+   - A suggested action distribution for exploration could be approximately equal for all actions: 
+     - Action `0` (Push Left): 33%
+     - Action `1` (No Push): 33%
+     - Action `2` (Push Right): 34%
+
+2. **Use of Exploration Strategies:**
+   - Implement an epsilon-greedy strategy with a higher initial epsilon value (e.g., 0.3 to 0.5) to encourage more random exploration. Gradually decay epsilon over time to shift towards more exploitation as the agent learns.
+   - Consider using other exploration strategies like Boltzmann exploration or entropy-based exploration to promote diverse action selection.
+
+3. **Monitor Learning Progress:**
+   - Regularly evaluate the agent's performance to determine if the exploration strategy needs further adjustment.
+   - If the agent's performance plateaus, consider increasing exploration temporarily to escape potential local optima.
+
+4. **Reward Shaping:**
+   - Although not directly related to exploration, consider reward shaping to provide intermediate rewards for reaching specific positions or velocities, encouraging the agent to explore beneficial states.
+
+By implementing a more balanced and strategic exploration approach, the agent should be able to learn the necessary dynamics of the MountainCar-v0 environment more effectively, ultimately improving its performance over the training episodes.","```json
+{
+  ""action_probs"": [0.33, 0.33, 0.34]
+}
+```"
+211,-38.086171296145764,-52.7961063145987,0.01,0.018932797014713287,N/A,N/A
+212,-42.256683960463846,-53.314111066797295,0.01,0.03565388172864914,N/A,N/A
+213,-39.55426724106074,-58.18654171883627,0.01,0.00998021475970745,N/A,N/A
+214,-37.979455454793886,-58.41833329737017,0.01,0.03439495712518692,N/A,N/A
+215,-48.516477994451186,-50.619971377700146,0.01,0.008960890583693981,"Based on the data provided, the action distribution in the last episode is heavily skewed towards actions 0 (Push Left) and 2 (Push Right), with a noticeable bias towards action 2. The total reward of -48.52 suggests that the agent is not yet efficiently reaching the goal, which is typical in MountainCar-v0 as the agent needs to learn to oscillate between pushing left and right to build enough momentum to reach the flag.
+
+### Analysis:
+1. **Action Distribution**: The sampled actions show a strong preference for action 2 (Push Right) after an initial series of action 0 (Push Left). This indicates that the agent is trying to build momentum, but it might not be alternating between actions optimally to gain sufficient momentum.
+
+2. **Total Reward**: A reward of -48.52 indicates that the agent is still far from solving the environment optimally, as the maximum reward is -110 for failing to reach the goal within 200 steps.
+
+### Recommendations for Exploration Strategy:
+To improve the learning efficiency of the DQN agent, consider the following adjustments to the exploration strategy:
+
+1. **Balanced Exploration**: Encourage a more balanced exploration between actions 0 and 2. This can be achieved by adjusting the exploration policy to sample actions more evenly, particularly in the early stages of training. For example, you might start with a distribution like [0.4, 0.2, 0.4] for actions [0, 1, 2], respectively. This encourages the agent to explore both directions equally while still allowing for no push (action 1) occasionally.
+
+2. **Decaying Exploration Rate**: Implement a decaying exploration strategy where the exploration rate (epsilon in epsilon-greedy strategies) decreases over time. Start with a higher exploration rate to encourage broad exploration, then gradually reduce it to allow the agent to exploit learned policies.
+
+3. **Momentum Building**: Specifically focus on teaching the agent to alternate between pushing left and right effectively. You might use a reward shaping strategy to provide additional rewards for sequences of actions that effectively build momentum.
+
+4. **Environment-Specific Heuristics**: Incorporate domain knowledge by encouraging sequences of actions that are known to be effective, such as alternating between actions 0 and 2 in a rhythm that matches the dynamics of the car.
+
+5. **Reward Shaping**: Consider modifying the reward structure slightly to provide intermediate rewards for gaining momentum or reaching higher positions on the left hill, which can encourage the agent to learn the necessary oscillation strategy.
+
+By implementing these strategies, you can help the DQN agent learn the optimal policy for MountainCar-v0 more efficiently. The key is to ensure the agent explores enough to understand the dynamics of the environment while gradually focusing on exploiting the most successful strategies it discovers.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+216,-38.82783106339962,-49.98777394458123,0.01,0.009036333300173283,N/A,N/A
+217,-57.583486267493576,-50.09848023400778,0.01,0.03253304585814476,N/A,N/A
+218,-58.125393372674324,-60.50187127970452,0.01,0.05930585414171219,N/A,N/A
+219,-42.49057357946544,-47.83421196321182,0.01,0.057490214705467224,N/A,N/A
+220,-58.47035599345606,-50.38754897189348,0.01,0.015457198023796082,"Based on the provided data, the agent's exploration strategy seems to be heavily biased towards actions 0 (Push Left) and 2 (Push Right), with a notable lack of action 1 (No Push). The total reward for the last episode indicates that the agent is not yet performing optimally. Here are some observations and recommendations to improve the exploration strategy:
+
+### Observations:
+
+1. **Action Distribution**: The sampled actions show a strong preference for actions 0 and 2, with almost no occurrences of action 1. This suggests that the agent is not exploring the possibility of maintaining its current velocity (by taking action 1), which could be useful in certain states.
+
+2. **Momentum Building**: The MountainCar-v0 environment requires the car to build momentum by moving back and forth. The current action distribution seems to partially support this, as actions 0 and 2 are being taken, but the distribution might not be balanced enough to optimize momentum building.
+
+3. **Exploration Strategy**: The lack of action 1 implies that the agent might not be adequately exploring all possible state transitions. Action 1 could help the agent maintain its position when necessary, potentially leading to better state evaluations and policy learning.
+
+### Recommendations:
+
+1. **Balanced Exploration**: Introduce a more balanced exploration strategy by ensuring that all three actions are sampled more evenly. This can be achieved by setting a target distribution such as:
+   - Action 0 (Push Left): 40%
+   - Action 1 (No Push): 20%
+   - Action 2 (Push Right): 40%
+
+   This distribution encourages the agent to explore the effects of maintaining its velocity while still focusing on building momentum.
+
+2. **Adaptive Exploration**: Implement an adaptive exploration strategy where the action distribution can change based on the agent's current performance or state. For example, if the car is on a slope, the agent might benefit from more frequent use of actions 0 and 2, whereas on flat terrain, action 1 might be more useful.
+
+3. **Reward Shaping**: Consider incorporating reward shaping to encourage the agent to explore underutilized actions. For instance, providing a small positive reward for taking action 1 when the car is near the peak of a slope might help the agent learn to maintain momentum.
+
+4. **Monitor Performance**: Continuously monitor the agent's performance and adjust the exploration strategy as needed. If the agent's performance improves, gradually decrease exploration in favor of exploitation to refine the learned policy.
+
+By implementing these recommendations, the agent should be able to explore the state-action space more effectively, leading to faster and more robust learning in the MountainCar-v0 environment.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+221,-58.31089749825394,-48.13477388030192,0.01,0.0710846483707428,N/A,N/A
+222,-47.106888851044445,-49.8957469565393,0.01,0.00963562075048685,N/A,N/A
+223,-56.330190220471884,-51.71145536386997,0.01,0.034968964755535126,N/A,N/A
+224,-57.1751231321882,-50.82594416360969,0.01,0.0068676224909722805,N/A,N/A
+225,-39.07918339334429,-47.54470762608115,0.01,0.006717214826494455,"To help the DQN agent learn more effectively in the MountainCar-v0 environment, it's important to ensure that the exploration strategy allows the agent to experience a diverse range of state-action pairs. This is particularly crucial in MountainCar-v0, where the agent needs to build momentum by swinging back and forth to reach the goal.
+
+### Analysis:
+1. **Current Action Distribution:**
+   - The sampled actions in the last episode show a strong bias: 17 actions of ""Push Left"" (0) and 83 actions of ""Push Right"" (2), with no instances of ""No Push"" (1).
+   - This suggests the agent is primarily trying to push in one direction (right) after a brief period of pushing left, which might not be sufficient to build the necessary momentum to reach the goal.
+
+2. **Total Reward:**
+   - A reward of -39.08 indicates the agent is not reaching the goal efficiently. The minimum possible reward (when reaching the goal) is -200, so the agent is making some progress but still has room for improvement.
+
+### Recommendations:
+To improve exploration and help the agent learn more effectively, consider adjusting the action distribution to encourage more balanced exploration. Here's a recommended strategy:
+
+1. **Balanced Exploration:**
+   - Encourage the agent to explore all actions more evenly to better understand the dynamics of the environment. This can be achieved by setting an exploration action distribution that gives more weight to underutilized actions.
+   - Suggested Action Distribution: 
+     - Push Left (0): 30%
+     - No Push (1): 40%
+     - Push Right (2): 30%
+
+2. **Incorporate Exploration Noise:**
+   - Introduce some randomness to the action selection process to prevent the agent from getting stuck in local optima. This can be done using techniques like epsilon-greedy, where with probability epsilon, a random action is chosen instead of the best-known action.
+
+3. **Monitor and Adjust:**
+   - After implementing the new exploration strategy, monitor the agent's performance over the next 20 episodes. Look for improvements in the total reward and adjust the action distribution as needed based on observed behavior.
+
+4. **Consider Annealing Exploration:**
+   - Gradually reduce exploration (i.e., decrease epsilon in epsilon-greedy) as the agent becomes more skilled. This allows the agent to exploit known strategies while still having the opportunity to explore new ones.
+
+By adopting a more balanced exploration strategy, the agent will have a better chance of discovering the optimal policy to solve the MountainCar-v0 task efficiently.","```json
+{
+  ""action_probs"": [0.3, 0.4, 0.3]
+}
+```"
+226,-44.699893645356795,-48.303365183344994,0.01,0.015319569036364555,N/A,N/A
+227,-57.65486918971874,-51.34256237170318,0.01,0.007980301044881344,N/A,N/A
+228,-59.75015839281757,-48.71330151816774,0.01,0.03941905125975609,N/A,N/A
+229,-47.66372775318533,-47.61907389393981,0.01,0.02277306281030178,N/A,N/A
+230,-41.28841106573651,-47.98314646271065,0.01,0.010058027692139149,"Based on the data provided, it appears that the agent's exploration strategy is heavily skewed towards a sequence of actions where it initially pushes left (action 0) repeatedly, followed by a transition to pushing right (action 2) almost exclusively. This pattern suggests that the agent might be getting stuck in a repetitive cycle that doesn't effectively explore the state space, especially the critical transition states that help build momentum to reach the goal.
+
+### Analysis:
+1. **Initial Actions**: The agent predominantly starts with action 0 (Push Left), which might be due to an initial attempt to gather momentum. However, the sequence is excessively long and might not be optimal.
+   
+2. **Transition to Action 2**: After the initial push left, the agent switches to pushing right (action 2) almost exclusively. This indicates a lack of exploration in the ""No Push"" (action 1) and might be missing out on potentially beneficial states that could be reached with a more balanced approach.
+
+3. **Lack of Action 1**: The absence of action 1 (No Push) suggests that the agent is not exploring the state space where it might benefit from maintaining its current velocity, which can be crucial in achieving the right balance of momentum.
+
+### Recommendations for Exploration Strategy:
+To help the DQN agent learn more effectively, consider adjusting the action distribution during exploration to encourage more diverse state exploration:
+
+1. **Balanced Exploration**: Introduce a more balanced action distribution to ensure all actions are sampled more evenly. For instance:
+   - Action 0 (Push Left): 30%
+   - Action 1 (No Push): 20%
+   - Action 2 (Push Right): 50%
+
+2. **Incorporate Action 1**: Encourage the use of action 1 (No Push) more frequently. This can help the agent learn to maintain momentum without unnecessary acceleration or deceleration, which is crucial for fine-tuning the approach to the goal.
+
+3. **Dynamic Exploration**: Consider using an adaptive exploration strategy, such as epsilon-greedy, where the exploration probability decreases over time. This allows the agent to explore widely initially and exploit learned strategies later.
+
+4. **Momentum Building**: Encourage exploration strategies that allow the agent to experiment with building momentum in both directions. This could be achieved by periodically resetting exploration parameters to prevent the agent from falling into repetitive cycles.
+
+5. **Reward Shaping**: If possible, introduce intermediate rewards for achieving sub-goals, like reaching certain positions or velocities, to guide the agent towards more effective exploration paths.
+
+By implementing these strategies, the agent should be able to explore the state space more effectively, leading to faster learning and better performance in the MountainCar-v0 environment.","```json
+{
+  ""action_probs"": [0.3, 0.2, 0.5]
+}
+```"
+231,-58.31255279194697,-49.14170725852441,0.01,0.061179593205451965,N/A,N/A
+232,-41.687016898227306,-47.240884176432324,0.01,0.027957530692219734,N/A,N/A
+233,-57.19293901789935,-48.951932389692026,0.01,0.011444860137999058,N/A,N/A
+234,-48.53993675051191,-46.384225964503216,0.01,0.007065919693559408,N/A,N/A
+235,-46.14328467070924,-48.31925478240749,0.01,0.0270795039832592,"Based on the provided data, it appears that the agent is predominantly selecting the action ""Push Right"" (action 2) and ""Push Left"" (action 0), with very few instances of ""No Push"" (action 1). This behavior suggests that the agent is attempting to build momentum to reach the flag but may not be effectively exploring the state space due to an imbalanced action distribution.
+
+### Analysis:
+
+1. **Action Distribution:**
+   - The agent heavily favors ""Push Right"" (action 2), with a significant number of consecutive ""Push Right"" actions.
+   - ""Push Left"" (action 0) is used, but not as frequently as ""Push Right"".
+   - ""No Push"" (action 1) is rarely used, which might limit exploration in certain states where maintaining momentum without changing direction could be beneficial.
+
+2. **Reward:**
+   - The total reward of -46.14 indicates that the agent is still far from solving the task optimally. A higher reward (closer to 0) would indicate that the agent is reaching the flag more efficiently.
+
+### Recommendations:
+
+To enhance exploration and potentially improve learning speed, consider adjusting the action distribution to encourage more balanced exploration. Here is a recommended strategy:
+
+1. **Balanced Exploration:**
+   - Introduce a more uniform action distribution during exploration. For example, aim for a distribution like:
+     - 40% ""Push Right"" (action 2)
+     - 40% ""Push Left"" (action 0)
+     - 20% ""No Push"" (action 1)
+
+2. **Encourage ""No Push"":**
+   - The ""No Push"" action can be useful for maintaining momentum or allowing the car to naturally roll back down the hill to gain speed. Increasing its occurrence might help the agent discover more efficient strategies.
+
+3. **Adaptive Exploration:**
+   - Consider using an exploration strategy that adapts based on the agent's performance. For instance, increase the probability of less frequently chosen actions if the agent's performance stagnates.
+
+4. **Monitor Performance:**
+   - After implementing the new action distribution, closely monitor the agent's performance over the next 20 episodes. If the total reward improves, continue with the exploration strategy. If not, further adjustments may be needed.
+
+By encouraging a more balanced action distribution, the agent may better explore the state space and discover more effective strategies for reaching the goal.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+236,-49.06407073186043,-46.5567386266669,0.01,0.0077400244772434235,N/A,N/A
+237,-47.95495016217094,-46.42543029380188,0.01,0.009910011664032936,N/A,N/A
+238,-45.73097077346647,-46.51553429736822,0.01,0.024509787559509277,N/A,N/A
+239,-56.52759719847736,-46.38413558029694,0.01,0.026485741138458252,N/A,N/A
+240,-45.76990981048312,-46.466079652571175,0.01,0.007769257761538029,"Based on the information provided, it seems that the agent's current exploration strategy is heavily biased towards the ""Push Right"" action (action 2), with occasional ""Push Left"" actions (action 0). The ""No Push"" action (action 1) is not being utilized at all. This imbalance in action distribution likely hinders the agent's ability to effectively explore the state space and learn a more optimal policy.
+
+### Analysis:
+1. **Action Distribution**: The sampled actions show a significant preference for ""Push Right"" (action 2). This can lead to suboptimal exploration, as the agent may not be able to build the necessary momentum by moving back and forth effectively.
+   
+2. **Total Reward**: The total reward of -45.77 indicates that the agent is not performing optimally. In MountainCar-v0, a higher (less negative) reward is better, as it indicates reaching the goal faster.
+
+3. **Lack of ""No Push"" Actions**: The absence of ""No Push"" actions (action 1) suggests that the agent is not exploring the potential benefits of maintaining its current velocity, which can sometimes be advantageous in building momentum efficiently.
+
+### Recommendations:
+To improve the exploration strategy and help the DQN agent learn faster, consider adjusting the action distribution as follows:
+
+1. **Balanced Action Distribution**:
+   - **Push Left (action 0)**: 30%
+   - **No Push (action 1)**: 20%
+   - **Push Right (action 2)**: 50%
+
+2. **Rationale**:
+   - **Push Left (action 0)**: Increasing the frequency of ""Push Left"" actions will help the agent explore the left side of the state space more thoroughly, which is crucial for building the momentum needed to reach the flag.
+   - **No Push (action 1)**: Introducing ""No Push"" actions allows the agent to maintain its current velocity when advantageous, which can help in stabilizing the car's momentum.
+   - **Push Right (action 2)**: While still maintaining a higher probability for ""Push Right"" actions, reducing its frequency slightly can encourage more balanced exploration.
+
+3. **Exploration Strategy**:
+   - Consider using an epsilon-greedy strategy with a decaying epsilon. Start with a higher epsilon (e.g., 0.3) to encourage exploration and gradually reduce it to exploit learned policies as training progresses.
+
+By implementing these recommendations, the agent should be able to explore the environment more effectively, leading to improved learning and performance in the MountainCar-v0 task.","```json
+{
+  ""action_probs"": [0.3, 0.2, 0.5]
+}
+```"
+241,-48.80758074652734,-47.74671460673991,0.01,0.013003302738070488,N/A,N/A
+242,-48.04804525581588,-46.463552845111444,0.01,0.013208489865064621,N/A,N/A
+243,-58.05597491556377,-46.35562304290277,0.01,0.009623450227081776,N/A,N/A
+244,-48.41305636658467,-48.43591859149099,0.01,0.010447114706039429,N/A,N/A
+245,-37.98068442194322,-47.67632385676273,0.01,0.04327816888689995,"In the MountainCar-v0 environment, the objective is to drive the car up the right hill to reach the flag. Given the weak engine, the car must oscillate between the hills to build sufficient momentum. Let's analyze the provided data and suggest an exploration strategy to help the DQN agent learn faster.
+
+### Analysis of the Data:
+
+1. **Total Reward**: The total reward in the last episode is -37.98. In MountainCar-v0, the reward is -1 for each time step until the car reaches the goal. Therefore, a reward closer to 0 indicates better performance. A reward of -37.98 suggests the car is not reaching the goal efficiently and is taking many steps.
+
+2. **Sampled Actions**:
+   - The action sequence shows a heavy bias towards action 2 (Push Right) after an initial series of action 0 (Push Left).
+   - There is minimal use of action 1 (No Push), which might be under-explored.
+
+### Recommendations for Exploration Strategy:
+
+To improve the agent's learning, we should ensure a balanced exploration of all actions, especially since the agent seems to be biased towards a specific sequence. Here are some recommendations:
+
+1. **Balanced Action Distribution**:
+   - Encourage exploration of all actions by setting a more balanced action probability distribution. For instance, try a distribution like [0.4, 0.2, 0.4] for actions [0, 1, 2]. This encourages more exploration of the ""No Push"" action, which might help in finding better state transitions.
+
+2. **Encourage Momentum Building**:
+   - Ensure the agent explores sequences that build momentum. This might involve alternating between actions 0 and 2 more frequently. Consider a strategy where the agent alternates actions more systematically, such as [0.45, 0.1, 0.45], to encourage oscillation.
+
+3. **Adaptive Exploration**:
+   - Implement an adaptive exploration strategy that starts with more exploration (e.g., ε-greedy with a higher ε value) and gradually reduces exploration as the agent becomes more confident in its policy. This can help in discovering effective strategies initially and then focusing on exploitation.
+
+4. **Reward Shaping**:
+   - Although not directly related to action distribution, consider reward shaping to provide additional incentives for reaching higher velocities or specific positions. This can guide the agent towards more effective oscillation strategies.
+
+5. **Monitor and Adjust**:
+   - After implementing the new exploration strategy, monitor the agent's performance over the next 20 episodes. Adjust the action distribution based on observed improvements or persisting issues.
+
+By implementing these strategies, the DQN agent should be able to explore more effectively, discover better policies, and ultimately learn to solve the MountainCar-v0 task more efficiently.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"
+246,-46.93516711250579,-46.470153974213936,0.01,0.0073385159485042095,N/A,N/A
+247,-55.90796339899035,-46.37581524949054,0.01,0.01257365196943283,N/A,N/A
+248,-58.53398131753782,-46.42625011576355,0.01,0.00872896146029234,N/A,N/A
+249,-48.0602623420568,-47.840409179858185,0.01,0.008613204583525658,N/A,N/A
+250,-48.70777751914491,-46.470453127495304,0.01,0.0068216887302696705,"Based on the information provided, the agent is currently favoring the action ""Push Right"" (action 2) heavily, as seen from the sampled actions. This suggests that the exploration strategy is biased towards this action, which might not be optimal for learning the MountainCar-v0 task effectively. The task requires the agent to build momentum by moving back and forth, which means a more balanced exploration strategy is needed to allow the agent to experience the dynamics of moving left and right.
+
+### Analysis:
+1. **Action Bias**: The current action distribution is heavily skewed towards ""Push Right"" (action 2), with very few ""Push Left"" (action 0) actions, and no ""No Push"" (action 1) actions being taken. This could lead to suboptimal learning as the agent may not adequately explore the state space.
+
+2. **Reward**: The total reward in the last episode is -48.71, which indicates that the agent is not performing well. The optimal policy should achieve a reward closer to -110 or better.
+
+### Recommendations:
+To help the agent learn faster, we should encourage a more balanced exploration strategy. Here is a recommended action distribution for the next 20 training episodes:
+
+1. **Balanced Exploration**: 
+   - **Push Left (action 0)**: 40%
+   - **No Push (action 1)**: 20%
+   - **Push Right (action 2)**: 40%
+
+2. **Rationale**:
+   - **Push Left (action 0)**: Increasing the frequency of this action will help the agent explore the left side of the state space, which is crucial for building the momentum needed to reach the goal.
+   - **No Push (action 1)**: Introducing this action at a moderate level allows the agent to experience the effects of inertia and the natural dynamics of the environment without external force. This can be useful for learning how the car behaves when not actively pushed.
+   - **Push Right (action 2)**: Maintaining a significant proportion of this action ensures that the agent can still explore moving towards the goal on the right hill.
+
+3. **Exploration Strategy**: Consider employing an epsilon-greedy strategy where the epsilon value is initially high (e.g., 0.5) and decays over time. This allows for more exploration initially and gradually shifts towards exploitation as the agent learns more about the environment.
+
+4. **Monitor and Adjust**: After implementing this distribution, monitor the agent's performance and adjust the distribution as needed. If the agent starts to improve, gradually shift the distribution towards actions that yield higher rewards.
+
+By adopting a more balanced exploration strategy, the agent should be able to learn the dynamics of the MountainCar-v0 environment more effectively, potentially leading to better performance and faster convergence to an optimal policy.","```json
+{
+  ""action_probs"": [0.4, 0.2, 0.4]
+}
+```"

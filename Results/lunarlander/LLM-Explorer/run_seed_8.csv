@@ -1,0 +1,674 @@
+episode,train_return,eval_return,epsilon,loss,llm1_full_response,llm2_full_response
+1,-203.5069097782735,-674.7407013376435,0.9966835,nan,N/A,N/A
+2,-407.8296644005865,-674.7407013376435,0.992278,nan,N/A,N/A
+3,-187.2512323111085,-674.7407013376435,0.987229,nan,N/A,N/A
+4,-151.8695731410183,-674.7407013376435,0.98317,nan,N/A,N/A
+5,-170.4006754842735,-674.7407013376435,0.9794575,nan,N/A,N/A
+6,-266.66578002014364,-674.7407013376435,0.9753985,nan,N/A,N/A
+7,-63.792649993534425,-1182.265045597443,0.969508,2.9423911571502686,N/A,N/A
+8,-356.7815862005208,-61.66258138812037,0.963865,2.0972516536712646,N/A,N/A
+9,-156.59758936850827,-286.0112520650694,0.958519,1.8535830974578857,N/A,N/A
+10,-245.00143906516948,-362.8413657078644,0.953371,1.2640154361724854,N/A,N/A
+11,-188.26257590056525,-351.77225113760977,0.947629,2.00618839263916,N/A,N/A
+12,-88.11406897301624,-362.85856417336055,0.943075,1.4345600605010986,N/A,N/A
+13,-75.17470725541443,-259.46682923020296,0.939511,2.7384564876556396,N/A,N/A
+14,-84.26787012239211,-228.6464158307953,0.9357489999999999,2.2109951972961426,N/A,N/A
+15,-239.54258097903542,-228.6806618828231,0.9322345,0.9898591041564941,N/A,N/A
+16,-261.49949357579305,-224.9109257707652,0.927829,0.36164507269859314,N/A,N/A
+17,-29.433382473621066,-146.49795821622496,0.9247105,1.824655294418335,N/A,N/A
+18,-100.81182997958078,-106.17318015934511,0.91882,2.1372601985931396,N/A,N/A
+19,-216.65941153783928,-97.50036499783789,0.914068,1.550717830657959,N/A,N/A
+20,-267.2606794736879,-80.10853411637758,0.9083755,0.4890193045139313,"To help the DQN agent learn faster in the LunarLander-v2 environment, we need to analyze the current action distribution and the reward from the last episode. The goal is to adjust the exploration strategy to better balance exploration and exploitation, potentially improving the agent's learning rate and performance.
+
+### Analysis of Current Action Distribution:
+The sampled actions from the last episode are as follows:
+- Action 0 (Do Nothing): 15 times
+- Action 1 (Fire Left Orientation Engine): 21 times
+- Action 2 (Fire Main Engine): 32 times
+- Action 3 (Fire Right Orientation Engine): 22 times
+
+The distribution of actions suggests that the agent is currently exploring all actions, but there is a slight preference towards firing the main engine (Action 2), which is common as it is often used to control descent speed. However, the negative total reward indicates that the agent is not effectively stabilizing the lander or managing its descent.
+
+### Recommendations for Exploration Strategy:
+1. **Balanced Exploration**: While Action 2 is crucial for controlling descent, it appears over-represented. A more balanced distribution might help the agent learn better control strategies. Consider adjusting the exploration strategy to:
+   - Action 0: 20%
+   - Action 1: 25%
+   - Action 2: 30%
+   - Action 3: 25%
+
+   This adjustment allows for a slight reduction in the use of the main engine while increasing the exploration of orientation engines, which are critical for stabilizing the lander.
+
+2. **State-Dependent Exploration**:
+   - **High Vertical Speed (vy)**: Encourage more use of Action 2 to reduce speed.
+   - **High Angular Velocity (omega)**: Increase the probability of using Actions 1 and 3 to stabilize the angle.
+   - **Near Ground (low y)**: Reduce the use of Action 0 to prevent crashes and increase the use of Actions 1 and 3 for precise landing.
+
+3. **Reward Shaping**: Consider implementing a reward shaping strategy to provide intermediate rewards for achieving stable angles and velocities, which can guide the agent towards safer landing strategies more effectively.
+
+4. **Adaptive Exploration**: Implement an epsilon-greedy strategy with decay, where the exploration rate decreases over time as the agent becomes more confident in its policy. This can help the agent transition from exploration to exploitation as it learns.
+
+5. **Monitor Learning Progress**: Continuously monitor the agent's performance and adjust the exploration strategy based on its progress. If certain actions lead to consistently poor outcomes, reduce their exploration probability.
+
+By implementing these strategies, the agent should be able to explore more effectively, potentially leading to improved learning and performance in the LunarLander-v2 environment.","```json
+{
+  ""action_probs"": [0.20, 0.25, 0.30, 0.25]
+}
+```"
+21,-108.9437815743574,-102.80834407568018,0.904564,0.7348158359527588,N/A,N/A
+22,-187.98091694465768,-149.7927123839898,0.899614,0.9175592660903931,N/A,N/A
+23,-86.67463798743083,-138.02267212760592,0.8946145,2.4704904556274414,N/A,N/A
+24,-107.79137084707908,-192.28487425785477,0.890704,1.4392956495285034,N/A,N/A
+25,-127.82657049269397,-167.2599370527996,0.8832295,1.6032215356826782,N/A,N/A
+26,-98.18239011222114,-156.33893134971783,0.878824,2.197723150253296,N/A,N/A
+27,-51.75201067110768,-157.98910727094585,0.8751115,0.3070836067199707,N/A,N/A
+28,-111.31720342129663,-144.1733058598878,0.871201,1.3742399215698242,N/A,N/A
+29,-48.443878636762065,-176.04115093577337,0.8622415,1.6212666034698486,N/A,N/A
+30,-96.64833489605789,-172.79840548779217,0.8578855,0.7508927583694458,N/A,N/A
+31,-123.16389626295498,-168.7392563595134,0.852886,0.5801934003829956,N/A,N/A
+32,-145.97353458510233,-179.27338483988882,0.8488765,3.5106420516967773,N/A,N/A
+33,-46.75345491313975,-177.77631434503905,0.845263,1.3715951442718506,N/A,N/A
+34,-77.41752365815363,-155.3770197673582,0.838828,2.8793957233428955,N/A,N/A
+35,21.163479973282605,-145.7546558716299,0.831997,2.2620935440063477,N/A,N/A
+36,-172.52120581702275,-161.02728886677102,0.827641,2.6834511756896973,N/A,N/A
+37,-146.05949010276208,-153.53619172713428,0.8219485,0.329551637172699,N/A,N/A
+38,-96.91502399522199,-152.68643761508665,0.81586,1.085139274597168,N/A,N/A
+39,-49.989277343161504,-138.83361560811858,0.811801,0.8271734714508057,N/A,N/A
+40,-88.79168639911184,-152.59015093872844,0.804574,0.7061315774917603,"Based on the information provided, the agent is currently exploring a range of actions in the LunarLander-v2 environment. The goal is to optimize the exploration strategy to help the DQN agent learn more efficiently and improve its performance, as indicated by the negative total reward in the last episode.
+
+### Analysis of Sampled Actions:
+- **Action Distribution**: 
+  - Action 0 (Do Nothing): 14 times
+  - Action 1 (Fire Left Orientation Engine): 16 times
+  - Action 2 (Fire Main Engine): 36 times
+  - Action 3 (Fire Right Orientation Engine): 34 times
+
+The distribution shows a higher frequency of firing the main engine (Action 2) and the right orientation engine (Action 3), which is a common pattern in attempts to stabilize the lander and control descent. However, the relatively high negative reward suggests that the current strategy might not be optimal.
+
+### Recommendations for Exploration Strategy:
+
+1. **Balanced Exploration**:
+   - Ensure a more balanced action distribution to explore different control strategies. The current distribution is skewed towards Actions 2 and 3. Consider increasing the exploration of Action 0 (Do Nothing) and Action 1 (Fire Left Orientation Engine) to understand their potential benefits in different states.
+
+2. **State-Dependent Exploration**:
+   - Implement a state-dependent exploration strategy where actions are chosen based on the current state of the lander. For example:
+     - If `vx` and `theta` are high, prioritize orientation engines (Actions 1 and 3) to stabilize.
+     - If `vy` is high, prioritize the main engine (Action 2) to reduce vertical speed.
+     - If both legs are in contact, consider more `Do Nothing` actions to see if the lander can stabilize naturally.
+
+3. **Reward Shaping**:
+   - Encourage exploration by modifying the reward structure slightly to give more feedback on intermediate states, such as achieving stable horizontal and vertical velocities or maintaining a level angle.
+
+4. **Adaptive Exploration Rate**:
+   - Use an adaptive exploration rate that decreases over time as the agent becomes more proficient. This helps balance exploration and exploitation, especially after the agent has gathered significant experience.
+
+5. **Action Noise**:
+   - Introduce a small amount of noise to actions to encourage exploration of less visited states and actions, which can help escape local optima and discover new strategies.
+
+6. **Prioritize Safe Landings**:
+   - Encourage actions that lead to stable and safe landings by giving higher priority to leg contact states. If both legs are in contact, reduce the frequency of firing engines unless necessary.
+
+By implementing these recommendations, the agent should be able to explore the state-action space more effectively, potentially leading to improved learning and better performance in future episodes.","```json
+{
+  ""action_probs"": [0.2, 0.3, 0.3, 0.2]
+}
+```"
+41,-52.03735807541229,-154.73726384902176,0.7995745000000001,0.8042885661125183,N/A,N/A
+42,-127.67088794967697,-152.59572303415274,0.7929415,1.1262848377227783,N/A,N/A
+43,-63.6624691339097,-142.47860231358146,0.788932,2.107513427734375,N/A,N/A
+44,-37.63749853000664,-143.37564011406582,0.7810615,1.31747567653656,N/A,N/A
+45,-48.92342527960835,-157.5389995281776,0.7776460000000001,0.27145954966545105,N/A,N/A
+46,-119.50694015065562,-152.64028280474753,0.771112,3.0748658180236816,N/A,N/A
+47,-72.81987655728237,-151.27956954404357,0.76735,1.9698293209075928,N/A,N/A
+48,-75.32339207620035,-167.9581151336446,0.76339,0.7099508047103882,N/A,N/A
+49,-98.97748359159307,-154.71432408171898,0.759826,0.6894701719284058,N/A,N/A
+50,-235.2065155160745,-148.55211771917234,0.751708,1.4455128908157349,N/A,N/A
+51,-129.67500283651998,-158.76256131355345,0.7470055,0.5185842514038086,N/A,N/A
+52,-103.08254745553128,-143.94270928652244,0.742204,1.8949637413024902,N/A,N/A
+53,-112.92338149728693,-155.1672905370433,0.7353235,1.3163576126098633,N/A,N/A
+54,-131.55276603996998,-156.65605465170395,0.7289875,1.2122087478637695,N/A,N/A
+55,-54.90922216326366,-166.47925110658264,0.724384,1.5426039695739746,N/A,N/A
+56,67.48221053572556,-145.873460158239,0.674884,4.772668838500977,N/A,N/A
+57,-42.30118844902343,-147.12298665080476,0.6682015,2.0569262504577637,N/A,N/A
+58,-127.35294728696647,-146.42899218979045,0.662212,2.010648727416992,N/A,N/A
+59,-3.020218217279563,-136.3677901521406,0.6544405,2.6459569931030273,N/A,N/A
+60,-68.44113895602167,-139.1882081627519,0.6478075,1.184779167175293,"Based on the provided information, it seems the agent's performance in the last episode was suboptimal, as indicated by the negative total reward. The sampled actions show a distribution where the main engine (action 2) is heavily favored, followed by the left orientation engine (action 1), and the right orientation engine (action 3). The ""do nothing"" action (action 0) is used the least.
+
+Here's a breakdown of the current action distribution:
+- Action 0 (Do Nothing): 11 times
+- Action 1 (Fire Left Orientation Engine): 23 times
+- Action 2 (Fire Main Engine): 37 times
+- Action 3 (Fire Right Orientation Engine): 19 times
+
+### Analysis:
+1. **Main Engine Overuse**: The main engine is used most frequently, which might be causing inefficient fuel use and potentially destabilizing the lander if not controlled properly.
+2. **Orientation Engines**: The left orientation engine is used more than the right, which indicates a possible bias in correcting the lander's angle or an imbalance in handling angular velocity.
+3. **Do Nothing Action**: This action is underutilized, but it can be beneficial when the lander is stable or when minor corrections are needed.
+
+### Recommendations:
+To improve the agent's learning and performance, consider the following exploration strategy:
+
+1. **Balanced Action Distribution**: Encourage a more balanced use of actions to ensure the agent explores different scenarios equally. This can help the agent learn more about the consequences of each action in various states.
+
+2. **Action Distribution for Exploration**:
+   - Action 0 (Do Nothing): Increase usage slightly to allow the agent to learn when stability is achieved.
+   - Action 1 (Fire Left Orientation Engine): Maintain current usage but ensure it's not overused compared to the right engine.
+   - Action 2 (Fire Main Engine): Reduce usage to encourage more efficient fuel consumption and to prevent destabilization from overuse.
+   - Action 3 (Fire Right Orientation Engine): Increase usage to balance with the left engine and explore right corrections more thoroughly.
+
+3. **Proposed Action Distribution**:
+   - Action 0: 20%
+   - Action 1: 25%
+   - Action 2: 30%
+   - Action 3: 25%
+
+4. **State-Dependent Exploration**:
+   - Encourage the agent to use the ""do nothing"" action when both legs are in contact with the ground or when velocities (vx, vy) are close to zero.
+   - Use orientation engines (actions 1 and 3) more when the lander's angle (theta) and angular velocity (omega) are not zero, to maintain balance.
+   - Use the main engine (action 2) primarily when vertical velocity (vy) is high or when the lander is far from the ground.
+
+5. **Reward Shaping**: Consider providing additional rewards for maintaining stability (low velocities and angles) and for efficient fuel usage to guide the agent's learning process.
+
+By implementing these recommendations, the agent should be able to explore the environment more effectively, leading to better learning and improved performance in landing the lunar module safely.","```json
+{
+  ""action_probs"": [0.2, 0.25, 0.3, 0.25]
+}
+```"
+61,-27.311977522301504,-142.4468240533119,0.6401844999999999,1.2491469383239746,N/A,N/A
+62,-137.45200903991702,-129.66613448563785,0.6298885,1.0292541980743408,N/A,N/A
+63,-2.0866992379086753,-142.3417097013658,0.6245425,2.428450584411621,N/A,N/A
+64,8.569449411343996,-168.7601283966721,0.618256,2.1070070266723633,N/A,N/A
+65,-25.264984007533897,-175.7481112972393,0.611326,1.4281724691390991,N/A,N/A
+66,-65.79291521281878,-219.66340526380486,0.603208,1.498408317565918,N/A,N/A
+67,-47.688261933623025,-241.61012110990814,0.5947435000000001,1.1971163749694824,N/A,N/A
+68,-183.42214061676873,-257.75678674681524,0.5886055,6.0422868728637695,N/A,N/A
+69,-23.986756119144005,-236.1400438877853,0.5798935000000001,1.1324514150619507,N/A,N/A
+70,-18.646519139025287,-200.30330640608636,0.571924,0.8183311223983765,N/A,N/A
+71,-3.6839265105557786,-158.11855479107518,0.563707,1.0592072010040283,N/A,N/A
+72,-151.39628175779083,-159.24077109787908,0.5558365000000001,1.3268373012542725,N/A,N/A
+73,-65.69433451748486,-151.64013409421008,0.5345515000000001,1.2387927770614624,N/A,N/A
+74,34.48766556693448,-154.40465595570296,0.523216,2.1929659843444824,N/A,N/A
+75,-193.23120783758807,-138.8601243689506,0.5032675,4.974053382873535,N/A,N/A
+76,-15.488340592598874,-158.20836246000937,0.497773,1.4164601564407349,N/A,N/A
+77,8.331181876839949,-143.1242883622004,0.49084300000000003,1.5239982604980469,N/A,N/A
+78,-2.8770733212775923,-146.10191587533214,0.48252699999999993,1.0311667919158936,N/A,N/A
+79,-135.46845133916617,-148.72544610360984,0.43302700000000005,2.333233594894409,N/A,N/A
+80,-18.018801668375815,-119.7101668843377,0.38352699999999995,2.157531261444092,"Based on the provided data, the agent's performance in the last episode resulted in a total reward of -18.0188, which indicates that there is room for improvement. The action distribution from the sampled actions shows a strong preference for firing the main engine (action 2), which was used in 66 out of 100 actions. The remaining actions were distributed among the other actions as follows: action 1 (fire left orientation engine) was used 15 times, action 3 (fire right orientation engine) was used 16 times, and action 0 (do nothing) was used 3 times.
+
+### Analysis:
+1. **Action Bias**: The agent is heavily biased towards using the main engine (action 2). While the main engine is crucial for controlling vertical velocity and descent, over-reliance on it can lead to inefficient fuel usage and potential destabilization if not balanced with orientation control.
+
+2. **Orientation Control**: The use of orientation engines (actions 1 and 3) is relatively balanced compared to each other, but the frequency of their usage suggests that the agent might not be effectively managing its horizontal position and angle. This can lead to instability during landing attempts.
+
+3. **Negligible Use of 'Do Nothing'**: The minimal use of action 0 indicates that the agent might be overly reactive. In some scenarios, not taking an action can be beneficial, especially when the lander is stable or when fine adjustments are not needed.
+
+### Recommendations:
+To help the DQN agent learn more effectively during exploration, consider adjusting the action distribution to encourage a more balanced approach that can lead to better control and stability:
+
+1. **Increase Exploration of Orientation Engines**: Encourage a higher frequency of actions 1 and 3 to improve the agent's ability to control its orientation and horizontal position. This can help the agent learn to stabilize the lander and adjust its trajectory more effectively.
+
+2. **Moderate Use of Main Engine**: While the main engine is important, reducing its frequency slightly can encourage the agent to explore alternative strategies for managing descent and stability, potentially leading to more efficient fuel usage.
+
+3. **Incorporate 'Do Nothing'**: Increase the exploration of action 0 to allow the agent to learn when maintaining the current state is beneficial. This can help in scenarios where the lander is already stable or when minimal adjustments are needed.
+
+### Suggested Exploration Action Distribution:
+- **Action 0 (Do Nothing)**: 10%
+- **Action 1 (Fire Left Orientation Engine)**: 25%
+- **Action 2 (Fire Main Engine)**: 40%
+- **Action 3 (Fire Right Orientation Engine)**: 25%
+
+This distribution aims to create a more balanced exploration strategy, encouraging the agent to learn effective control over the lander’s position and orientation while still making use of the main engine when necessary. Adjusting the exploration strategy in this way should help the agent improve its landing performance over the next 20 episodes.","```json
+{
+  ""action_probs"": [0.1, 0.25, 0.4, 0.25]
+}
+```"
+81,11.918262050296093,-102.26806813682731,0.37798300000000007,1.3858519792556763,N/A,N/A
+82,-90.1761110695586,-99.00337588418957,0.3683305,2.009455442428589,N/A,N/A
+83,-69.9742071434436,-52.599396677834385,0.3188304999999999,1.2461318969726562,N/A,N/A
+84,-110.19704304359195,-80.41362242282212,0.309871,1.9181724786758423,N/A,N/A
+85,-65.87968251016588,-43.72534617824401,0.260371,2.7433574199676514,N/A,N/A
+86,-24.51560056322788,-31.003544530981394,0.21087100000000003,1.708524465560913,N/A,N/A
+87,-10.323045994407131,-19.838660728583626,0.16137100000000004,0.7058979272842407,N/A,N/A
+88,-28.817164275177195,-13.351280994595351,0.11187100000000005,0.8737056255340576,N/A,N/A
+89,-4.684527760604241,-17.59965880038662,0.062370999999999954,0.7104439735412598,N/A,N/A
+90,-28.318330678167406,-21.228356312277185,0.012871000000000077,0.9892799854278564,N/A,N/A
+91,-29.9234919590369,-19.32219309936738,0.01,0.5778306722640991,N/A,N/A
+92,-31.234392456293833,-12.141131878771052,0.01,0.5423860549926758,N/A,N/A
+93,-51.448643814051536,-24.30650431307937,0.01,0.7936913967132568,N/A,N/A
+94,-168.66606756792635,-103.10289700201722,0.01,0.3856099247932434,N/A,N/A
+95,-39.5423338902659,-95.37728283205685,0.01,0.2404797375202179,N/A,N/A
+96,-167.0233765508914,-66.83196574748493,0.01,0.3361364006996155,N/A,N/A
+97,-53.871483787448845,0.7616851317805441,0.01,0.2595481872558594,N/A,N/A
+98,-44.57729677118798,-44.0109463614938,0.01,0.2733924984931946,N/A,N/A
+99,17.269440444081198,-20.302678481079617,0.01,1.1957758665084839,N/A,N/A
+100,1.7690903987239943,-19.880923230816226,0.01,0.3593706488609314,"To help the DQN agent learn faster in the LunarLander-v2 environment, we need to analyze the action distribution and recommend an exploration strategy that effectively balances exploration and exploitation. Here’s a breakdown of the current situation and recommendations:
+
+### Analysis of Current Situation
+
+1. **Action Distribution**:
+   - Action 0 (Do Nothing): 30 times
+   - Action 1 (Fire Left Orientation Engine): 8 times
+   - Action 2 (Fire Main Engine): 46 times
+   - Action 3 (Fire Right Orientation Engine): 16 times
+
+2. **Current Strategy**:
+   - The agent predominantly uses Action 2 (Fire Main Engine), which is expected as it is crucial for controlling the descent and maintaining altitude.
+   - Actions 1 and 3 are used less frequently, suggesting that the agent might not be exploring orientation adjustments as much as it could.
+   - Action 0 (Do Nothing) is used moderately, which is good for conserving fuel but might not be optimal if the agent is not in a stable state.
+
+3. **Reward**:
+   - The total reward of 1.77 in the last episode indicates that there is significant room for improvement.
+
+### Recommendations for Exploration Strategy
+
+1. **Balanced Exploration**:
+   - Encourage more balanced exploration by slightly increasing the probability of selecting Actions 1 and 3. This can help the agent learn to effectively use orientation controls to stabilize and direct the lander.
+
+2. **Adaptive Exploration**:
+   - Implement an adaptive exploration strategy where the probability of selecting less frequent actions (1 and 3) is increased when the lander is unstable (e.g., high angular velocity or non-zero angle). This can be achieved by adjusting the exploration policy based on the lander's state.
+
+3. **Reward Shaping**:
+   - Consider implementing reward shaping to incentivize the agent to maintain a stable orientation and reduce horizontal and vertical velocities. This can guide the agent to explore actions that contribute to stability and safe landing.
+
+4. **Exploration Strategy**:
+   - Use an epsilon-greedy exploration strategy, where epsilon starts higher and decays over time. Initially, set a higher probability for Actions 1 and 3 to encourage exploration of orientation adjustments.
+
+5. **State-Dependent Exploration**:
+   - Develop a state-dependent exploration mechanism where action probabilities are adjusted based on the current state. For example, if the lander is tilting, increase the probability of Actions 1 and 3 to encourage corrective maneuvers.
+
+### Suggested Action Probability Distribution
+
+For the next 20 episodes, consider the following exploration action distribution:
+
+- Action 0 (Do Nothing): 20%
+- Action 1 (Fire Left Orientation Engine): 20%
+- Action 2 (Fire Main Engine): 40%
+- Action 3 (Fire Right Orientation Engine): 20%
+
+This distribution encourages more exploration of orientation controls while still maintaining a focus on using the main engine for descent control. Adjust these probabilities dynamically based on the agent's performance and the specific state characteristics observed during episodes.","```json
+{
+  ""action_probs"": [0.2, 0.2, 0.4, 0.2]
+}
+```"
+101,-16.07122921120823,-67.050563341005,0.01,0.27800244092941284,N/A,N/A
+102,-77.66716592794859,-86.43100228483567,0.01,0.3100491762161255,N/A,N/A
+103,3.9269465720316195,-31.98015101481219,0.01,0.2702063024044037,N/A,N/A
+104,-3.7250063117041208,-19.402058737056212,0.01,0.2436821162700653,N/A,N/A
+105,-10.563451271491417,-24.401498801598763,0.01,0.27942317724227905,N/A,N/A
+106,-21.53627469942888,-28.742066484785955,0.01,0.18953725695610046,N/A,N/A
+107,-27.051197613243513,-23.991264246236362,0.01,0.26285213232040405,N/A,N/A
+108,-20.86225079959411,-16.897723789557578,0.01,0.17321377992630005,N/A,N/A
+109,-28.645441279055223,-36.79875803691247,0.01,0.2254408299922943,N/A,N/A
+110,24.20321100046575,-31.106669471017153,0.01,0.24116267263889313,N/A,N/A
+111,-30.841433805589467,-22.28952575797848,0.01,0.21570441126823425,N/A,N/A
+112,0.5736356792156463,-20.403175134097246,0.01,0.2576097846031189,N/A,N/A
+113,-26.94152151625545,-35.87601461901595,0.01,0.20510180294513702,N/A,N/A
+114,23.635987720848515,-6.380774446596305,0.01,0.2274148166179657,N/A,N/A
+115,-12.617570966266516,-15.782043275547704,0.01,0.23512309789657593,N/A,N/A
+116,2.9726495893456875,-7.429218289649652,0.01,0.16881772875785828,N/A,N/A
+117,31.968900665476436,8.441995927673071,0.01,0.23344139754772186,N/A,N/A
+118,-35.54431144515465,-5.302361093616156,0.01,0.1996135413646698,N/A,N/A
+119,-12.433059773255396,-8.299376108861662,0.01,0.18740451335906982,N/A,N/A
+120,18.011104367038403,-14.692118025780454,0.01,0.12511706352233887,"Based on the data provided, here are some observations and strategy recommendations for the LunarLander-v2 exploration:
+
+### Observations:
+
+1. **Action Distribution:**
+   - Action `2` (Fire Main Engine) was sampled most frequently, indicating a preference for vertical control, which is crucial for maintaining altitude and soft landings.
+   - Action `0` (Do Nothing) and Action `3` (Fire Right Orientation Engine) were also used but less frequently.
+   - Action `1` (Fire Left Orientation Engine) was the least used, which might indicate less need for leftward orientation correction in the current episodes.
+
+2. **Total Reward:**
+   - The total reward in the last episode was 18.01, which suggests that the agent is not yet consistently achieving successful landings, as higher rewards are typically required for successful landings.
+
+3. **Leg Contacts:**
+   - The state includes `left_leg` and `right_leg` contact indicators. Ensuring both legs make contact simultaneously is critical for a successful landing.
+
+### Strategy Recommendations:
+
+1. **Balanced Exploration:**
+   - Encourage a more balanced exploration of actions. While the main engine is crucial, excessive reliance on it might lead to inefficient learning of orientation controls. Consider increasing the exploration of Actions `1` and `3` to improve lateral control and orientation.
+
+2. **Adaptive Exploration:**
+   - Implement an adaptive exploration strategy where the action distribution changes based on the current state. For example, if the lander is tilting significantly, prioritize orientation actions (`1` and `3`) to correct the angle.
+
+3. **State-Based Action Bias:**
+   - Introduce a bias towards certain actions based on the state:
+     - If `theta` (Lander Angle) is high, prioritize Actions `1` or `3` to stabilize.
+     - If `vy` (Vertical Velocity) is high, prioritize Action `2` to reduce descent speed.
+     - If both legs are not in contact and `y` (Vertical Position) is low, prioritize Action `2` to ensure a softer landing.
+
+4. **Reward Shaping:**
+   - Consider incorporating reward shaping to incentivize desirable behaviors, such as stable descent (low `vy`), level orientation (low `theta`), and simultaneous leg contact.
+
+5. **Exploration Noise:**
+   - Introduce noise or stochastic elements to action selection during exploration to prevent premature convergence on suboptimal policies.
+
+6. **Episode Analysis:**
+   - Analyze episodes where rewards were higher to identify successful strategies and reinforce those patterns in future episodes.
+
+By implementing these strategies, the agent should be able to explore the action space more effectively, leading to faster learning and improved performance in the LunarLander-v2 environment.","```json
+{
+  ""action_probs"": [0.15, 0.25, 0.35, 0.25]
+}
+```"
+121,0.033884970280573246,-3.391631285255184,0.01,0.24026764929294586,N/A,N/A
+122,-13.591109192563854,-10.973692634401749,0.01,0.19141043722629547,N/A,N/A
+123,-10.03512650610598,-13.673929862205034,0.01,0.1403043568134308,N/A,N/A
+124,-7.023003989358437,-10.9756734747783,0.01,0.14875280857086182,N/A,N/A
+125,22.39035264303673,-7.066143980522679,0.01,0.16370977461338043,N/A,N/A
+126,-7.2700659943199,-12.416737507857757,0.01,0.13438552618026733,N/A,N/A
+127,22.492111351415897,-11.778256897554234,0.01,0.13614757359027863,N/A,N/A
+128,19.86688584633042,-12.479075373682587,0.01,0.11781961470842361,N/A,N/A
+129,7.161823188536783,-14.72380899693844,0.01,0.13356482982635498,N/A,N/A
+130,-20.92293508354801,-20.814596243527888,0.01,0.1458318680524826,N/A,N/A
+131,2.905617470362694,-10.643361803478852,0.01,0.1306518018245697,N/A,N/A
+132,27.766939957783972,8.549033037387861,0.01,0.10529285669326782,N/A,N/A
+133,21.28720493124884,-12.390113429021083,0.01,0.12416202574968338,N/A,N/A
+134,12.2251069938463,-15.378658017136157,0.01,0.11131349205970764,N/A,N/A
+135,-13.62088776823891,-22.640972192438586,0.01,0.1775246262550354,N/A,N/A
+136,-11.233477063854782,-2.728048706607626,0.01,0.10596545040607452,N/A,N/A
+137,17.560877628189232,-12.586664807743364,0.01,0.10991455614566803,N/A,N/A
+138,-22.612305990201243,-33.92086672943099,0.01,0.13854201138019562,N/A,N/A
+139,-20.410389595178437,-21.62798180623221,0.01,0.0875585675239563,N/A,N/A
+140,-5.671401020305199,-4.270923447053818,0.01,0.1415395438671112,"To help your DQN agent learn more effectively in the LunarLander-v2 environment, let's analyze the current action distribution and reward, and then recommend an exploration strategy.
+
+### Analysis of Current Action Distribution
+
+1. **Action Distribution:**
+   - **Action 0 (Do Nothing):** 28 occurrences
+   - **Action 1 (Fire Left Orientation Engine):** 4 occurrences
+   - **Action 2 (Fire Main Engine):** 52 occurrences
+   - **Action 3 (Fire Right Orientation Engine):** 16 occurrences
+
+2. **Observations:**
+   - Action 2 (Fire Main Engine) is heavily favored, comprising over half of the actions.
+   - Actions 1 and 3 (Orientation Engines) are underutilized, especially Action 1.
+   - The current policy seems to rely on firing the main engine frequently, which might not be optimal for learning nuanced control.
+
+3. **Reward:**
+   - The total reward in the last episode is -5.671, indicating suboptimal landings or frequent crashes.
+
+### Recommendations for Exploration Strategy
+
+1. **Balanced Exploration:**
+   - Encourage a more balanced exploration by increasing the frequency of orientation engine actions (Actions 1 and 3). This will help the agent learn to control the lander’s orientation more effectively, which is crucial for stable landing.
+
+2. **Action Distribution Adjustment:**
+   - Consider a more uniform exploration strategy initially. For example, distribute actions as follows for the next 20 episodes:
+     - Action 0: 20%
+     - Action 1: 20%
+     - Action 2: 40%
+     - Action 3: 20%
+   - This will encourage the agent to explore different strategies and learn the effects of each action on the lander's state.
+
+3. **Adaptive Exploration:**
+   - Implement an adaptive exploration strategy where the exploration rate decreases as the agent's performance improves. Start with a higher exploration rate to encourage diverse action sampling and reduce it gradually as the agent learns.
+
+4. **State-Action Pair Analysis:**
+   - Analyze specific state-action pairs that lead to negative rewards. Focus on states where the lander is unstable or at risk of crashing, and encourage exploration of alternative actions in these states.
+
+5. **Reward Shaping:**
+   - Consider shaping rewards to provide more immediate feedback on actions that lead to stable flight and successful landings. For instance, give small positive rewards for maintaining a stable angle and velocity.
+
+### Conclusion
+
+By adjusting the exploration strategy to encourage a more balanced action distribution and implementing adaptive exploration, the DQN agent is likely to learn faster and achieve better performance in the LunarLander-v2 environment.","```json
+{
+  ""action_probs"": [0.2, 0.2, 0.4, 0.2]
+}
+```"
+141,28.28755183898566,-31.723577197247828,0.01,0.13621118664741516,N/A,N/A
+142,16.084850031606596,-37.048865083598784,0.01,0.13062651455402374,N/A,N/A
+143,9.496408890732692,-7.82639213828166,0.01,0.1423940360546112,N/A,N/A
+144,-63.829543300764314,-7.88015358860334,0.01,0.16240453720092773,N/A,N/A
+145,-12.226017505301261,-21.250296468977897,0.01,0.1965310275554657,N/A,N/A
+146,-101.0969933805805,-11.00519550157467,0.01,0.15228229761123657,N/A,N/A
+147,-32.47483920007464,-14.33848098776096,0.01,0.15377293527126312,N/A,N/A
+148,7.6197423765956085,-8.330577722837237,0.01,0.12702608108520508,N/A,N/A
+149,1.986299643104875,-9.206174413515049,0.01,0.11378668248653412,N/A,N/A
+150,-8.73188327614092,-14.82663490766868,0.01,0.1585652232170105,N/A,N/A
+151,-16.649831246457538,-11.853108687192464,0.01,0.138181671500206,N/A,N/A
+152,8.195456417941557,-15.782567951647057,0.01,0.14057789742946625,N/A,N/A
+153,-35.129809462698795,-13.004125490362904,0.01,0.14616678655147552,N/A,N/A
+154,7.143197764474421,-23.086584009221756,0.01,0.13815952837467194,N/A,N/A
+155,15.592682164576999,-2.417155351852331,0.01,0.08859255909919739,N/A,N/A
+156,-47.05307612537465,-32.232564413718464,0.01,0.1247790977358818,N/A,N/A
+157,-55.48527447656269,-10.462867223531909,0.01,0.12325704097747803,N/A,N/A
+158,-23.96015209327769,-25.47509951348969,0.01,0.1132689043879509,N/A,N/A
+159,-43.31582216958569,-2.7100575165242793,0.01,0.0887865275144577,N/A,N/A
+160,-46.76667941499538,-23.631924623218993,0.01,0.08969073742628098,"Based on the provided data, it appears that the agent's action selection is heavily skewed towards firing the main engine (action 2). This is evident from the frequent occurrence of action 2 in the sampled actions. The total reward in the last episode is negative, indicating that the current strategy might not be optimal for achieving a successful landing. Here's a detailed analysis and strategy recommendation:
+
+### Analysis
+
+1. **Action Distribution**:
+   - **Action 0 (Do Nothing)**: This action is used moderately but might not be contributing significantly to controlling the lander effectively.
+   - **Action 1 (Fire Left Orientation Engine)**: This action is underutilized, which might suggest insufficient correction of angular orientation.
+   - **Action 2 (Fire Main Engine)**: This action is overrepresented, indicating that the agent is overly reliant on the main engine for control, which might cause instability and inefficient fuel usage.
+   - **Action 3 (Fire Right Orientation Engine)**: Similar to action 1, this action is also underutilized, suggesting potential issues with maintaining or correcting the lander's angle.
+
+2. **State Observations**:
+   - The agent may not be effectively using orientation engines (actions 1 and 3) to stabilize the lander, leading to inefficient control and potential crashes.
+   - The reliance on the main engine might imply that the agent is attempting to control vertical velocity but is not addressing horizontal velocity and angular stability adequately.
+
+### Strategy Recommendations
+
+To improve the learning process and help the agent achieve better control, consider the following exploration strategy:
+
+1. **Balanced Action Exploration**:
+   - Encourage a more balanced exploration of actions, especially increasing the exploration of actions 1 and 3. This could be achieved by adjusting the exploration policy to sample these actions more frequently.
+   - A possible target distribution for exploration could be:
+     - Action 0: 20%
+     - Action 1: 25%
+     - Action 2: 30%
+     - Action 3: 25%
+
+2. **State-Dependent Action Bias**:
+   - Implement a state-dependent exploration strategy where the choice of actions is influenced by the current state of the lander. For example:
+     - If the lander is tilted (high theta or omega), increase the probability of selecting actions 1 or 3.
+     - If the lander is falling too quickly (high negative vy), increase the probability of selecting action 2.
+
+3. **Reward Shaping**:
+   - Introduce intermediate rewards to encourage the agent to maintain a stable orientation and reduce horizontal and vertical velocities. This can guide the agent to explore more stabilizing actions.
+
+4. **Adaptive Exploration**:
+   - Use an adaptive exploration strategy that adjusts the exploration rate based on the agent's performance over episodes. If the agent's performance improves, gradually reduce exploration to allow for more exploitation of learned policies.
+
+By implementing these strategies, the agent should be able to explore a wider range of actions effectively, leading to better learning outcomes and improved performance in the LunarLander-v2 environment.","```json
+{
+  ""action_probs"": [0.20, 0.25, 0.30, 0.25]
+}
+```"
+161,3.0526007150192274,0.282508252241116,0.01,0.10479818284511566,N/A,N/A
+162,-45.704687688057724,-27.228916945707663,0.01,0.127214252948761,N/A,N/A
+163,-12.037444993090372,-13.403004556908627,0.01,0.12082372605800629,N/A,N/A
+164,100.66862722429478,-14.575805491364331,0.01,0.12467154860496521,N/A,N/A
+165,-12.633209577233497,-11.108225078747205,0.01,0.16383053362369537,N/A,N/A
+166,21.48305165734231,-3.6771158375010797,0.01,0.7541458606719971,N/A,N/A
+167,22.547966859663628,-2.551251103284536,0.01,0.12425637245178223,N/A,N/A
+168,61.95651227764911,-12.651541860019929,0.01,0.17177428305149078,N/A,N/A
+169,14.350626338905448,-12.21432135595037,0.01,0.15308673679828644,N/A,N/A
+170,10.258040117050896,6.876699442622922,0.01,0.12249378859996796,N/A,N/A
+171,23.473682097901765,7.856026130408627,0.01,0.28199365735054016,N/A,N/A
+172,-25.115692059328143,23.262033021687596,0.01,0.17665737867355347,N/A,N/A
+173,100.698131937573,7.4811694727894835,0.01,0.22894544899463654,N/A,N/A
+174,-3.757401322636296,2.893141271267033,0.01,0.2718953490257263,N/A,N/A
+175,2.6963845776820596,-10.97442121160557,0.01,0.13959187269210815,N/A,N/A
+176,30.909594915576207,24.03484106532242,0.01,0.13408741354942322,N/A,N/A
+177,31.91047231731399,20.42551478814217,0.01,0.33820921182632446,N/A,N/A
+178,190.8893439377416,47.933928499059206,0.01,0.16003775596618652,N/A,N/A
+179,202.36328569647947,-16.452670443257595,0.01,0.12708008289337158,N/A,N/A
+180,17.47936219270059,26.046212634531894,0.01,0.38236626982688904,"Based on the task description and the provided data, the goal is to help the DQN agent learn faster in the LunarLander-v2 environment. The action distribution and the total reward from the last episode provide insights into the current exploration strategy and its effectiveness. Here's an analysis and some recommendations:
+
+### Analysis
+
+1. **Current Action Distribution:**
+   - **Do Nothing (0):** 20 times
+   - **Fire Left Orientation Engine (1):** 11 times
+   - **Fire Main Engine (2):** 52 times
+   - **Fire Right Orientation Engine (3):** 17 times
+
+2. **Observations:**
+   - The main engine (action 2) is being used most frequently, which is expected as it helps with vertical control, crucial for landing.
+   - The ""Do Nothing"" action (0) and orientation engines (1 and 3) are used less frequently, with a notable preference for the main engine.
+   - The total reward of 17.48 is relatively low, indicating the agent might not be optimizing its actions effectively for landing.
+
+3. **Potential Issues:**
+   - Over-reliance on the main engine could lead to inefficient fuel use and instability.
+   - Less frequent use of orientation engines might result in poor angular control, which is vital for a stable landing.
+
+### Recommendations
+
+To improve the learning and performance of the DQN agent, consider adjusting the exploration strategy as follows:
+
+1. **Balanced Action Distribution:**
+   - Encourage more exploration of the orientation engines (actions 1 and 3) to improve angular control. This can help the agent learn how to stabilize the lander effectively.
+   - Reduce the frequency of the ""Do Nothing"" action as it might not contribute significantly to learning control dynamics.
+
+2. **Proposed Action Distribution:**
+   - **Do Nothing (0):** 15%
+   - **Fire Left Orientation Engine (1):** 25%
+   - **Fire Main Engine (2):** 40%
+   - **Fire Right Orientation Engine (3):** 20%
+
+3. **Adaptive Exploration:**
+   - Implement an adaptive exploration strategy where the action distribution can be adjusted based on the agent's performance over episodes. For instance, if the agent shows improvement in stability, gradually shift more exploration towards optimizing landing precision.
+
+4. **State-Dependent Exploration:**
+   - Consider state-dependent exploration where the action distribution is adjusted based on the current state of the lander. For example, if the lander is tilting, prioritize orientation engines.
+
+5. **Monitor and Adjust:**
+   - Continuously monitor the total reward and the agent's landing success rate. Use this feedback to iteratively refine the exploration strategy, ensuring that the agent is learning effectively and efficiently.
+
+By implementing these recommendations, the agent should be able to explore a more diverse set of actions, leading to faster learning and improved performance in the LunarLander-v2 environment.","```json
+{
+  ""action_probs"": [0.15, 0.25, 0.40, 0.20]
+}
+```"
+181,0.6163550805541009,-9.802030356075894,0.01,0.14588803052902222,N/A,N/A
+182,-23.626022228221395,-17.90152269778762,0.01,0.11732922494411469,N/A,N/A
+183,8.027433270829734,-13.004212280222538,0.01,0.11321113258600235,N/A,N/A
+184,9.65584876189078,3.4039452281460485,0.01,0.17459958791732788,N/A,N/A
+185,0.4414404767452272,-11.424611543194002,0.01,0.10251466184854507,N/A,N/A
+186,-23.781412460119412,-19.518856828262507,0.01,0.13145811855793,N/A,N/A
+187,-16.27195979922319,12.277383537090435,0.01,0.34372174739837646,N/A,N/A
+188,19.315911700231936,-19.4040577460102,0.01,0.18603771924972534,N/A,N/A
+189,-23.36102875571517,17.03242153831355,0.01,0.17203547060489655,N/A,N/A
+190,-2.042104989773164,-9.669137449520644,0.01,0.10844358801841736,N/A,N/A
+191,-18.958056231177856,-13.610607918217903,0.01,0.13422970473766327,N/A,N/A
+192,-13.53014053343182,-18.491620310539915,0.01,0.16438394784927368,N/A,N/A
+193,22.78402743670855,-24.289441473107566,0.01,0.16633917391300201,N/A,N/A
+194,23.625971953648275,-4.170950899014883,0.01,0.15652328729629517,N/A,N/A
+195,-24.165160238503233,-7.156641232560338,0.01,0.1379721760749817,N/A,N/A
+196,-6.470625263810707,-4.4157197217390305,0.01,0.22117620706558228,N/A,N/A
+197,26.530880570210158,-6.834310858537295,0.01,0.15313848853111267,N/A,N/A
+198,-25.92168057998065,-5.419792452601259,0.01,0.1287621259689331,N/A,N/A
+199,22.842140183122126,-5.790771726768913,0.01,0.13842251896858215,N/A,N/A
+200,-31.507317470643923,-1.9421104065404229,0.01,0.12306784093379974,"To help the DQN agent learn faster in the LunarLander-v2 environment, we need to examine the current exploration strategy and suggest improvements based on the sampled actions and the reward from the last episode. Here's a breakdown of the current situation and recommendations:
+
+### Analysis:
+1. **Action Distribution**:
+   - The sampled actions from the last episode are as follows:
+     - Action 0 (Do Nothing): 27 times
+     - Action 1 (Fire Left Orientation Engine): 9 times
+     - Action 2 (Fire Main Engine): 52 times
+     - Action 3 (Fire Right Orientation Engine): 12 times
+
+2. **Current Strategy**:
+   - The agent predominantly uses the main engine (Action 2), which is expected as it is crucial for controlling the vertical descent and soft landing.
+   - Actions 0, 1, and 3 are used less frequently, with ""Do Nothing"" (Action 0) being the second most common.
+
+3. **Reward Analysis**:
+   - The total reward for the last episode is -31.51, indicating suboptimal performance. The goal is to achieve a positive reward, which signifies a successful landing without crashing or going out of bounds.
+
+### Recommendations:
+1. **Balanced Exploration**:
+   - The agent should explore the use of orientation engines (Actions 1 and 3) more to improve control over horizontal movement and stability. This will help in reducing horizontal velocity and correcting the lander's angle during descent.
+   - Consider a more balanced exploration strategy such as:
+     - Action 0 (Do Nothing): 20%
+     - Action 1 (Fire Left Orientation Engine): 25%
+     - Action 2 (Fire Main Engine): 40%
+     - Action 3 (Fire Right Orientation Engine): 15%
+
+2. **Adaptive Exploration**:
+   - Implement an adaptive exploration strategy where the probability of choosing an action is adjusted based on the current state. For example, if the lander is tilting to the left, increase the probability of firing the right orientation engine (Action 3).
+
+3. **State-Dependent Exploration**:
+   - Encourage the agent to take actions that counteract undesirable states:
+     - If `vx` (horizontal velocity) is high, increase the probability of using orientation engines (Actions 1 and 3).
+     - If `theta` (lander angle) is non-zero, prioritize actions that help stabilize the angle.
+
+4. **Reward Shaping**:
+   - Provide additional rewards or penalties based on specific state conditions to guide the agent's learning. For example, give a small negative reward for high horizontal velocity or a positive reward for reducing angular velocity.
+
+By implementing these recommendations, the agent should be able to explore more effectively, leading to faster learning and improved performance in landing the lunar module safely.","```json
+{
+  ""action_probs"": [0.20, 0.25, 0.40, 0.15]
+}
+```"
+201,21.93870585891003,-2.7182217694842903,0.01,0.12410900741815567,N/A,N/A
+202,3.8667225466549615,-0.56622729274903,0.01,0.1464611142873764,N/A,N/A
+203,24.50359683940675,-3.123662659061085,0.01,0.1368812471628189,N/A,N/A
+204,-36.48183175919083,-4.3792270399988595,0.01,0.1263589709997177,N/A,N/A
+205,-23.42082422691979,-5.313438170303944,0.01,0.10621312260627747,N/A,N/A
+206,-23.719234852331958,-1.228166625161539,0.01,0.11285674571990967,N/A,N/A
+207,15.488133224122782,-5.7348544013970795,0.01,0.1685907542705536,N/A,N/A
+208,0.48231741137948175,-4.635764625588256,0.01,0.13868555426597595,N/A,N/A
+209,-21.061685264442218,-8.099877538607105,0.01,0.1461726427078247,N/A,N/A
+210,13.353026652518608,1.5669473147852422,0.01,0.33100685477256775,N/A,N/A
+211,-3.529145842295751,-1.5023199119959905,0.01,0.19059237837791443,N/A,N/A
+212,-18.591178558408572,-13.961915225379775,0.01,0.2506426274776459,N/A,N/A
+213,17.955890216479197,2.04401448653402,0.01,0.7427607178688049,N/A,N/A
+214,-3.6257771234778633,26.076703358659206,0.01,0.16626399755477905,N/A,N/A
+215,0.13437666853050456,19.7545262847758,0.01,0.8477718830108643,N/A,N/A
+216,32.18700721238692,9.322596753497574,0.01,0.3305394649505615,N/A,N/A
+217,2.280683851310851,8.36833298820527,0.01,0.35371559858322144,N/A,N/A
+218,-8.445715187178612,31.24698399110095,0.01,0.34820619225502014,N/A,N/A
+219,163.19229175235375,94.36674509118176,0.01,0.4842824339866638,N/A,N/A
+220,160.09517575330744,131.70462232380902,0.01,0.27214694023132324,"To help the DQN agent learn faster in the LunarLander-v2 environment, we need to analyze the current action distribution and adjust the exploration strategy accordingly. The goal is to ensure that the agent explores effectively, learns from diverse experiences, and improves its policy. Let's break down the data and develop a strategy:
+
+### Current Action Distribution Analysis
+
+The sampled actions from the last episode are distributed as follows:
+
+- Action 0 (Do Nothing): 8 times
+- Action 1 (Fire Left Orientation Engine): 18 times
+- Action 2 (Fire Main Engine): 39 times
+- Action 3 (Fire Right Orientation Engine): 35 times
+
+### Observations
+
+1. **Main Engine Usage**: Action 2 (Fire Main Engine) is the most frequently used action. This suggests that the agent is often trying to control its descent speed, which is crucial for landing safely.
+
+2. **Orientation Engines Usage**: Actions 1 and 3 (Left and Right Orientation Engines) are used frequently, indicating that the agent is actively trying to stabilize or adjust its orientation.
+
+3. **Low Usage of 'Do Nothing'**: Action 0 is used sparingly, which might be appropriate since maintaining control is critical for a safe landing.
+
+4. **Current Reward**: The total reward of 160.09 indicates that the agent is performing reasonably well but still has room for improvement to consistently achieve higher rewards.
+
+### Recommendations for Exploration Strategy
+
+To enhance learning and exploration for the next 20 episodes, consider the following strategy:
+
+1. **Balanced Exploration**:
+   - Encourage a more balanced exploration by slightly increasing the probability of less-used actions. This can help the agent discover new strategies and potentially improve performance.
+   - Suggested action distribution:
+     - Action 0: 15%
+     - Action 1: 25%
+     - Action 2: 30%
+     - Action 3: 30%
+
+2. **Encourage Diverse Experiences**:
+   - Introduce a small amount of noise or randomness to action selection to ensure the agent does not get stuck in local optima. This can be achieved by using an epsilon-greedy strategy with a moderate epsilon value (e.g., 0.2) to encourage exploration.
+
+3. **Monitor and Adjust**:
+   - Continuously monitor the reward trends and adjust the exploration strategy as needed. If the agent shows improvement, gradually reduce exploration to allow exploitation of learned policies.
+
+4. **State-Dependent Exploration**:
+   - Consider implementing a state-dependent exploration strategy where exploration is higher in uncertain or less visited states. This can be achieved by using a curiosity-driven exploration method.
+
+By following these recommendations, the agent should be able to explore more effectively, leading to faster learning and improved performance in the LunarLander-v2 environment.","```json
+{
+  ""action_probs"": [0.15, 0.25, 0.30, 0.30]
+}
+```"
+221,249.52237077158858,154.44262575336543,0.01,0.1990785300731659,N/A,N/A

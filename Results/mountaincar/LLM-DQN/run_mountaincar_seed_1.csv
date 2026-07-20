@@ -1,0 +1,13 @@
+episode,train_return,eval_return,epsilon,loss,llm_full_response
+1,-98.18757922649391,-70.65380410525482,0.99525,0.031328453242889846,N/A
+2,151.89341597519817,44.333896095156675,0.9905,0.44204499818304266,N/A
+3,-98.18654699325566,-88.4205142712593,0.98575,2.4549001651257276,N/A
+4,175.7636583804153,149.0775163304527,0.981,3.8726631831377745,N/A
+5,189.83192519267322,52.38053371706978,0.97625,10.28944818430309,"{
+    ""vel_split"": 0.55,
+    ""pos_split"": 0.45,
+    ""action_low_energy"": 0,
+    ""action_high_energy"": 2,
+    ""reasoning"": ""The current policy has a good conflict rate of 0.0%, but there is room for improvement in the evaluation score. The low energy region coverage is relatively low, indicating that the car might not be building enough momentum. By slightly increasing the velocity split to 0.55, we can ensure the car builds more momentum before transitioning to the high energy state. Similarly, increasing the position split to 0.45 will allow the car to attempt to drive up the hill earlier, potentially improving the evaluation score. The actions remain the same as they are appropriate for the respective energy states.""
+}"
+6,174.6607818737626,190.1623050745935,0.9715,40.25851088942903,N/A

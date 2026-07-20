@@ -1,0 +1,14 @@
+episode,train_return,eval_return,epsilon,loss,llm_full_response
+1,152.20071531161668,2.7310520267486593,0.99525,1.036959671193645,N/A
+2,-97.43301187753684,-26.69438678936918,0.9905,4.057462199032306,N/A
+3,-97.95516108274458,-14.810652489559743,0.98575,5.534125100672245,N/A
+4,-97.80517489910127,127.4058653461082,0.981,7.273529482781887,N/A
+5,-98.16243158578874,109.49014372998849,0.97625,8.388706228286027,"{
+    ""vel_split"": 0.4,
+    ""pos_split"": 0.2,
+    ""action_low_energy"": 0,
+    ""action_high_energy"": 2,
+    ""reasoning"": ""The current policy has a high-energy region that covers most of the state space, but the car's performance suggests it is not effectively reaching the goal. By lowering the velocity split, we allow the car to identify more states as low energy, encouraging momentum building earlier. Additionally, reducing the position split will help the car to recognize more states as low energy when it's further from the goal, promoting more aggressive momentum building. The actions remain the same as they align with the general strategy of building momentum (action 0) and driving up the hill (action 2). This adjustment aims to improve the car's ability to reach the goal by better distinguishing between states that require momentum building and those where it should drive forward."" 
+}"
+6,-97.63942583799353,141.89510814842652,0.9715,17.404685921370984,N/A
+7,-98.16489051580432,171.218892247678,0.96675,17.555602502822875,N/A
