@@ -1,0 +1,100 @@
+episode,train_return,eval_return,epsilon,loss,llm_full_response
+1,-2774,-200.0,0.9934,1272.941991715204,N/A
+2,-1982,-200.0,0.9868,121.6190294246748,N/A
+3,-1190,-200.0,0.9802,1.9924594817124308,N/A
+4,-1982,-200.0,0.9736,7.441055853497237,N/A
+5,-2873,-200.0,0.967,2.817298622322269,N/A
+6,-1982,-200.0,0.9604,6.166877823122777,N/A
+7,-2675,-200.0,0.9538,2.932330118166283,N/A
+8,-1487,-200.0,0.9472,4.351303019954357,N/A
+9,-1685,-200.0,0.9406,2.0318628546735273,N/A
+10,-2675,-200.0,0.9339999999999999,4.257570741977543,"{
+    ""partial_policy"": {
+        ""36"": 1,
+        ""35"": 1,
+        ""34"": 1,
+        ""33"": 1,
+        ""32"": 1
+    },
+    ""reasoning"": ""The agent is currently stuck in a loop at state 36, repeatedly moving UP without making progress toward the goal. By directing the agent to move RIGHT from state 36 to state 35 and continuing to move RIGHT through states 34, 33, and 32, we can guide it safely toward the goal while avoiding the cliff states. This adjustment aims to break the loop and promote movement toward the goal efficiently.""
+}"
+11,-5447,-200.0,0.9274,2.2909692946681752,N/A
+12,-3962,-200.0,0.9208,1.236762006911449,N/A
+13,-3368,-200.0,0.9142,0.3291836606571451,N/A
+14,-2576,-200.0,0.9076,0.8180584393395111,N/A
+15,-4358,-200.0,0.901,2.3661783619923518,N/A
+16,-3962,-200.0,0.8944,1.568670350483153,N/A
+17,-3467,-200.0,0.8878,0.7813158107083291,N/A
+18,-2477,-200.0,0.8812,0.2534120571427047,N/A
+19,-2180,-200.0,0.8746,0.3672192317200825,N/A
+20,-3170,-200.0,0.868,0.2080204606615007,"{
+    ""partial_policy"": {
+        ""24"": 1,
+        ""25"": 1,
+        ""26"": 1,
+        ""35"": 0,
+        ""36"": 1
+    },
+    ""reasoning"": ""The agent is getting stuck in state 24, repeatedly moving LEFT and not making progress. By changing the action for state 24 to RIGHT, the agent can move towards the goal. Additionally, states 25 and 26 are also modified to encourage movement towards the right. State 35 is set to UP to avoid the cliff, and state 36 (the start state) is set to RIGHT to facilitate a better initial move towards the goal.""
+}"
+21,-3170,-200.0,0.8613999999999999,0.2512393178092316,N/A
+22,-3368,-200.0,0.8548,0.10976026024203747,N/A
+23,-1586,-200.0,0.8482000000000001,0.2761405724287033,N/A
+24,-3368,-200.0,0.8416,0.18010041008703412,N/A
+25,-3170,-200.0,0.835,0.06642917789518833,N/A
+26,-3962,-200.0,0.8284,0.054446898836176844,N/A
+27,-1883,-200.0,0.8218,0.06841762526892126,N/A
+28,-5447,-200.0,0.8151999999999999,0.06987033343408257,N/A
+29,-992,-200.0,0.8086,0.07237146627157927,N/A
+30,-3368,-200.0,0.802,0.05791444655507803,"{
+    ""partial_policy"": {
+        ""36"": 1,
+        ""35"": 1,
+        ""34"": 1,
+        ""33"": 0,
+        ""32"": 0
+    },
+    ""reasoning"": ""The agent is currently stuck in a loop between states 1 and 13, which indicates a failure to progress towards the goal. By modifying state 36 to move RIGHT (action 1), the agent can start moving towards the goal. Additionally, states 35 and 34 are set to move RIGHT to ensure the agent avoids the cliff and continues towards the goal. States 33 and 32 are set to move UP to prevent entering the cliff states while still progressing safely. This partial policy aims to provide a clearer path towards the goal while avoiding cliff states.""
+}"
+31,-2378,-200.0,0.7954,0.053697646604850886,N/A
+32,-1289,-200.0,0.7888,0.10920966506935656,N/A
+33,-3269,-200.0,0.7822,0.07384122689720243,N/A
+34,-1388,-200.0,0.7756000000000001,0.05433731825090945,N/A
+35,-2972,-200.0,0.769,0.062047919929027556,N/A
+36,-3764,-200.0,0.7624,0.05237518709618598,N/A
+37,-3566,-200.0,0.7558,0.05499830134678632,N/A
+38,-108,-200.0,0.7492,0.1028989401852919,N/A
+39,-1586,-200.0,0.7425999999999999,0.6016866645030677,N/A
+40,-3170,-200.0,0.736,0.26246523261070254,"{
+    ""partial_policy"": {
+        ""36"": 1,
+        ""35"": 1,
+        ""34"": 1,
+        ""33"": 0,
+        ""32"": 0
+    },
+    ""reasoning"": ""The agent is currently stuck in a loop at state 36, repeatedly taking the LEFT action, which does not progress towards the goal and leads to negative rewards. By changing the action at state 36 to RIGHT (1), the agent can start moving towards the goal. Additionally, states 35 and 34 are also set to RIGHT to ensure the agent continues to avoid the cliff and make progress. States 33 and 32 are set to UP (0) to provide a safe upward movement when necessary, avoiding the cliff states while still progressing towards the goal.""
+}"
+41,-1487,-200.0,0.7294,0.054760347809642555,N/A
+42,-2180,-200.0,0.7228,0.1350954435998574,N/A
+43,-2675,-200.0,0.7162,0.1332953429920599,N/A
+44,-855,-200.0,0.7096,0.08248929991559298,N/A
+45,-3071,-200.0,0.7030000000000001,0.15963113526813685,N/A
+46,-978,-200.0,0.6964,0.37367106389639704,N/A
+47,-2873,-200.0,0.6898,0.631074664182961,N/A
+48,-255,-200.0,0.6832,0.39665452103342924,N/A
+49,-1028,-200.0,0.6766000000000001,0.15671414158640118,N/A
+50,-621,-200.0,0.67,0.10218727853637011,"{
+    ""partial_policy"": {
+        ""36"": 1,
+        ""35"": 1,
+        ""34"": 1,
+        ""33"": 1,
+        ""32"": 1
+    },
+    ""reasoning"": ""The agent is currently stuck in a loop at state 36, repeatedly moving UP without making progress towards the goal. By directing the agent to move RIGHT from state 36 to 35, and continuing to move RIGHT through states 34, 33, and 32, we can guide it towards the goal while avoiding the cliff. This adjustment focuses on critical states near the cliff and aims to create a more effective path towards the goal.""
+}"
+51,-337,-200.0,0.6634,0.08440991309471428,N/A
+52,-2435,-200.0,0.6568,0.08946524278696956,N/A
+53,-1684,-200.0,0.6502,0.08882306886836887,N/A
+54,-1329,-13.0,0.6436,0.13964259384054664,N/A

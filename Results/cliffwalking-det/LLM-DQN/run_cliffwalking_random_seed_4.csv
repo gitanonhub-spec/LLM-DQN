@@ -1,0 +1,45 @@
+episode,train_return,eval_return,epsilon,loss,llm_full_response
+1,-1685,-200.0,0.9934,834.0583649824063,N/A
+2,-1883,-200.0,0.9868,156.9229858341813,N/A
+3,-1289,-200.0,0.9802,19.151147223003207,N/A
+4,-1784,-200.0,0.9736,8.053228187919593,N/A
+5,-1388,-200.0,0.967,3.076391091067344,N/A
+6,-1685,-200.0,0.9604,6.323255408741534,N/A
+7,-1190,-200.0,0.9538,5.241949155172333,N/A
+8,-1487,-200.0,0.9472,2.7276991267455744,N/A
+9,-653,-200.0,0.9406,2.6529211854573953,N/A
+10,-1289,-200.0,0.9339999999999999,5.325191961834207,"{
+    ""partial_policy"": {
+        ""36"": 1,
+        ""35"": 1,
+        ""34"": 1,
+        ""33"": 1,
+        ""32"": 1
+    },
+    ""reasoning"": ""The agent is currently stuck in a loop at state 36, repeatedly moving DOWN and failing to progress towards the goal. By changing the action at state 36 to RIGHT, the agent can start moving towards the goal while avoiding the cliff. Additionally, states 35 to 32 are modified to also move RIGHT, ensuring a safe path towards the goal and preventing the agent from entering cliff states.""
+}"
+11,-3665,-200.0,0.9274,3.194340816773474,N/A
+12,-5051,-200.0,0.9208,0.7951355116441846,N/A
+13,-5150,-200.0,0.9142,3.402975137522444,N/A
+14,-4853,-15.0,0.9076,1.7261173261795193,N/A
+15,-2180,-200.0,0.901,1.3250079996185378,N/A
+16,-6239,-200.0,0.8944,0.6839842252805829,N/A
+17,-3416,-200.0,0.8878,1.1766177033317968,N/A
+18,-1190,-200.0,0.8812,0.9732644806243479,N/A
+19,-1883,-200.0,0.8746,0.22217643287032843,N/A
+20,-2429,-200.0,0.868,0.20555321763784282,"{
+    ""partial_policy"": {
+        ""36"": 1,
+        ""35"": 1,
+        ""34"": 1,
+        ""33"": 0,
+        ""32"": 0
+    },
+    ""reasoning"": ""The agent is currently stuck oscillating between states 19 and 20, which indicates poor action choices. By modifying state 36 to move RIGHT (1), the agent can start progressing towards the goal. Additionally, states 35 and 34 are modified to also move RIGHT (1) to ensure the agent continues to avoid the cliff. States 33 and 32 are set to move UP (0) to provide a safe path while avoiding the cliff states. This should help in reducing the average reward and improving the overall trajectory.""
+}"
+21,-3962,-200.0,0.8613999999999999,0.1775330625427887,N/A
+22,-871,-17.0,0.8548,0.18688027827139897,N/A
+23,-1190,-200.0,0.8482000000000001,0.20755109730176627,N/A
+24,-5942,-200.0,0.8416,0.19732042448595166,N/A
+25,-3566,-200.0,0.835,0.06472035694634543,N/A
+26,-2873,-13.0,0.8284,0.09097413902170956,N/A

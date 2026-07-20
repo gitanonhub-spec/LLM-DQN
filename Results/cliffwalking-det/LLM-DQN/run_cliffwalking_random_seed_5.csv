@@ -1,0 +1,47 @@
+episode,train_return,eval_return,epsilon,loss,llm_full_response
+1,-2378,-200.0,0.9934,776.6451105642177,N/A
+2,-1586,-200.0,0.9868,234.3214065925777,N/A
+3,-1586,-200.0,0.9802,8.841660768762232,N/A
+4,-2675,-200.0,0.9736,1.352980354242027,N/A
+5,-1388,-200.0,0.967,2.5885464486386627,N/A
+6,-1190,-200.0,0.9604,2.7635968947643414,N/A
+7,-1388,-200.0,0.9538,2.771339391507208,N/A
+8,-1685,-200.0,0.9472,2.183517938610166,N/A
+9,-1586,-200.0,0.9406,1.3539099056553097,N/A
+10,-992,-200.0,0.9339999999999999,0.278667770284228,"{
+    ""partial_policy"": {
+        ""36"": 1,
+        ""35"": 1,
+        ""34"": 1,
+        ""33"": 1,
+        ""32"": 0
+    },
+    ""reasoning"": ""The agent is currently getting stuck in a loop between states 4 and 5, which are not progressing towards the goal. By modifying state 36 to move RIGHT, the agent can start progressing towards the goal. Additionally, states 35, 34, and 33 are set to move RIGHT to ensure the agent continues to avoid the cliff while making progress. State 32 is set to move UP to prevent any potential entry into the cliff states while still allowing for upward movement towards the goal.""
+}"
+11,-3566,-200.0,0.9274,0.07231862396001816,N/A
+12,-2576,-200.0,0.9208,0.08068406281410717,N/A
+13,-3368,-200.0,0.9142,0.11093442450277508,N/A
+14,-3368,-200.0,0.9076,0.052668033817317335,N/A
+15,-4556,-200.0,0.901,0.05241272501181811,N/A
+16,-4754,-200.0,0.8944,0.06634322161553427,N/A
+17,-5051,-200.0,0.8878,0.04105341887217946,N/A
+18,-2675,-200.0,0.8812,0.04958131220191717,N/A
+19,-657,-200.0,0.8746,0.2521244877771962,N/A
+20,-6932,-200.0,0.868,1.5477867040131241,"{
+    ""partial_policy"": {
+        ""36"": 1,
+        ""35"": 1,
+        ""34"": 1,
+        ""33"": 0,
+        ""32"": 0
+    },
+    ""reasoning"": ""The agent is currently stuck in a loop at state 36, repeatedly moving LEFT. To improve performance, I have assigned the action RIGHT (1) to state 36, which will direct the agent towards the goal while avoiding the cliff. Additionally, I have assigned RIGHT (1) to states 35, 34, and UP (0) to states 33 and 32 to ensure the agent moves safely upward and avoids the cliff states (37-46). This should help the agent find a more optimal path towards the goal.""
+}"
+21,-3640,-200.0,0.8613999999999999,0.5079108453329121,N/A
+22,-3863,-200.0,0.8548,0.9987232750770636,N/A
+23,-3665,-200.0,0.8482000000000001,0.48815577596891674,N/A
+24,-4160,-200.0,0.8416,0.3335495308926329,N/A
+25,-4853,-200.0,0.835,0.19613737998297437,N/A
+26,-4853,-200.0,0.8284,0.2108897364884615,N/A
+27,-4556,-15.0,0.8218,0.14541111952625216,N/A
+28,-267,-13.0,0.8151999999999999,0.14596863949428435,N/A

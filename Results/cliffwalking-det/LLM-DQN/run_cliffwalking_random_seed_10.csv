@@ -1,0 +1,28 @@
+episode,train_return,eval_return,epsilon,loss,llm_full_response
+1,-2081,-200.0,0.9934,601.90700322567,N/A
+2,-1388,-200.0,0.9868,242.66507061600686,N/A
+3,-205,-200.0,0.9802,35.00355737079989,N/A
+4,-1289,-200.0,0.9736,10.991144593227654,N/A
+5,-1982,-200.0,0.967,2.29313572938554,N/A
+6,-992,-200.0,0.9604,2.196721145864576,N/A
+7,-1883,-200.0,0.9538,2.3630210821516813,N/A
+8,-1883,-200.0,0.9472,3.662541806641966,N/A
+9,-1190,-200.0,0.9406,3.1076374534517526,N/A
+10,-1289,-200.0,0.9339999999999999,3.541655439706519,"{
+    ""partial_policy"": {
+        ""36"": 1,
+        ""35"": 1,
+        ""34"": 1,
+        ""33"": 1,
+        ""32"": 1
+    },
+    ""reasoning"": ""The agent is currently stuck in a loop at state 36, repeatedly moving LEFT and failing to progress towards the goal. By directing the agent to move RIGHT from state 36 to states 35, 34, 33, and 32, we can guide it safely away from the cliff and towards the goal. This adjustment aims to break the loop and encourage movement towards the right side of the grid, where the goal is located.""
+}"
+11,-3566,-200.0,0.9274,1.4410770462686195,N/A
+12,-4358,-200.0,0.9208,0.7565809359960258,N/A
+13,-4160,-200.0,0.9142,0.14038401544559748,N/A
+14,-2477,-200.0,0.9076,2.0834523617755623,N/A
+15,-169,-200.0,0.901,1.1510178465396166,N/A
+16,-5348,-200.0,0.8944,0.9393462305516005,N/A
+17,-2893,-200.0,0.8878,0.3846376172674835,N/A
+18,-376,-13.0,0.8812,0.12967013751592818,N/A
